@@ -32,5 +32,17 @@ ehthumbs.db
 Thumbs.db
 
 # Eclipse specific files
-.metadata/
 .project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+/src/main/resources/rebel.xml
