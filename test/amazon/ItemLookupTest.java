@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class ItemLookupTest {
 
@@ -39,20 +40,19 @@ public class ItemLookupTest {
         String requestUrl = null;
         String content = null;
 
-        System.out.println("Map form example:");
         Map<String, String> params = new HashMap<String, String>();
         params.put("Service", "AWSECommerceService");
         params.put("Version", "2013-08-01");
         params.put("Operation", "ItemLookup");
         params.put("IdType", ID_TYPE);
         params.put("ItemId", ITEM_ID);
-        params.put("ResponseGroup", "EditorialReview");
+        params.put("ResponseGroup", "Small,EditorialReview,Reviews");
         if (!ID_TYPE.equals("ASIN"))
             params.put("SearchIndex", "All");
         params.put("AssociateTag", "drupal0a-20");
 
         requestUrl = helper.sign(params);
-        System.out.println("Signed Request is \"" + requestUrl + "\"");
+        System.out.println("Signed Request:\n" + requestUrl);
         System.out.println();
 
         content = fetchContent(requestUrl);
@@ -60,13 +60,21 @@ public class ItemLookupTest {
         System.out.println();
     }
 
+    // Parse result html 
     private static String fetchContent(String requestUrl) {
         String title = null;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(requestUrl);
+
+            Node description = doc.getElementsByTagName("Content").item(0);
+            Node reviewURL = doc.getElementsByTagName("IFrameURL").item(0);
+            Node title = doc.getElementsByTagName("Title").item(0);
+            NodeList authors = doc.getElementsByTagName("Author");
+
             Node titleNode = doc.getElementsByTagName("Content").item(0);
+
             title = titleNode.getTextContent();
         } catch (Exception e) {
             throw new RuntimeException(e);
