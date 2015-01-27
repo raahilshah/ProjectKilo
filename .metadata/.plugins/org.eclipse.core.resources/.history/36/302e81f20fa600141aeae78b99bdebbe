@@ -1,5 +1,0 @@
-package uk.ac.cam.kilo.backend;
-
-public abstract class Summariser {
-	abstract public static String summarise();
-}
