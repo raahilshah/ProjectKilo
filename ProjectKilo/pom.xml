@@ -29,6 +29,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>ProjectKilo</finalName>
+		<finalName>ProjectKiloWebApp</finalName>
 	</build>
 </project>
