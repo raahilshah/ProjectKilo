@@ -47,3 +47,7 @@ local.properties
 .loadpath
 /src/main/resources/rebel.xml
 
+# TexPad files
+
+.texpadtmp/
+
