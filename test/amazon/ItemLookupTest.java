@@ -2,6 +2,8 @@ package test.amazon;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -55,14 +57,16 @@ public class ItemLookupTest {
         System.out.println("Signed Request:\n" + requestUrl);
         System.out.println();
 
-        content = fetchContent(requestUrl);
-        System.out.println("Product Description: \n" + content);
-        System.out.println();
+        List<String> data = fetchContent(requestUrl);
+
+        for (String s : data) {
+            System.out.println(s + "\n");
+        }
     }
 
     // Parse result html 
-    private static String fetchContent(String requestUrl) {
-        String title = null;
+    private static List<String> fetchContent(String requestUrl) {
+        List<String> info = null;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -73,13 +77,19 @@ public class ItemLookupTest {
             Node title = doc.getElementsByTagName("Title").item(0);
             NodeList authors = doc.getElementsByTagName("Author");
 
-            Node titleNode = doc.getElementsByTagName("Content").item(0);
+            info = new LinkedList<String>();
+            info.add(title.getTextContent());
+            for (int i = 0; i < authors.getLength(); i++) {
+                Node a = authors.item(i);
+                info.add(a.getTextContent());
+            }
+            info.add(description.getTextContent());
+            info.add(reviewURL.getTextContent());
 
-            title = titleNode.getTextContent();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return title;
+        return info;
     }
 
 }
