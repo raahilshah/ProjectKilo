@@ -23,3 +23,10 @@ cookbook_file "/var/lib/tomcat6/webapps/Calendar.war" do
   owner 'root'
   group 'root'
 end
+
+cookbook_file "/var/lib/tomcat6/webapps/ProjectKiloWebApp.war" do
+	source "ProjectKiloWebApp.war"
+	mode 00744
+	owner 'root'
+	group 'root'
+end
