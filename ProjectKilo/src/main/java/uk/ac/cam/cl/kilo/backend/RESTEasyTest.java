@@ -12,14 +12,14 @@ public class RESTEasyTest {
 	@GET
 	public Response simpleResponse(
 			@QueryParam("barcodeNo") String barcodeNo,
-			@DefaultValue("UPC") @QueryParam("barcodeType") String barcodeType) {
+			@DefaultValue("ISBN") @QueryParam("barcodeType") String barcodeType) {
 		
 		String responseString;
 		
 		if (barcodeNo != null) {	
 			responseString =
-					"Barcode number: " + barcodeNo   + "\n" +
-					"Barcode type: "   + barcodeType + "\n";			
+					"Barcode number: " + barcodeNo   + "<br>" +
+					"Barcode type: "   + barcodeType;			
 		} else {
 			responseString = "Missing barcode number.";
 		}
