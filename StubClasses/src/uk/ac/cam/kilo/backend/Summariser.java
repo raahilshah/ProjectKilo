@@ -4,7 +4,7 @@ public class Summariser {
 
 	public static String summarise(ItemInfo itemInfo) {
 	    String[] sentences = itemInfo.description.split("\\.", 0);
-        return sentences[0];
+	    return sentences[0];
 	}
 
     public static void main(String[] args) {
