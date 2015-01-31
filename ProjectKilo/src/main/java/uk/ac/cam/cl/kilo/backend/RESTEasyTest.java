@@ -12,7 +12,7 @@ public class RESTEasyTest {
 	@GET
 	public Response simpleResponse(
 			@QueryParam("barcodeNo") String barcodeNo,
-			@DefaultValue("ISBN") @QueryParam("barcodeType") String barcodeType) {
+			@DefaultValue("It works") @QueryParam("barcodeType") String barcodeType) {
 		
 		String responseString;
 		
