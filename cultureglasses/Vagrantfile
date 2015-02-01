@@ -88,4 +88,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       'recipe[cultureglasses::default]'
     ]
   end
+
+  # Extra shell provision for staging purposes
+  config.vm.provision "shell", inline: "sudo rm -rf /var/lib/tomcat6/webapps/ProjectKiloWebApp"
+
 end
