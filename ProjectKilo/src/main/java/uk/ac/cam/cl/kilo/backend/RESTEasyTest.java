@@ -19,7 +19,7 @@ public class RESTEasyTest {
 		if (barcodeNo != null) {	
 			responseString =
 					"Barcode number: " + barcodeNo   + "<br>" +
-					"Barcode type: "   + barcodeType;			
+                    "Barcode type: "   + barcodeType;			
 		} else {
 			responseString = "Missing barcode number.";
 		}
