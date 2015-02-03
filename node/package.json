@@ -1,0 +1,14 @@
+{
+  "name": "ProjectKiloNodejs",
+  "description": "Project Kilo Node.js Server Code",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "dependencies": {
+    "underscore": "1.7.x",
+    "jquery": "2.1.x",
+    "requirejs": "2.1.x"
+  }
+}
