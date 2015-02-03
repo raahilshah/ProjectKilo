@@ -14,3 +14,12 @@ then provide a private display with cues of clever things to say about it.
 This will probably come from online reviews, but your software will
 need to spot the barcode, find the reviews, and distil them into a few
 words that make the wearer seem as smart as possible. 
+
+Directories
+-----------
+
+- BarcodeEye - fork of the BarcodeEye google glass app
+- Docs - documents for the project (basically just our original spec)
+- ProjectKilo - the eclipse project (all important code is here)
+- StubClasses/src/uk/ac/cam/kilo/backend - the abstract classes, as created for the original spec
+- cultureglasses - the vagrant VM on which the server runs
