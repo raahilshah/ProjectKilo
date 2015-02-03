@@ -57,3 +57,14 @@ local.properties
 
 
 cultureglasses/files/default/ProjectKiloWebApp.war
+
+
+# node.js files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+desktop.ini
+
+# folders in the root folder
+/node/node_modules/
