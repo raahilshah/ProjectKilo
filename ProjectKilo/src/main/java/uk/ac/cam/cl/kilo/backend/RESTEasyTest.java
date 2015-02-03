@@ -3,8 +3,10 @@ package uk.ac.cam.cl.kilo.backend;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.MediaType;	
 
 import uk.ac.cam.cl.kilo.lookup.AmznItemLookup;
 
@@ -12,6 +14,7 @@ import uk.ac.cam.cl.kilo.lookup.AmznItemLookup;
 public class RESTEasyTest {
 	
 	@GET
+	@Produces(MediaType.TEXT_HTML)
 	public Response simpleResponse(
 			@QueryParam("barcodeNo") String barcodeNo,
 			@DefaultValue("ISBN") @QueryParam("barcodeType") String barcodeType) {
@@ -28,7 +31,7 @@ public class RESTEasyTest {
 					"Barcode number: " + barcodeNo   + "<br>" +
                     "Barcode type: "   + barcodeType + "<br>" + 
 					"Product title: "  + title		 + "<br>" +
-                    "Product description" + desc	 + "<br>";			
+                    "Product description: " + desc	 + "<br>";			
 		} else {
 			responseString = "Missing barcode number.";
 		}
