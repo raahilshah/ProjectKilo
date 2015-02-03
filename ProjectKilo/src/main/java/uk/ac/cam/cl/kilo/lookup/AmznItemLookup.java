@@ -25,11 +25,15 @@ public class AmznItemLookup {
 
     // Information fields.
     private String title, description;
+    private List<String> authors;
     
     public AmznItemLookup(String idType, String itemId) {
     	
         ID_TYPE = idType;
         ITEM_ID = itemId;
+        title = "";
+        description = "";
+        authors = new LinkedList<String>();
 
         SignedRequestsHelper helper;
         try {
@@ -73,11 +77,14 @@ public class AmznItemLookup {
             Node descriptionNode = doc.getElementsByTagName("Content").item(0);
             Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
             Node titleNode = doc.getElementsByTagName("Title").item(0);
-            NodeList authorsNode = doc.getElementsByTagName("Author");
+            NodeList authorsNodeList = doc.getElementsByTagName("Author");
 
             title = titleNode.getTextContent();
             description = descriptionNode.getTextContent();
-
+            
+            for (int i = 0; i < authorsNodeList.getLength(); i++) 
+            	authors.add(authorsNodeList.item(i).getTextContent());
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +96,10 @@ public class AmznItemLookup {
     
     public String getDescription() {
     	return description;
+    }
+    
+    public List<String> getAuthors() {
+    	return authors;
     }
 
 }
