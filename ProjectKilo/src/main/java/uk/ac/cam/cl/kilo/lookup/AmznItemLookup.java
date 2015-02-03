@@ -77,13 +77,14 @@ public class AmznItemLookup {
             Node descriptionNode = doc.getElementsByTagName("Content").item(0);
             Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
             Node titleNode = doc.getElementsByTagName("Title").item(0);
-            NodeList authorsNodeList = doc.getElementsByTagName("Author");
-
+            Node itemAttrNode = doc.getElementsByTagName("ItemAttributes").item(0);
+            
+            for (Node child = itemAttrNode.getFirstChild(); child != null; child = child.getNextSibling())
+            	if (child.getNodeName().equalsIgnoreCase("Author"))
+            		authors.add(child.getTextContent());
+            
             title = titleNode.getTextContent();
             description = descriptionNode.getTextContent();
-            
-            for (int i = 0; i < authorsNodeList.getLength(); i++) 
-            	authors.add(authorsNodeList.item(i).getTextContent());
             
         } catch (Exception e) {
             e.printStackTrace();

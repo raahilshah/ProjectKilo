@@ -36,7 +36,7 @@ public class RESTEasyTest {
 					"Product title: "  + title		 + "<br>";
 			responseString += "Author(s): ";
 			for (String a : authors) 
-				responseString += a + " ";
+				responseString += a + ", ";
 			responseString += "<br>Product description: " + desc	 + "<br>";			
 		} else {
 			responseString = "Missing barcode number.";
