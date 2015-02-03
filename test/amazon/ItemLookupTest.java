@@ -39,7 +39,7 @@ public class ItemLookupTest {
             return;
         }
         
-        String requestUrl = null;
+        String requestURL = null;
         String content = null;
 
         Map<String, String> params = new HashMap<String, String>();
@@ -53,11 +53,11 @@ public class ItemLookupTest {
             params.put("SearchIndex", "All");
         params.put("AssociateTag", "drupal0a-20");
 
-        requestUrl = helper.sign(params);
-        System.out.println("Signed Request:\n" + requestUrl);
+        requestURL = helper.sign(params);
+        System.out.println("Signed Request:\n" + requestURL);
         System.out.println();
 
-        List<String> data = fetchContent(requestUrl);
+        List<String> data = fetchContent(requestURL);
 
         for (String s : data) {
             System.out.println(s + "\n");
@@ -65,12 +65,12 @@ public class ItemLookupTest {
     }
 
     // Parse result html 
-    private static List<String> fetchContent(String requestUrl) {
+    private static List<String> fetchContent(String requestURL) {
         List<String> info = null;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(requestUrl);
+            Document doc = db.parse(requestURL);
 
             Node description = doc.getElementsByTagName("Content").item(0);
             Node reviewURL = doc.getElementsByTagName("IFrameURL").item(0);
@@ -85,6 +85,9 @@ public class ItemLookupTest {
             }
             info.add(description.getTextContent());
             info.add(reviewURL.getTextContent());
+
+            Document reviewsDoc = dbf.newDocumentBuilder().parse(reviewURL.getTextContent());
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);

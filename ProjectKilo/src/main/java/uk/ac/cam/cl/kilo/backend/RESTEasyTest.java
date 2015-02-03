@@ -6,6 +6,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import uk.ac.cam.cl.kilo.lookup.AmznItemLookup;
+
 @Path("/test")
 public class RESTEasyTest {
 	
@@ -17,9 +19,16 @@ public class RESTEasyTest {
 		String responseString;
 		
 		if (barcodeNo != null) {	
+			AmznItemLookup amzn = new AmznItemLookup(barcodeType, barcodeNo);
+			
+			String title = amzn.getTitle();
+			String desc = amzn.getDescription();
+			
 			responseString =
 					"Barcode number: " + barcodeNo   + "<br>" +
-                    "Barcode type: "   + barcodeType;			
+                    "Barcode type: "   + barcodeType + "<br>" + 
+					"Product title: "  + title		 + "<br>" +
+                    "Product description" + desc	 + "<br>";			
 		} else {
 			responseString = "Missing barcode number.";
 		}
