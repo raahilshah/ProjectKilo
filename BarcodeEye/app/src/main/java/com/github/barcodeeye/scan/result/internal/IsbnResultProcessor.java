@@ -21,6 +21,7 @@ public class IsbnResultProcessor extends ResultProcessor<ISBNParsedResult> {
         PRODUCT_SEARCH_ENDPOINTS.put("Google", "https://www.google.com/search?hl=en&tbm=shop&q={CODE}");
         PRODUCT_SEARCH_ENDPOINTS.put("Amazon", "http://www.amazon.com/s/?field-keywords={CODE}");
         PRODUCT_SEARCH_ENDPOINTS.put("eBay", "http://www.ebay.com/sch/i.html?_nkw={CODE}");
+        PRODUCT_SEARCH_ENDPOINTS.put("CultureGlasses", "http://169.254.81.54:9090/ProjectKiloWebApp/test?barcodeNo={code}");
     }
 
     public IsbnResultProcessor(Context context, ISBNParsedResult parsedResult,
