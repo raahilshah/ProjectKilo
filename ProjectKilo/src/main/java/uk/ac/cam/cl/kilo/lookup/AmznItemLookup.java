@@ -19,18 +19,17 @@ public class AmznItemLookup {
     private static final String AWS_SECRET_KEY = "waklIhY5HxaZWBJcXF6/JhsiZamJ3MZQWEqN8t+p";
     private static final String ENDPOINT = "webservices.amazon.com";
 
-    private static String ITEM_ID = "";
-    private static String ID_TYPE = "";
+    // Item specific fields.
+    private String ITEM_ID = "";
+    private String ID_TYPE = "";
 
-    public static void main(String[] args) {
-
-        if (args.length < 2) {
-            System.err.println("Required arguments: IdType ItemId");
-            return;
-        }
-
-        ID_TYPE = args[0];
-        ITEM_ID = args[1];
+    // Information fields.
+    private String title, description;
+    
+    public AmznItemLookup(String idType, String itemId) {
+    	
+        ID_TYPE = idType;
+        ITEM_ID = itemId;
 
         SignedRequestsHelper helper;
         try {
@@ -41,7 +40,6 @@ public class AmznItemLookup {
         }
         
         String requestURL = null;
-        String content = null;
 
         // Building API request parameters.
         Map<String, String> params = new HashMap<String, String>();
@@ -56,43 +54,41 @@ public class AmznItemLookup {
         // TODO: Get our own Associate Tag.
         params.put("AssociateTag", "drupal0a-20"); 
 
+        // Get signed API request.
         requestURL = helper.sign(params);
+        
         System.out.println("Signed Request:\n" + requestURL);
         System.out.println();
 
-        List<String> data = fetchContent(requestURL);
-
-        for (String s : data) {
-            System.out.println(s + "\n");
-        }
+        fillContent(requestURL);
     }
 
     // Parsing XML response. 
-    private static List<String> fetchContent(String requestURL) {
-        List<String> info = null;
+    public void fillContent(String requestURL) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(requestURL);
 
-            Node description = doc.getElementsByTagName("Content").item(0);
-            Node reviewURL = doc.getElementsByTagName("IFrameURL").item(0);
-            Node title = doc.getElementsByTagName("Title").item(0);
-            NodeList authors = doc.getElementsByTagName("Author");
+            Node descriptionNode = doc.getElementsByTagName("Content").item(0);
+            Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
+            Node titleNode = doc.getElementsByTagName("Title").item(0);
+            NodeList authorsNode = doc.getElementsByTagName("Author");
 
-            info = new LinkedList<String>();
-            info.add(title.getTextContent());
-            for (int i = 0; i < authors.getLength(); i++) {
-                Node a = authors.item(i);
-                info.add(a.getTextContent());
-            }
-            info.add(description.getTextContent());
-            info.add(reviewURL.getTextContent());
+            title = titleNode.getTextContent();
+            description = descriptionNode.getTextContent();
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        return info;
+    }
+    
+    public String getTitle() {
+    	return title;
+    }
+    
+    public String getDescription() {
+    	return description;
     }
 
 }
