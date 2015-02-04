@@ -1,4 +1,4 @@
-/*
+package com.github.barcodeeye.scan.result.supplement;/*
  * Copyright (C) 2010 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package com.github.barcodeeye.scan.result.supplement;
+import android.content.Context;
+import android.widget.TextView;
+import com.github.barcodeeye.R;
+import com.github.barcodeeye.migrated.HttpHelper;
+import com.google.zxing.client.result.URIParsedResult;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import android.content.Context;
-import android.widget.TextView;
-
-import com.github.barcodeeye.R;
-import com.github.barcodeeye.migrated.HttpHelper;
-import com.google.zxing.client.result.URIParsedResult;
 
 final class URIResultInfoRetriever extends SupplementalInfoRetriever {
 

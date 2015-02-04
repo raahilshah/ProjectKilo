@@ -1,4 +1,4 @@
-/*
+package com.github.barcodeeye.scan.result.supplement;/*
  * Copyright (C) 2010 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 
-package com.github.barcodeeye.scan.result.supplement;
-
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.text.Spannable;
@@ -30,11 +23,15 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.widget.TextView;
-
 import com.google.zxing.client.result.ISBNParsedResult;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ProductParsedResult;
 import com.google.zxing.client.result.URIParsedResult;
+
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public abstract class SupplementalInfoRetriever extends AsyncTask<Object,Object,Object> {
 

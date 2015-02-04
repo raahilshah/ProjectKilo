@@ -33,7 +33,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.github.barcodeeye.BaseGlassActivity;
+import cam.cl.kilo.BaseGlassActivity;
 import com.github.barcodeeye.R;
 import com.github.barcodeeye.image.ImageManager;
 import com.github.barcodeeye.migrated.AmbientLightManager;

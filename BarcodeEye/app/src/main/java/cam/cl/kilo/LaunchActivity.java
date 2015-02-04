@@ -1,4 +1,4 @@
-package com.github.barcodeeye;
+package cam.cl.kilo;
 
 import android.app.Activity;
 import android.os.Bundle;
