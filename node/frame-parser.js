@@ -24,8 +24,24 @@ requirejs([
     standardInterface,
     parseFrame
 ) {
-    console.log(arguments)
+    var readNextCommand = true,
+        readCommand = function () {
+            standardInterface.read(function (obj) {
+                parseFrame(obj, function (res) {
+                    standardInterface.write(res);
+                    readNextCommand = true;
+                });
+            });
+        };
+
+    // repeatedly read in commands from stdin
+    // don't read the next if you are currently
+    // reading one in/processing one
+    // use infinite loop to avoid stack overflow of `readCommand`
     while (true) {
-        standardInterface.read(_.partial(parseFrame, _, standardInterface.write));
+        if (readNextCommand) {
+            readNextCommand = false;
+            readCommand();
+        }
     }
 });

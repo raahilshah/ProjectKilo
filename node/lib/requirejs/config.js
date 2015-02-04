@@ -12,6 +12,9 @@
 */
 
 requirejs = require("requirejs");
+if (typeof define !== "function") {
+	define = require("amdefine")(module);
+}
 
 requirejs.config({
     nodeRequire: require,

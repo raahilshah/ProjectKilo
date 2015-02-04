@@ -12,7 +12,7 @@
 |
 */
 
-requirejs([
+define([
     "underscore",
     "tools/standard-interface",
     "parse-frame/parse-frame"
