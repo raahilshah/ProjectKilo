@@ -13,11 +13,8 @@ bin/
 gen/
 
 # Gradle files
-gradle
-gradlew
+.gradle/
 build/
-.idea
-*.gradle
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -50,6 +47,7 @@ local.properties
 .loadpath
 /src/main/resources/rebel.xml
 *.iml
+.idea
 
 # TexPad files
 
