@@ -25,7 +25,7 @@ public class ResultProcessor<T extends ParsedResult> {
     public static final HashMap<String, String> PRODUCT_SEARCH_ENDPOINTS = new HashMap<String, String>();
 
     static {
-        PRODUCT_SEARCH_ENDPOINTS.put("CultureGlasses", "http://172.21.80.12:9090/ProjectKiloWebApp/test?barcodeNo={CODE}&barcodeType={TYPE}");
+        PRODUCT_SEARCH_ENDPOINTS.put("CultureGlasses", "http://172.17.157.177:9090/ProjectKiloWebApp/test?barcodeNo={CODE}&barcodeType={TYPE}");
     }
 
     public ResultProcessor(Context context, T parsedResult,
