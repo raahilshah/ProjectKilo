@@ -13,6 +13,11 @@
 
 package com.github.barcodeeye.scan;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.Map;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +33,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import cam.cl.kilo.BaseGlassActivity;
 import com.github.barcodeeye.R;
 import com.github.barcodeeye.image.ImageManager;
 import com.github.barcodeeye.migrated.AmbientLightManager;
@@ -35,6 +41,7 @@ import com.github.barcodeeye.migrated.BeepManager;
 import com.github.barcodeeye.migrated.FinishListener;
 import com.github.barcodeeye.migrated.InactivityTimer;
 import com.github.barcodeeye.scan.result.ResultProcessor;
+import com.github.barcodeeye.scan.result.ResultProcessorFactory;
 import com.github.barcodeeye.scan.ui.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
@@ -42,15 +49,6 @@ import com.google.zxing.Result;
 import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.camera.CameraManager;
-import com.google.zxing.client.result.ParsedResult;
-import com.google.zxing.client.result.ResultParser;
-
-import java.io.IOException;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.Map;
-
-import cam.cl.kilo.BaseGlassActivity;
 
 /**
  * This activity opens the camera and does the actual scanning on a background
@@ -302,8 +300,8 @@ public final class CaptureActivity extends BaseGlassActivity implements
             Log.e(TAG, "Failed to save image!", e);
         }
 
-        ResultProcessor<?> processor = new ResultProcessor<ParsedResult>(
-                this, ResultParser.parseResult(rawResult), rawResult, imageUri);
+        ResultProcessor<?> processor = ResultProcessorFactory
+                .makeResultProcessor(this, rawResult, imageUri);
 
         startActivity(ResultsActivity.newIntent(this,
                 processor.getCardResults()));
@@ -357,5 +355,4 @@ public final class CaptureActivity extends BaseGlassActivity implements
     public void drawViewfinder() {
         mViewfinderView.drawViewfinder();
     }
-
 }
