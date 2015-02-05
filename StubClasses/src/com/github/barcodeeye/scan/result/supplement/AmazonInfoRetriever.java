@@ -1,4 +1,4 @@
-/*
+package com.github.barcodeeye.scan.result.supplement;/*
  * Copyright 2013 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.barcodeeye.scan.result.supplement;
+import android.content.Context;
+import android.widget.TextView;
+import com.github.barcodeeye.migrated.HttpHelper;
+import com.github.barcodeeye.migrated.LocaleManager;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import android.content.Context;
-import android.widget.TextView;
-
-import com.github.barcodeeye.migrated.HttpHelper;
-import com.github.barcodeeye.migrated.LocaleManager;
 
 /**
  * @author Sean Owen

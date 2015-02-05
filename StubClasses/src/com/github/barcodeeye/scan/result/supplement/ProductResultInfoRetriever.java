@@ -1,4 +1,4 @@
-/*
+package com.github.barcodeeye.scan.result.supplement;/*
  * Copyright (C) 2010 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.github.barcodeeye.scan.result.supplement;
+import android.content.Context;
+import android.text.Html;
+import android.widget.TextView;
+import com.github.barcodeeye.R;
+import com.github.barcodeeye.migrated.HttpHelper;
+import com.github.barcodeeye.migrated.LocaleManager;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.content.Context;
-import android.text.Html;
-import android.widget.TextView;
-
-import com.github.barcodeeye.R;
-import com.github.barcodeeye.migrated.HttpHelper;
-import com.github.barcodeeye.migrated.LocaleManager;
 
 /**
  * <p>Retrieves product information from Google Product search.</p>

@@ -1,4 +1,4 @@
-/*
+package com.github.barcodeeye.scan.result.supplement;/*
  * Copyright 2012 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.github.barcodeeye.scan.result.supplement;
+import android.widget.TextView;
+import com.github.barcodeeye.migrated.HttpHelper;
+import com.google.zxing.client.result.URIParsedResult;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.widget.TextView;
-
-import com.github.barcodeeye.migrated.HttpHelper;
-import com.google.zxing.client.result.URIParsedResult;
 
 /**
  * Retrieves the title of a web page as supplemental info.
