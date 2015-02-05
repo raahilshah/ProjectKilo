@@ -13,11 +13,7 @@ bin/
 gen/
 
 # Gradle files
-gradle
-gradlew
 build/
-.idea
-*.gradle
 *.iml
 
 # Local configuration file (sdk path, etc)
@@ -35,7 +31,7 @@ local.properties
 ehthumbs.db
 Thumbs.db
 
-# Eclipse specific files
+# IDE-specific files
 .project
 .metadata
 bin/**
@@ -50,6 +46,7 @@ local.properties
 .settings/
 .loadpath
 /src/main/resources/rebel.xml
+.idea
 
 # TexPad files
 
