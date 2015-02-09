@@ -1,29 +1,28 @@
-var cp = require("child_process");
+// var spawn = require("child_process").spawn;
+var spawn = require("win-spawn");
 
 // var n = cp.fork(__dirname + "/../frame-parser.js", [], {stdio: "pipe"});
-var n = cp.spawn("node", [__dirname + "/../frame-parser.js"], {stdio: "pipe"});
+var n = spawn("node", [__dirname + "/../frame-parser.js"], {stdio: "pipe"});
 
 // set callbacks to read any responses
 var inputChunks = [];
 
-n.stdout.on("readable", function() {
-    var curChunk = n.stdout.read();
+n.stdout.setEncoding("utf8");
 
 
-    console.log(curChunk)
-
-    if (curChunk != null) {
-        inputChunks.push(curChunk);
-    }
+n.stdout.on("data", function(chunk) {
+    inputChunks.push(chunk);
 });
 
 n.stdout.on("end", function() {
-    console.log(JSON.parse(inputChunks.join("")));
+    console.log("= test end =")
+    // console.log(JSON.parse(inputChunks.join("")));
+    console.log(inputChunks.join(""));
 });
-setTimeout(function () {
-	// send something
-	n.stdin.end("{\"hello\": 2}");
-	// n.stdin.write("{\"hello\": 2}", "utf8", function () {
-	// });
-	
-}, 200)
+
+console.log("= send start =")
+// send something
+n.stdin.end("hello");
+// n.stdin.write("{\"hello\": 2}", "utf8");
+// n.stdin.end();
+console.log("= send end =")

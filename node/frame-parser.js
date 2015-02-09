@@ -34,6 +34,8 @@ requirejs([
             });
         };
 
+    readCommand();
+
     // repeatedly read in commands from stdin
     // don't read the next if you are currently
     // reading one in/processing one

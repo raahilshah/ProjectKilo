@@ -18,8 +18,10 @@ define([
 ], function (
     _
 ) {
+    var fs = require("fs");
     var standardInterface,
-        stdin = process.stdin;
+        stdin = process.stdin,
+        stdout = process.stdout;
 
     stdin.setEncoding("utf8");
 
@@ -29,36 +31,31 @@ define([
 
     standardInterface = {
         read: function (callback) {
-            console.log(100)
             var inputChunks = [],
                 readCallback, endCallback;
 
+            readCallback = function(chunk) {
+                fs.writeFileSync("message.txt", chunk);
 
-            readCallback = function() {
-                console.log(200)
-                var curChunk = stdin.read();
-
-                if (curChunk != null) {
-                    inputChunks.push(curChunk);
-                }
+                
+                inputChunks.push(chunk);
             };
 
-            stdin.on("readable", readCallback);
+            stdin.on("data", readCallback);
 
             endCallback = function() {
-                console.log("sldfkj")
+                stdout.end("remove");
                 callback(JSON.parse(inputChunks.join("")));
-                stdin.removeListener("readable", readCallback);
+                stdin.removeListener("data", readCallback);
                 stdin.removeListener("end", endCallback);
             };
 
             stdin.on("end", endCallback);
         },
         write: function (obj) {
-            var stdout = process.stdout;
-
             stdout.write(JSON.stringify(obj));
-            stdout.end("\n");
+            // stdout.end("\n");
+            stdout.end();
         }
     };
 
