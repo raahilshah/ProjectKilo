@@ -2,17 +2,29 @@ var _ = require("underscore"),
     spawn = require("child_process").spawn,
     tests = [{
         input: JSON.stringify({site: "amazon", hello: 2, goodbye: "hello"}),
-        expectedOutput: "[\"This was really good.\",\"This wasn't very good.\"]"
+        // response must match this exactly
+        expectedOutputObj: [
+            "This was really good.",
+            "This wasn't very good."
+        ]
     }, {
         input: JSON.stringify({site: "amazon", hello: 2, goodbye: "hello"}),
-        expectedOutput: "[\"This was really good.\",\"This wasn't very good.\"]"
+        // response must match this exactly
+        expectedOutputObj: [
+            "This was really good.",
+            "This wasn't very good."
+        ]
     }, {
         input: "this is not valid json",
-        expectedOutput: "{\"interfaceError\":true,\"errorMessage\":\"data poorly formatted\",\"errorCode\":100}"
+        // response must contain this field
+        expectedOutputObjContains: {errorCode: 100}
     }, {
         input: JSON.stringify({site: "not a real site"}),
-        expectedOutput: "{\"errorMessage\":\"site not found\",\"errorCode\":200}"
+        // response must contain this field
+        expectedOutputObjContains: {errorCode: 200}
     }],
+    // pass a parameter to determine whether to display
+    // output from the harness or the source
     onlySourceOutput = !!process.argv[2];
 
 _.each(tests, function (curTest, curTestIndex) {
@@ -32,8 +44,22 @@ _.each(tests, function (curTest, curTestIndex) {
     });
 
     n.stdout.on("end", function() {
+        var res = JSON.parse(inputChunks.join("")), passed = true;
+
         if (!onlySourceOutput) {
-            console.log((inputChunks.join("") === curTest.expectedOutput ? "passed test " : "failed test ") + curTestIndex);
+            passed = _.reduce(curTest, function (curPassed, curTestItem, curTestItemKey) {
+                switch (curTestItemKey) {
+                    case 'expectedOutputObj':
+                        curPassed = curPassed && _.isEqual(res, curTestItem);
+                        break;
+                    case 'expectedOutputObjContains':
+                        curPassed = curPassed && _.matches(curTestItem)(res);
+                        break;
+                }
+                return curPassed
+            }, passed);
+
+            console.log((passed ? "passed test " : "failed test ") + curTestIndex);
         }
     });
 
