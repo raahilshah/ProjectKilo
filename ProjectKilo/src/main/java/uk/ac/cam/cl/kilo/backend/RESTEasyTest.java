@@ -8,7 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;	
+import javax.ws.rs.core.MediaType;  
 
 import uk.ac.cam.cl.kilo.lookup.AmznItemLookup;
 
@@ -35,18 +35,18 @@ public class RESTEasyTest {
 			String desc = amzn.getDescription();
 			List<String> authors = amzn.getAuthors();
 			
-			responseString =
-					"Barcode number: " + barcodeNo   + "<br>" +
+            responseString =
+                    "Barcode number: " + barcodeNo   + "<br>" + 
                     "Barcode type: "   + barcodeType + "<br>" + 
-					"Product title: "  + title		 + "<br>";
-			responseString += "Author(s): ";
-			for (String a : authors) 
-				responseString += a + ", ";
-			responseString += "<br>Product description: " + desc	 + "<br>";			
-		} else {
-			responseString = "Missing barcode number.";
-		}
-		
-		return Response.ok(responseString).build();
-	}
+                    "Product title: "  + title       + "<br>";
+            responseString += "Author(s): ";
+            for (String a : authors) 
+                responseString += a + ", ";
+            responseString += "<br>Product description: " + desc     + "<br>";          
+        } else {
+            responseString = "Missing barcode number.";
+        }
+        
+        return Response.ok(responseString).build();
+    }
 }

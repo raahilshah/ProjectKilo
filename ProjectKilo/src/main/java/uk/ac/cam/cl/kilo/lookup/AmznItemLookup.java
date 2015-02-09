@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 
 public class AmznItemLookup {
 
-	// Amazon Advertising API details.
+    // Amazon Advertising API details.
     private static final String AWS_ACCESS_KEY_ID = "AKIAI4LLUAWZMGNUW5NA";
     private static final String AWS_SECRET_KEY = "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";
     private static final String ENDPOINT = "webservices.amazon.com";
@@ -28,7 +28,7 @@ public class AmznItemLookup {
     private List<String> authors;
     
     public AmznItemLookup(String idType, String itemId) {
-    	
+        
         ID_TYPE = idType;
         ITEM_ID = itemId;
         title = "";
@@ -80,8 +80,8 @@ public class AmznItemLookup {
             Node itemAttrNode = doc.getElementsByTagName("ItemAttributes").item(0);
             
             for (Node child = itemAttrNode.getFirstChild(); child != null; child = child.getNextSibling())
-            	if (child.getNodeName().equalsIgnoreCase("Author"))
-            		authors.add(child.getTextContent());
+                if (child.getNodeName().equalsIgnoreCase("Author"))
+                    authors.add(child.getTextContent());
             
             title = titleNode.getTextContent();
             description = descriptionNode.getTextContent();
@@ -92,15 +92,15 @@ public class AmznItemLookup {
     }
     
     public String getTitle() {
-    	return title;
+        return title;
     }
     
     public String getDescription() {
-    	return description;
+        return description;
     }
     
     public List<String> getAuthors() {
-    	return authors;
+        return authors;
     }
 
 }

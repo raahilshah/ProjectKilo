@@ -17,7 +17,7 @@ require("./lib/requirejs/config.js");
 
 requirejs([
     "underscore",
-    "tools/standard-interface",
+    "tools/standard-interface/standard-interface",
     "parse-frame/parse-frame"
 ], function (
     _,
@@ -38,10 +38,11 @@ requirejs([
     // don't read the next if you are currently
     // reading one in/processing one
     // use infinite loop to avoid stack overflow of `readCommand`
-    while (true) {
+    // don't use while (true) as this is FUBAR
+    setInterval(function () {
         if (readNextCommand) {
             readNextCommand = false;
             readCommand();
         }
-    }
+    }, 50);
 });
