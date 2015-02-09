@@ -2,7 +2,7 @@
 var spawn = require("win-spawn");
 
 // var n = cp.fork(__dirname + "/../frame-parser.js", [], {stdio: "pipe"});
-var n = spawn("node", [__dirname + "/../frame-parser.js"], {stdio: "pipe"});
+var n = spawn("node", [__dirname + "/../frame-parser.js"]);
 
 // set callbacks to read any responses
 var inputChunks = [];
@@ -15,14 +15,13 @@ n.stdout.on("data", function(chunk) {
 });
 
 n.stdout.on("end", function() {
-    console.log("= test end =")
-    // console.log(JSON.parse(inputChunks.join("")));
-    console.log(inputChunks.join(""));
+    console.log(JSON.parse(inputChunks.join("")));
 });
 
-console.log("= send start =")
+
+// write all child stdout to this process' stdout
+n.stdout.pipe(process.stdout);
+
 // send something
-n.stdin.end("hello");
-// n.stdin.write("{\"hello\": 2}", "utf8");
-// n.stdin.end();
-console.log("= send end =")
+n.stdin.write("{\"hello\": 2}");
+n.stdin.end();

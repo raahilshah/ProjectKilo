@@ -35,16 +35,12 @@ define([
                 readCallback, endCallback;
 
             readCallback = function(chunk) {
-                fs.writeFileSync("message.txt", chunk);
-
-                
                 inputChunks.push(chunk);
             };
 
             stdin.on("data", readCallback);
 
             endCallback = function() {
-                stdout.end("remove");
                 callback(JSON.parse(inputChunks.join("")));
                 stdin.removeListener("data", readCallback);
                 stdin.removeListener("end", endCallback);
@@ -54,7 +50,6 @@ define([
         },
         write: function (obj) {
             stdout.write(JSON.stringify(obj));
-            // stdout.end("\n");
             stdout.end();
         }
     };
