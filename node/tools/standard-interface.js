@@ -14,11 +14,12 @@
 */
 
 define([
-    "underscore"
+    "underscore",
+    "tools/standard-interface/errors"
 ], function (
-    _
+    _,
+    errors
 ) {
-    var fs = require("fs");
     var standardInterface,
         stdin = process.stdin,
         stdout = process.stdout;
@@ -41,7 +42,18 @@ define([
             stdin.on("data", readCallback);
 
             endCallback = function() {
-                callback(JSON.parse(inputChunks.join("")));
+                var obj, response;
+
+                // validate the input, or pass an error object to the handler
+                // this may, or may not, eventually get sent back to stdout
+                try {
+                    obj = JSON.parse(inputChunks.join(""));
+                } catch (exception) {
+                    obj = _.clone(errors.poorFormat);
+                }
+
+                callback(obj);
+
                 stdin.removeListener("data", readCallback);
                 stdin.removeListener("end", endCallback);
             };
@@ -49,6 +61,7 @@ define([
             stdin.on("end", endCallback);
         },
         write: function (obj) {
+            // send response to stdout
             stdout.write(JSON.stringify(obj));
             stdout.end();
         }

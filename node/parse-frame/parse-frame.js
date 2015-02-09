@@ -20,6 +20,14 @@ define([
     _
 ) {
     return function (frameObj, complete) {
-        complete(["This was really good.", "This wasn't very good."]);
+    	// fs.writeFileSync("message.txt", JSON.stringify(frameObj));
+    	if (!frameObj.interfaceError) {
+    		switch (frameObj) {
+
+    		}
+	        complete(["This was really good.", "This wasn't very good."]);
+    	} else {
+    		complete(frameObj);
+    	}
     };
 });
