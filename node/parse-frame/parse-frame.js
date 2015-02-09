@@ -14,20 +14,29 @@
 
 define([
     "underscore",
-    "tools/standard-interface",
-    "parse-frame/parse-frame"
+    "parse-frame/parse-frame-site-map",
+    "parse-frame/errors"
 ], function (
-    _
+    _,
+    parseSiteMap,
+    errors
 ) {
     return function (frameObj, complete) {
-    	// fs.writeFileSync("message.txt", JSON.stringify(frameObj));
-    	if (!frameObj.interfaceError) {
-    		switch (frameObj) {
+        var parseSite;
 
-    		}
-	        complete(["This was really good.", "This wasn't very good."]);
-    	} else {
-    		complete(frameObj);
-    	}
+        // fs.writeFileSync("message.txt", JSON.stringify(frameObj));
+        if (!frameObj.interfaceError) {
+            parseSite = _.find(parseSiteMap, function (curFunc, curSiteKey) {
+                return curSiteKey === frameObj.site;
+            });
+            
+            if (parseSite == null) {
+                complete(errors.siteNotFound);
+            } else {
+                parseSite(frameObj, complete);
+            }
+        } else {
+            complete(frameObj);
+        }
     };
 });

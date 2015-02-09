@@ -1,17 +1,19 @@
 var _ = require("underscore"),
     spawn = require("child_process").spawn,
     tests = [{
-        input: JSON.stringify({hello: 2, goodbye: "hello"}),
+        input: JSON.stringify({site: "amazon", hello: 2, goodbye: "hello"}),
         expectedOutput: "[\"This was really good.\",\"This wasn't very good.\"]"
     }, {
-        input: JSON.stringify({hello: 2, goodbye: "hello"}),
+        input: JSON.stringify({site: "amazon", hello: 2, goodbye: "hello"}),
         expectedOutput: "[\"This was really good.\",\"This wasn't very good.\"]"
     }, {
         input: "this is not valid json",
         expectedOutput: "{\"interfaceError\":true,\"errorMessage\":\"data poorly formatted\",\"errorCode\":100}"
+    }, {
+        input: JSON.stringify({site: "not a real site"}),
+        expectedOutput: "{\"errorMessage\":\"site not found\",\"errorCode\":200}"
     }],
-    onlySourceOutput = false;
-
+    onlySourceOutput = !!process.argv[2];
 
 _.each(tests, function (curTest, curTestIndex) {
     // set callbacks to read any responses

@@ -17,7 +17,7 @@ require("./lib/requirejs/config.js");
 
 requirejs([
     "underscore",
-    "tools/standard-interface",
+    "tools/standard-interface/standard-interface",
     "parse-frame/parse-frame"
 ], function (
     _,
