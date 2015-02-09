@@ -24,6 +24,11 @@ public class RESTEasyTest {
 		String responseString;
 		
 		if (barcodeNo != null) {	
+			/*
+			 * TODO: change constructor to pass an instance of ItemInfo
+			 * by reference and populate that object.
+			 */
+			
 			AmznItemLookup amzn = new AmznItemLookup(barcodeType, barcodeNo);
 			
 			String title = amzn.getTitle();
