@@ -14,9 +14,9 @@ import org.w3c.dom.NodeList;
 
 public class GoodReadsLookUp {
 
-	private static final String GR_KEY = "JFp6OfWw4CyC62C9EAXJdw";
+    private static final String GR_KEY = "JFp6OfWw4CyC62C9EAXJdw";
    
-	// Item specific fields.
+    // Item specific fields.
     private String ID_TYPE = "";
     private String bookIsbn = "";
 
@@ -25,10 +25,10 @@ public class GoodReadsLookUp {
     private List<String> authors;
     
     public GoodReadsLookUp(String idType, String itemId){
-    	
-    	ID_TYPE = idType;
+        
+        ID_TYPE = idType;
         if (ID_TYPE.equals("isbn")){
-        	bookIsbn = itemId;
+            bookIsbn = itemId;
         }
         title = "";
         description = "";
@@ -38,41 +38,41 @@ public class GoodReadsLookUp {
     
         fillContent(uri);
     }
-	
- // Parsing XML response. 
+    
+    // Parsing XML response. 
     public void fillContent(String requestURL) {
-    	try {
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(requestURL);
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(requestURL);
 
-			Node descriptionNode = doc.getElementsByTagName("description").item(0);
-			Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
-			Node titleNode = doc.getElementsByTagName("title").item(0);
-			Node itemAttrNode = doc.getElementsByTagName("author").item(0);
+            Node descriptionNode = doc.getElementsByTagName("description").item(0);
+            Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
+            Node titleNode = doc.getElementsByTagName("title").item(0);
+            Node itemAttrNode = doc.getElementsByTagName("author").item(0);
 
-			for (Node child = itemAttrNode.getFirstChild(); child != null; child = child.getNextSibling())
-				if (child.getNodeName().equalsIgnoreCase("name"))
-					authors.add(child.getTextContent());
+            for (Node child = itemAttrNode.getFirstChild(); child != null; child = child.getNextSibling())
+                if (child.getNodeName().equalsIgnoreCase("name"))
+                    authors.add(child.getTextContent());
 
-			title = titleNode.getTextContent();
-			description = descriptionNode.getTextContent();
+            title = titleNode.getTextContent();
+            description = descriptionNode.getTextContent();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public String getTitle() {
-    	return title;
+        return title;
     }
     
     public String getDescription() {
-    	return description;
+        return description;
     }
     
     public List<String> getAuthors() {
-    	return authors;
+        return authors;
     }
-	
+    
 }
