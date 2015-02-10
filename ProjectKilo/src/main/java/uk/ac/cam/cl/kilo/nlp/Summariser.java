@@ -1,4 +1,4 @@
-package uk.ac.cam.kilo.backend;
+package uk.ac.cam.cl.kilo.nlp;
 
 public class Summariser {
 

@@ -11,6 +11,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;  
 
 import uk.ac.cam.cl.kilo.lookup.AmznItemLookup;
+import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+import uk.ac.cam.cl.kilo.nlp.Summariser;
 
 @Path("/test")
 public class RESTEasyTest {
@@ -29,10 +31,17 @@ public class RESTEasyTest {
 			 * by reference and populate that object.
 			 */
 			
-			AmznItemLookup amzn = new AmznItemLookup(barcodeType, barcodeNo);
+			ItemInfo itemInfo = new ItemInfo();
 			
+			AmznItemLookup amzn = new AmznItemLookup(barcodeType, barcodeNo);
+			if (amzn.getDescription() != null) {
+				itemInfo.addDescription(amzn.getDescription());
+			} else {
+				itemInfo.addDescription("This is a description. It has two sentences!");
+			}
+			
+			String summarised = Summariser.summarise(itemInfo);
 			String title = amzn.getTitle();
-			String desc = amzn.getDescription();
 			List<String> authors = amzn.getAuthors();
 			
             responseString =
@@ -42,11 +51,18 @@ public class RESTEasyTest {
             responseString += "Author(s): ";
             for (String a : authors) 
                 responseString += a + ", ";
-            responseString += "<br>Product description: " + desc     + "<br>";          
+            responseString += "<br>Product description: " + summarised + "<br>";          
         } else {
             responseString = "Missing barcode number.";
         }
         
         return Response.ok(responseString).build();
     }
+	
+	public static void main(String[] args) {
+		
+		RESTEasyTest test = new RESTEasyTest();
+		test.simpleResponse("052156543X","ISBN");
+		
+	}
 }

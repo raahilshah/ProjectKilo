@@ -1,13 +1,13 @@
-package uk.ac.cam.kilo.backend;
+package uk.ac.cam.cl.kilo.nlp;
 
 import java.util.Vector;
 
 public class ItemInfo {
 
 	private String title;
-    private Vector<String> authors;
-    private Vector<String> descriptions;
-    private Vector<String> reviews;
+    private Vector<String> authors = new Vector<String>();
+    private Vector<String> descriptions = new Vector<String>();
+    private Vector<String> reviews = new Vector<String>();
 	
     /**
 	 * @return the title
