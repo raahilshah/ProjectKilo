@@ -48,6 +48,7 @@ local.properties
 /src/main/resources/rebel.xml
 *.iml
 .idea
+.recommenders
 
 # TexPad files
 
