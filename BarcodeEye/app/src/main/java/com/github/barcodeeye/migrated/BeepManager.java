@@ -13,8 +13,6 @@
 
 package com.github.barcodeeye.migrated;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,6 +25,8 @@ import android.util.Log;
 
 import com.github.barcodeeye.R;
 import com.github.barcodeeye.scan.CaptureActivity;
+
+import java.io.IOException;
 
 /**
  * Manages beeps and vibrations for {@link CaptureActivity}.

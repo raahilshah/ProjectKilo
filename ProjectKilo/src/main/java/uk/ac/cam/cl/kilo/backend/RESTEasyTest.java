@@ -1,6 +1,7 @@
 package uk.ac.cam.cl.kilo.backend;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -36,25 +37,34 @@ public class RESTEasyTest {
 			AmznItemLookup amzn = new AmznItemLookup(barcodeType, barcodeNo);
 			if (amzn.getDescription() != null) {
 				itemInfo.addDescription(amzn.getDescription());
+				for (String a : amzn.getAuthors()) {
+					itemInfo.addAuthor(a);
+				}
+				itemInfo.setTitle(amzn.getTitle());
 			} else {
 				itemInfo.addDescription("This is a description. It has two sentences!");
 			}
 			
 			String summarised = Summariser.summarise(itemInfo);
-			String title = amzn.getTitle();
-			List<String> authors = amzn.getAuthors();
+			//String title = amzn.getTitle();
+			//List<String> authors = amzn.getAuthors();
 			
-            responseString =
+           /* responseString =
                     "Barcode number: " + barcodeNo   + "<br>" + 
                     "Barcode type: "   + barcodeType + "<br>" + 
                     "Product title: "  + title       + "<br>";
             responseString += "Author(s): ";
             for (String a : authors) 
                 responseString += a + ", ";
-            responseString += "<br>Product description: " + summarised + "<br>";          
+            responseString += "<br>Product description: " + summarised + "<br>";      */
+			
+			responseString = summarised;
+			
         } else {
             responseString = "Missing barcode number.";
         }
+		
+		System.out.println(responseString);
         
         return Response.ok(responseString).build();
     }

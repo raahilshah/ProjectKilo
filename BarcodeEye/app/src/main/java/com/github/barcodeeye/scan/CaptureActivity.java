@@ -35,6 +35,7 @@ import com.github.barcodeeye.migrated.BeepManager;
 import com.github.barcodeeye.migrated.FinishListener;
 import com.github.barcodeeye.migrated.InactivityTimer;
 import com.github.barcodeeye.scan.result.ResultProcessor;
+import com.github.barcodeeye.scan.ui.LoadingActivity;
 import com.github.barcodeeye.scan.ui.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
@@ -85,6 +86,8 @@ public final class CaptureActivity extends BaseGlassActivity implements
     private BeepManager mBeepManager;
     private AmbientLightManager mAmbientLightManager;
     private ImageManager mImageManager;
+    private String EXTRA_CODE = "EXTRA_CODE";
+    private String EXTRA_TYPE = "EXTRA_TYPE";
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, CaptureActivity.class);
@@ -305,8 +308,13 @@ public final class CaptureActivity extends BaseGlassActivity implements
         ResultProcessor<?> processor = new ResultProcessor<ParsedResult>(
                 this, ResultParser.parseResult(rawResult), rawResult, imageUri);
 
-        startActivity(ResultsActivity.newIntent(this,
-                processor.getCardResults()));
+        //startActivity(ResultsActivity.newIntent(this,processor.getCardResults()));
+
+        ParsedResult result = processor.getParsedResult();
+
+        startActivity(new Intent(this, LoadingActivity.class)
+                .putExtra(EXTRA_CODE, result.getDisplayResult())
+                .putExtra(EXTRA_TYPE, result.getType().toString()));
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
