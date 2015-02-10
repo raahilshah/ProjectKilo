@@ -49,27 +49,66 @@ Set up a basic test harness for this system and I would like to improve this by 
 
 \section{Davide Cultrera}
 
-Refactored BarcodeEye Glass app: pruned out unnecessary classes (e.g. the ResultProcessorFactory, and some website-specific look up functions), and readapted existing ones (e.g. ResultProcessor) to allow sending requests to the backend server
+\begin{itemize}
 
-Set up Tomcat server on the Student-Run Computing Facility
+	\item Refactored BarcodeEye Glass app: pruned out unnecessary classes (e.g. the ResultProcessorFactory, and some website-specific look up functions), and readapted existing ones (e.g. ResultProcessor) to allow sending requests to the backend server
 
-Tested components of the backend (local server on Vagrant, Maven project)
+	\item Set up Tomcat server on the Student-Run Computing Facility
 
-Researched possible NLP libraries
+	\item Tested components of the backend (local server on Vagrant, Maven project)
 
-Defined ItemInfo class
+	\item Researched possible NLP libraries
 
+	\item Defined ItemInfo class
+	
+\end{itemize}
 
 \section{Howard Guo}
 
+\begin{itemize}
+
+\item Researched possible NLP libraries and tested some of summariser
+
+\item Write the code of HTML formatter
+
+\item Write the test harness
+
+\end{itemize}
+
 \section{Rupert Horlick}
 
-Set up a Vagrant VM running a Tomcat server. This allows us to all run the same server test environment on our own machines and sync it via GitHub. To do this it was necessary to define a Vagrantfile, specifying the nature of the VM, and a collection of Chef cookbooks, used to provision the VM with Tomcat and its dependencies, and install the WebApp produced by our Java application.
+\begin{itemize}
 
-Designed the interface of our Glassware, including defining an HTML format for the WebApp to return information in. This allows us to translate from our Java representation to a native Glassware card extremely easily.
+\item Set up a Vagrant VM running a Tomcat server. This allows us to all run the same server test environment on our own machines and sync it via GitHub. To do this it was necessary to define a Vagrantfile, specifying the nature of the VM, and a collection of Chef cookbooks, used to provision the VM with Tomcat and its dependencies, and install the WebApp produced by our Java application.
+
+\item Designed the interface of our Glassware, including defining an HTML format for the WebApp to return information in. This allows us to translate from our Java representation to a native Glassware card extremely easily.
+
+\end{itemize}
 
 \section{Raahil Shah}
 
+\begin{itemize}
+
+\item Set up maven web project in eclipse and a simple REST based web application for the backed.
+
+\item Implemented the client for the Amazon ItemLookup service of the Advertising API that given a barcode number and type queries the API for results including title, author(s), editorial description and customer reviews.
+
+\item Integrated the ItemLookup client with the web app for a simple demo.
+
+\item Tested the client individually and within the web app.
+
+\end{itemize}
+
 \section{Jerry Yan}
+
+\begin{itemize}
+
+\item Implemented the client for the GoodRead Lookup service of the GoodReads API that given an ISBN number and type queries the API for results including title, author(s), book description and customer reviews
+
+\item Wrote JUnit tests for GoodReads Lookup Class but will require reformatting as ItemInfo has removed functionality from methods such as getAuthor(s)
+
+\item Wrote a simple JUnit test class for RESTeasytest class (the server) but will require some modification as the “Response” return type cannot be directly compared
+
+\end{itemize}
 
 \end{document}
