@@ -27,7 +27,7 @@ define([
         var parseSite;
 
         // fs.writeFileSync("message.txt", JSON.stringify(frameObj));
-        if (!frameObj instanceof NodeError) {
+        if (!(frameObj instanceof NodeError)) {
             parseSite = _.find(parseSiteMap, function (curFunc, curSiteKey) {
                 return curSiteKey === frameObj.site;
             });

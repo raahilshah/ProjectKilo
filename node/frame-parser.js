@@ -19,12 +19,14 @@ requirejs([
     "underscore",
     "tools/standard-interface/standard-interface",
     "parse-frame/parse-frame",
-    "errors/node-error"
+    "errors/node-error",
+    "errors/error-map"
 ], function (
     _,
     standardInterface,
     parseFrame,
-    NodeError
+    NodeError,
+    errorMap
 ) {
     var readNextCommand = true,
         sendResult = function (res) {
@@ -38,12 +40,17 @@ requirejs([
             });
         };
 
+    // alternative means of communicating if this is a test run
     if (process.argv[2] === "test") {
         sendResult = function (res) {
-            console.log(res);
+            console.log(res instanceof NodeError ? res.getErrorObj() : res);
         };
         readRequest = function (callback) {
-            callback(JSON.parse(process.argv[3]));
+            try {
+                callback(JSON.parse(process.argv[3]));
+            } catch (err) {
+                callback(new errorMap.PoorRequestFormat());
+            }
         };
     }
 

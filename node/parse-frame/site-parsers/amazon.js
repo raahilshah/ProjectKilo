@@ -16,12 +16,21 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module) }
 
 define([
-    "tools/getUrlHtml"
+    "tools/getUrlHtml",
+    "errors/node-error",
+    "errors/error-map"
 ], function (
-    getUrlHtml
+    getUrlHtml,
+    NodeError,
+    errorMap
 ) {
     return function (frameObj, complete) {
-        getUrlHtml("http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D");
-        complete(["This was really good.", "This wasn't very good."]);
+        getUrlHtml(frameObj.url, function (body) {
+        	if (!(body instanceof NodeError)) {
+		        complete(["This was really good.", "This wasn't very good."]);
+        	} else {
+        		complete(body);
+        	}
+        });
     };
 });

@@ -1,14 +1,20 @@
 var _ = require("underscore"),
     spawn = require("child_process").spawn,
     tests = [{
-        input: JSON.stringify({site: "amazon", hello: 2, goodbye: "hello"}),
+        input: JSON.stringify({
+            site: "amazon",
+            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D"
+        }),
         // response must match this exactly
         expectedOutputObj: [
             "This was really good.",
             "This wasn't very good."
         ]
     }, {
-        input: JSON.stringify({site: "amazon", hello: 2, goodbye: "hello"}),
+        input: JSON.stringify({
+            site: "amazon",
+            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D"
+        }),
         // response must match this exactly
         expectedOutputObj: [
             "This was really good.",
@@ -63,12 +69,13 @@ _.each(tests, function (curTest, curTestIndex) {
                 console.log("passed test " + curTestIndex);
             } else {
                 console.log("failed test " + curTestIndex);
-                console.log("expected / got");
+                console.log("   expected:");
                 _.each(curTest, function (curTestItem, curTestItemKey) {
                     if (curTestItemKey !== "input"){
                         console.log(curTestItem);
                     }
                 });
+                console.log("   got:");
                 console.log(res);
             }
         }

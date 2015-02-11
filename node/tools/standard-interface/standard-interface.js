@@ -51,7 +51,7 @@ define([
                 try {
                     obj = JSON.parse(inputChunks.join(""));
                 } catch (exception) {
-                    obj = _.clone(new errors.PoorRequestFormat());
+                    obj = new errors.PoorRequestFormat();
                 }
 
                 callback(obj);
