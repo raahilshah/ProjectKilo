@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 
 import com.github.barcodeeye.migrated.HttpHelper;
+import com.github.barcodeeye.scan.ScanFailureActivity;
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.Slider;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import uk.ac.cam.cl.kilo.nlp.ItemInfo;
 
 /**
  * Created by ruhatch on 10/02/15.
@@ -21,9 +27,10 @@ public class LoadingActivity extends Activity {
     private Slider.Indeterminate mIndeterminate;
     private Slider mSlider;
     private String URI = "http://groupkilo.soc.srcf.net/ProjectKiloWebApp/test?barcodeNo={CODE}&barcodeType={TYPE}";
-    private String EXTRA_RESULT = "EXTRA_RESULT";
+    private String EXTRA_RESULT_SERIAL = "EXTRA_RESULT_SERIAL";
     private String EXTRA_CODE = "EXTRA_CODE";
     private String EXTRA_TYPE = "EXTRA_TYPE";
+    private ItemInfo itemInfo;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -54,30 +61,50 @@ public class LoadingActivity extends Activity {
 
     private void displayResults(String result) {
 
-        startActivity(new Intent(this, EmbeddedCardLayoutActivity.class).putExtra(EXTRA_RESULT, result));
+        if (result.equals("success")) {
+            startActivity(new Intent(this, EmbeddedCardLayoutActivity.class).putExtra(EXTRA_RESULT_SERIAL, itemInfo));
+        } else {
+            startActivity(new Intent(this, ScanFailureActivity.class)); //failure activity!
+        }
 
     }
 
     private class GetItemInfo extends AsyncTask<String, Void, String> {
 
-        private String getInfo(String uri) {
-
-            CharSequence result = null;
+        private void getInfo(String uri) {
 
             try {
-                result = HttpHelper.downloadViaHttp(uri, HttpHelper.ContentType.HTML);
+                CharSequence result = HttpHelper.downloadViaHttp(uri, HttpHelper.ContentType.HTML);
+                itemInfo = (ItemInfo) fromString(result.toString());
             } catch (IOException ioe) {
-
+                itemInfo = new ItemInfo();
+                itemInfo.setTitle("No Results Found");
+            } catch (ClassNotFoundException cnfe) {
+                cnfe.printStackTrace();
+                itemInfo = new ItemInfo();
+                itemInfo.setTitle("No Class Found");
             }
-            return result.toString();
 
+        }
+
+        private Object fromString( String s ) throws IOException, ClassNotFoundException {
+            byte [] data = Base64.decode(s, Base64.DEFAULT);
+            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
+            Object o = ois.readObject();
+            ois.close();
+            return o;
         }
 
         @Override
         protected String doInBackground(String... urls) {
 
             // params comes from the execute() call: params[0] is the url.
-            return getInfo(urls[0]);
+            getInfo(urls[0]);
+            if (itemInfo.getDescriptions().size() > 0) {
+                return "success";
+            } else {
+                return "failure";
+            }
 
         }
         // onPostExecute displays the results of the AsyncTask.
@@ -98,6 +125,7 @@ public class LoadingActivity extends Activity {
     protected void onPause() {
         super.onPause();
         mIndeterminate.hide();
+        finish();
     }
 
 }

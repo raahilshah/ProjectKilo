@@ -14,46 +14,18 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.github.barcodeeye" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8fe6757-341f-432f-a154-233f74fbb58c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_circle_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_circle_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_circle_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_circle_yellow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/SimpleTableItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/simple_table.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/simple_table_row.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/table_row_divider.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/camera/AutoFocusManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/camera/AutoFocusManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/BeepManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/BeepManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/camera/CameraConfigurationManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/camera/CameraConfigurationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/camera/CameraManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/camera/CameraManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/CaptureActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/CaptureActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/CaptureActivityHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/CaptureActivityHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/api/CardPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/api/CardPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/history/DBHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/history/DBHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/DecodeFormatManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/DecodeFormatManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/DecodeHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/DecodeHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/DecodeHintManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/DecodeHintManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/DecodeThread.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/DecodeThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/history/HistoryItemAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/history/HistoryItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/image/ImageManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/image/ImageManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/share/LoadPackagesAsyncTask.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/share/LoadPackagesAsyncTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/LocaleManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/LocaleManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/cam/cl/kilo/nlp/ItemInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ScanFailureActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ProjectKilo/src/main/java/uk/ac/cam/cl/kilo/nlp/ItemInfo.java" afterPath="$PROJECT_DIR$/../ProjectKilo/src/main/java/uk/ac/cam/cl/kilo/nlp/ItemInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ProjectKilo/src/main/java/uk/ac/cam/cl/kilo/backend/RESTEasyTest.java" afterPath="$PROJECT_DIR$/../ProjectKilo/src/main/java/uk/ac/cam/cl/kilo/backend/RESTEasyTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ResultsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ResultsActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ProjectKilo/src/main/java/uk/ac/cam/cl/kilo/nlp/Summariser.java" afterPath="$PROJECT_DIR$/../ProjectKilo/src/main/java/uk/ac/cam/cl/kilo/nlp/Summariser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/ViewfinderView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/ViewfinderView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/wifi/WifiConfigManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/google/zxing/client/android/wifi/WifiConfigManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ProjectKilo/pom.xml" afterPath="$PROJECT_DIR$/../ProjectKilo/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BarcodeEye-master.iws" />
@@ -87,18 +59,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="930">
-              <caret line="42" column="77" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
-              <folding>
-                <element signature="e#797#815#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ResultsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ResultsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -123,28 +83,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple_table_row.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/simple_table_row.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
+      <file leaf-file-name="HttpHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/HttpHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.185184" vertical-offset="76" max-vertical-offset="675">
-              <caret line="36" column="66" selection-start-line="36" selection-start-column="66" selection-end-line="36" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1414" max-vertical-offset="3345">
+              <caret line="142" column="27" selection-start-line="142" selection-start-column="27" selection-end-line="142" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmbeddedCardLayoutActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EmbeddedCardLayoutActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.706278" vertical-offset="390" max-vertical-offset="1410">
-              <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="364" max-vertical-offset="1155">
+              <caret line="48" column="89" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2627#2644#0" expanded="true" />
+                <element signature="e#2000#2017#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemInfo.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/cam/cl/kilo/nlp/ItemInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -162,8 +129,20 @@
       <file leaf-file-name="LoadingActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="1635">
-              <caret line="47" column="66" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1609" max-vertical-offset="2055">
+              <caret line="123" column="4" selection-start-line="123" selection-start-column="4" selection-end-line="128" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScanFailureActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ScanFailureActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4157044" vertical-offset="0" max-vertical-offset="1230">
+              <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1188,8 +1167,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/SimpleTableItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/simple_table_row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ItemInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/cam/cl/kilo/nlp/ItemInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/cam/cl/kilo/nlp/ItemInfoParcelable.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ScanFailureActivity.java" />
       </list>
     </option>
   </component>
@@ -1294,6 +1277,24 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="nlp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BarcodeEye" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="com" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1321,36 +1322,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="scan" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BarcodeEye" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="barcodeeye" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scan" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1471,6 +1442,7 @@
       <recent name="cam.cl.kilo" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable-hdpi" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui" />
@@ -1682,7 +1654,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24169184" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24169184" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1717,20 +1689,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/com/github/barcodeeye/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="3390">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cam/cl/kilo/LaunchActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
-          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cam/cl/kilo/BaseGlassActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1275">
@@ -2006,14 +1964,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/HttpHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3345">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/DecodeThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36995515" vertical-offset="0" max-vertical-offset="1245">
@@ -2029,14 +1979,6 @@
           <folding>
             <element signature="e#797#815#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/result/ResultProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="649" max-vertical-offset="1095">
-          <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2090,13 +2032,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/result/ResultProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="1635">
-          <caret line="47" column="66" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="649" max-vertical-offset="1095">
+          <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/migrated/HttpHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1519" max-vertical-offset="3345">
+          <caret line="142" column="27" selection-start-line="142" selection-start-column="27" selection-end-line="142" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2108,13 +2056,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/cam/cl/kilo/nlp/ItemInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/EmbeddedCardLayoutActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.706278" vertical-offset="390" max-vertical-offset="1410">
-          <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="364" max-vertical-offset="1155">
+          <caret line="48" column="89" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2627#2644#0" expanded="true" />
+            <element signature="e#2000#2017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ui/LoadingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1609" max-vertical-offset="2055">
+          <caret line="123" column="4" selection-start-line="123" selection-start-column="4" selection-end-line="128" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/github/barcodeeye/scan/ScanFailureActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4157044" vertical-offset="0" max-vertical-offset="1230">
+          <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,15 +1,19 @@
 package uk.ac.cam.cl.kilo.backend;
 
-import java.util.List;
-import java.util.Vector;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;  
+
+import org.apache.commons.codec.binary.Base64;
 
 import uk.ac.cam.cl.kilo.lookup.AmznItemLookup;
 import uk.ac.cam.cl.kilo.nlp.ItemInfo;
@@ -45,7 +49,7 @@ public class RESTEasyTest {
 				itemInfo.addDescription("This is a description. It has two sentences!");
 			}
 			
-			String summarised = Summariser.summarise(itemInfo);
+			Summariser.summarise(itemInfo);
 			//String title = amzn.getTitle();
 			//List<String> authors = amzn.getAuthors();
 			
@@ -58,7 +62,13 @@ public class RESTEasyTest {
                 responseString += a + ", ";
             responseString += "<br>Product description: " + summarised + "<br>";      */
 			
-			responseString = summarised;
+			try {
+				responseString = toString(itemInfo);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				responseString = e.getMessage();
+			}
 			
         } else {
             responseString = "Missing barcode number.";
@@ -69,10 +79,21 @@ public class RESTEasyTest {
         return Response.ok(responseString).build();
     }
 	
+	private static String toString( Serializable o ) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream( baos );
+        oos.writeObject( o );
+        oos.close();
+        for (byte b : baos.toByteArray()) {
+        	System.out.println(b);
+        }
+        return Base64.encodeBase64String(baos.toByteArray());
+    }
+	
 	public static void main(String[] args) {
 		
 		RESTEasyTest test = new RESTEasyTest();
-		test.simpleResponse("052156543X","ISBN");
+		test.simpleResponse("9781907773242","ISBN");
 		
 	}
 }

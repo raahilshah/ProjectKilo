@@ -26,6 +26,8 @@ import com.google.android.glass.widget.CardScrollView;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+
 /**
  * Creates a card scroll view that shows an example of using a custom embedded layout in a
  * {@code CardBuilder}.
@@ -33,13 +35,8 @@ import java.util.List;
 public final class EmbeddedCardLayoutActivity extends Activity {
 
     private CardScrollView mCardScroller;
-    private String[] results;
-    private int authorNo;
-    private String[] authors;
-    private String title;
-    private int sentenceNo;
-    private String[] sentences;
-    private String EXTRA_RESULT = "EXTRA_RESULT";
+    private ItemInfo results;
+    private String EXTRA_RESULT_SERIAL = "EXTRA_RESULT_SERIAL";
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -49,25 +46,11 @@ public final class EmbeddedCardLayoutActivity extends Activity {
 
         if (intent != null && intent.getExtras() != null) {
 
-            results = intent.getExtras().getString(EXTRA_RESULT, "No barcode found").split("~");
-            for (int i = 0; i < results.length; i++) {
-
-                System.out.println(results[i]);
-
-            }
-            title = results[0];
-            authorNo = Integer.parseInt(results[1]);
-            authors = new String[authorNo];
-            for (int i = 0; i < authorNo; i++) {
-                authors[i] = results[i+2];
-            }
-            sentenceNo = results.length - authorNo - 2;
-            sentences = new String[sentenceNo];
-            for (int i = 0; i < sentenceNo; i++) {
-                sentences[i] = results[i + authorNo + 2];
-            }
+            results = (ItemInfo) intent.getExtras().getSerializable(EXTRA_RESULT_SERIAL);
 
         } else results = null;
+
+        System.out.println(results.getTitle());
 
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(new EmbeddedCardLayoutAdapter(this, createItems()));
@@ -79,9 +62,9 @@ public final class EmbeddedCardLayoutActivity extends Activity {
     private List<SimpleTableItem> createItems() {
         ArrayList<SimpleTableItem> items = new ArrayList<SimpleTableItem>();
 
-        for (int i = 0; i < sentenceNo; i++) {
+        for (String d : results.getDescriptions()) {
 
-            items.add(new SimpleTableItem(R.drawable.ic_circle_blue, sentences[i]));
+            items.add(new SimpleTableItem(R.drawable.ic_circle_blue, d));
 
         }
 
