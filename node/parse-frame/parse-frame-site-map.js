@@ -13,6 +13,8 @@
 |
 */
 
+if (typeof define !== 'function') { var define = require('amdefine')(module) }
+
 define([
     "parse-frame/site-parsers/amazon"
 ], function (

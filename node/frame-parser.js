@@ -18,22 +18,34 @@ require("./lib/requirejs/config.js");
 requirejs([
     "underscore",
     "tools/standard-interface/standard-interface",
-    "parse-frame/parse-frame"
+    "parse-frame/parse-frame",
+    "errors/node-error"
 ], function (
     _,
     standardInterface,
-    parseFrame
+    parseFrame,
+    NodeError
 ) {
     var readNextCommand = true,
         sendResult = function (res) {
-            standardInterface.write(res);
+            standardInterface.write(res instanceof NodeError ? res.getErrorObj() : res);
             readNextCommand = true;
         },
+        readRequest = standardInterface.read,
         readCommand = function () {
-            standardInterface.read(function (obj) {
+            readRequest(function (obj) {
                 parseFrame(obj, sendResult);
             });
         };
+
+    if (process.argv[2] === "test") {
+        sendResult = function (res) {
+            console.log(res);
+        };
+        readRequest = function (callback) {
+            callback(JSON.parse(process.argv[3]));
+        };
+    }
 
     // repeatedly read in commands from stdin
     // don't read the next if you are currently

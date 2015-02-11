@@ -15,23 +15,25 @@
 define([
     "underscore",
     "parse-frame/parse-frame-site-map",
-    "parse-frame/errors"
+    "errors/node-error",
+    "errors/error-map"
 ], function (
     _,
     parseSiteMap,
+    NodeError,
     errors
 ) {
     return function (frameObj, complete) {
         var parseSite;
 
         // fs.writeFileSync("message.txt", JSON.stringify(frameObj));
-        if (!frameObj.interfaceError) {
+        if (!frameObj instanceof NodeError) {
             parseSite = _.find(parseSiteMap, function (curFunc, curSiteKey) {
                 return curSiteKey === frameObj.site;
             });
             
             if (parseSite == null) {
-                complete(errors.siteNotFound);
+                complete(new errors.SiteNotFound());
             } else {
                 parseSite(frameObj, complete);
             }

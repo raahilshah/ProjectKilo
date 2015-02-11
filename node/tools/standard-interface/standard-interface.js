@@ -13,9 +13,11 @@
 |
 */
 
+if (typeof define !== 'function') { var define = require('amdefine')(module) }
+
 define([
     "underscore",
-    "tools/standard-interface/errors"
+    "errors/error-map"
 ], function (
     _,
     errors
@@ -49,7 +51,7 @@ define([
                 try {
                     obj = JSON.parse(inputChunks.join(""));
                 } catch (exception) {
-                    obj = _.clone(errors.poorFormat);
+                    obj = _.clone(new errors.PoorRequestFormat());
                 }
 
                 callback(obj);

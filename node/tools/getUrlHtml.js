@@ -12,32 +12,25 @@
 |
 */
 
+if (typeof define !== 'function') { var define = require('amdefine')(module) }
+
 define([
     "http",
-    "url"
+    "errors/error-map"
 ], function (
     http,
-    urlTools
+    errors
 ) {
     return function (url, complete) {
-        console.log(urlTools.parse(url), true, true);
-        // console.log(url.host)
-        // console.log(url.path)
-        // var host, path, request;
-
-        // request = http.request({
-        //     host: url, // 'www.bulksms.co.uk',
-        //     port: 80,
-        //     method: 'GET',
-        //     path: // '/eapi/submission/send_sms/2/2.0',
-        //     // headers: {
-        //     //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-        //     // }
-        // });
-
-
-        // // request.write(postBodyString);
-
-        // request.end();
+        http.get(url, function (res) {
+            console.log('STATUS: ' + res.statusCode);
+            console.log('HEADERS: ' + JSON.stringify(res.headers));
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+                console.log('BODY: ' + chunk);
+            });
+        }).on("error", function () {
+            complete(new errors.HttpGetFailed());
+        });
     };
 });

@@ -59,7 +59,18 @@ _.each(tests, function (curTest, curTestIndex) {
                 return curPassed
             }, passed);
 
-            console.log((passed ? "passed test " : "failed test ") + curTestIndex);
+            if (passed) {
+                console.log("passed test " + curTestIndex);
+            } else {
+                console.log("failed test " + curTestIndex);
+                console.log("expected / got");
+                _.each(curTest, function (curTestItem, curTestItemKey) {
+                    if (curTestItemKey !== "input"){
+                        console.log(curTestItem);
+                    }
+                });
+                console.log(res);
+            }
         }
     });
 
