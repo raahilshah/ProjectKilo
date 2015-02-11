@@ -23,12 +23,6 @@
     android:paddingTop="2px"
     android:paddingBottom="6px"
     >
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8px"
-        android:baselineAlignBottom="true"
-        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

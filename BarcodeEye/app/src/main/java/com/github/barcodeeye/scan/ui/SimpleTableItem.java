@@ -22,9 +22,6 @@ package com.github.barcodeeye.scan.ui;
  */
 public class SimpleTableItem {
 
-    /** The image resource ID associated with the table item. */
-    public final int iconResId;
-
     /** The primary text associated with the table item. */
     public final CharSequence primaryText;
 
@@ -32,8 +29,7 @@ public class SimpleTableItem {
      * Initializes a new {@code SimpleTableItem} with the specified icon, primary text, and
      * secondary text.
      */
-    public SimpleTableItem(int iconResId, CharSequence primaryText) {
-        this.iconResId = iconResId;
+    public SimpleTableItem(CharSequence primaryText) {
         this.primaryText = primaryText;
     }
 }

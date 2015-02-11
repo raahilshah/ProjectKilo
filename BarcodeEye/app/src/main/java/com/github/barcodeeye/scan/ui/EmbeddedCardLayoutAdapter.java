@@ -38,22 +38,20 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     /** The maximum number of items that fit on a card. */
     private static final int ITEMS_PER_CARD = 4;
 
-    /** Index of the {@link android.widget.ImageView} containing the icon in a table row. */
-    private static final int IMAGE_VIEW_INDEX = 0;
-
     /** Index of the {@link android.widget.TextView} containing the primary text in a table row. */
-    private static final int PRIMARY_TEXT_VIEW_INDEX = 1;
-
-    /** Index of the {@link android.widget.TextView} containing the secondary text in a table row. */
-    private static final int SECONDARY_TEXT_VIEW_INDEX = 2;
+    private static final int PRIMARY_TEXT_VIEW_INDEX = 0;
 
     private final Context mContext;
     private final List<SimpleTableItem> mItems;
+    private final String mTitle;
+    private final String mAuthor;
 
     /** Initializes a new adapter with the specified context and list of items. */
-    public EmbeddedCardLayoutAdapter(Context context, List<SimpleTableItem> items) {
+    public EmbeddedCardLayoutAdapter(Context context, List<SimpleTableItem> items, String title, String author) {
         mContext = context;
         mItems = items;
+        mTitle = title;
+        mAuthor = author;
     }
 
     @Override
@@ -87,8 +85,8 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         CardBuilder card = new CardBuilder(mContext, CardBuilder.Layout.EMBED_INSIDE)
             .setEmbeddedLayout(R.layout.simple_table)
-            .setFootnote(R.string.text_card_embedded_footnote)
-            .setTimestamp(R.string.text_card_embedded_timestamp);
+            .setFootnote(mTitle)
+            .setTimestamp(mAuthor);
         View view = card.getView(convertView, parent);
 
         // Get a reference to an embedded view from the custom layout and then manipulate it.
@@ -122,10 +120,7 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
 
     /** Populates a row in the table with the specified item data. */
     private void populateTableRow(SimpleTableItem item, ViewGroup rowView) {
-        ImageView imageView = (ImageView) rowView.getChildAt(IMAGE_VIEW_INDEX);
         TextView primaryTextView = (TextView) rowView.getChildAt(PRIMARY_TEXT_VIEW_INDEX);
-
-        imageView.setImageResource(item.iconResId);
         primaryTextView.setText(item.primaryText);
     }
 }

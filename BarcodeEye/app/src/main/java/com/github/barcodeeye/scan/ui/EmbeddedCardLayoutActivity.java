@@ -50,10 +50,8 @@ public final class EmbeddedCardLayoutActivity extends Activity {
 
         } else results = null;
 
-        System.out.println(results.getTitle());
-
         mCardScroller = new CardScrollView(this);
-        mCardScroller.setAdapter(new EmbeddedCardLayoutAdapter(this, createItems()));
+        mCardScroller.setAdapter(new EmbeddedCardLayoutAdapter(this, createItems(), results.getTitle(), results.getAuthors().get(0)));
 
         setContentView(mCardScroller);
     }
@@ -64,7 +62,7 @@ public final class EmbeddedCardLayoutActivity extends Activity {
 
         for (String d : results.getDescriptions()) {
 
-            items.add(new SimpleTableItem(R.drawable.ic_circle_blue, d));
+            items.add(new SimpleTableItem(d));
 
         }
 

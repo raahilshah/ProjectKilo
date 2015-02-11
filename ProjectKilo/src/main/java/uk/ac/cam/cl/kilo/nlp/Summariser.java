@@ -6,7 +6,7 @@ public class Summariser {
 
 	public static void summarise(ItemInfo itemInfo) {
 		
-		if (itemInfo.getDescriptions() != null && !itemInfo.getDescriptions().get(0).equals("")) {
+		if (itemInfo.getDescriptions() != null) {
 			
 		    String[] sentences = itemInfo.getDescriptions().get(0).split("\\. ", 0);
 		    
@@ -19,6 +19,8 @@ public class Summariser {
 		    }
 	    
 		}
+		
+		System.out.println(itemInfo.getDescriptions().get(0));
 	    
 	}
 
