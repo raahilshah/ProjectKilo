@@ -1,0 +1,26 @@
+/*
+|-------------------------------------------
+| standard interface error
+|-------------------------------------------
+|
+| represents an error thrown which may be sent via standard out
+|
+| type:         constructor
+| author:       Josh Bambrick
+| version:      0.0.1
+| modified:     10/02/15
+|
+*/
+
+define([
+], function (
+) {
+    return function StandardInterfaceError(messageObj) {
+        this.getMessage = function () {
+            return messageObj;
+        };
+        this.getMessageJson = function () {
+            return JSON.stringify(messageObj);
+        };
+    };
+});

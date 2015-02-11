@@ -20,8 +20,7 @@ define([
     urlTools
 ) {
     return function (url, complete) {
-        // console.log(url)
-        // console.log(urlTools.parse(url));
+        console.log(urlTools.parse(url), true, true);
         // console.log(url.host)
         // console.log(url.path)
         // var host, path, request;

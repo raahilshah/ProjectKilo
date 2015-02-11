@@ -25,12 +25,13 @@ requirejs([
     parseFrame
 ) {
     var readNextCommand = true,
+        sendResult = function (res) {
+            standardInterface.write(res);
+            readNextCommand = true;
+        },
         readCommand = function () {
             standardInterface.read(function (obj) {
-                parseFrame(obj, function (res) {
-                    standardInterface.write(res);
-                    readNextCommand = true;
-                });
+                parseFrame(obj, sendResult);
             });
         };
 

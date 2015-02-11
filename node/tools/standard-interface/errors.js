@@ -17,7 +17,7 @@ define([
 ], function (
 ) {
     return {
-        poorFormat : {
+        poorFormat: {
             interfaceError: true,
             errorMessage: "data poorly formatted",
             errorCode: 100
