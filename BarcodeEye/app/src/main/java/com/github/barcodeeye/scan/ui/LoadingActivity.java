@@ -36,7 +36,7 @@ public class LoadingActivity extends Activity {
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        mLoading = new CardBuilder(this, CardBuilder.Layout.ALERT).setText("Loading...").getView();
+        mLoading = new CardBuilder(this, CardBuilder.Layout.MENU).setText("Loading...").getView();
         mSlider = Slider.from(mLoading);
 
         Intent intent = getIntent();
@@ -100,7 +100,7 @@ public class LoadingActivity extends Activity {
 
             // params comes from the execute() call: params[0] is the url.
             getInfo(urls[0]);
-            if (itemInfo.getDescriptions().size() > 0) {
+            if (itemInfo.getDescriptions().size() > 0 && !itemInfo.getDescriptions().get(0).equals("")) {
                 return "success";
             } else {
                 return "failure";

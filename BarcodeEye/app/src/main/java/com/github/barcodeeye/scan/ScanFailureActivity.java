@@ -28,6 +28,7 @@ public class ScanFailureActivity extends Activity {
                     AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     am.playSoundEffect(Sounds.SUCCESS);
                     mGracePeriod = null;
+                    finish();
                 }
 
                 @Override
@@ -36,6 +37,7 @@ public class ScanFailureActivity extends Activity {
                     AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                     am.playSoundEffect(Sounds.DISMISSED);
                     mGracePeriod = null;
+                    finish();
                 }
             };
 
