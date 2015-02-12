@@ -12,7 +12,7 @@
 |
 */
 
-if (typeof define !== 'function') { var define = require('amdefine')(module) }
+if (typeof define !== "function") { var define = require("amdefine")(module) }
 
 define([
     "http",
@@ -23,11 +23,16 @@ define([
 ) {
     return function (url, complete) {
         http.get(url, function (res) {
-            console.log('STATUS: ' + res.statusCode);
-            console.log('HEADERS: ' + JSON.stringify(res.headers));
-            res.setEncoding('utf8');
-            res.on('data', function (chunk) {
-                console.log('BODY: ' + chunk);
+            var body = "";
+            
+            res.setEncoding("utf8");
+
+            res.on("data", function (chunk) {
+                body += chunk;
+            });
+
+            res.on("end", function (chunk) {
+                complete(body);
             });
         }).on("error", function () {
             complete(new errors.HttpGetFailed());
