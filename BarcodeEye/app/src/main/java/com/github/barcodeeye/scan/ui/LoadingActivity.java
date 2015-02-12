@@ -26,7 +26,7 @@ public class LoadingActivity extends Activity {
     private View mLoading;
     private Slider.Indeterminate mIndeterminate;
     private Slider mSlider;
-    private String URI = "http://groupkilo.soc.srcf.net/ProjectKiloWebApp/test?barcodeNo={CODE}&barcodeType={TYPE}";
+    private String URI = "http://groupkilo.soc.srcf.net/ProjectKiloWebApp/barcode?barcodeNo={CODE}&barcodeType={TYPE}";
     private String EXTRA_RESULT_SERIAL = "EXTRA_RESULT_SERIAL";
     private String EXTRA_CODE = "EXTRA_CODE";
     private String EXTRA_TYPE = "EXTRA_TYPE";

@@ -31,11 +31,7 @@ public class RESTEasyBarcode {
 		
 		String responseString;
 		
-		if (barcodeNo != null) {	
-			/*
-			 * TODO: change constructor to pass an instance of ItemInfo
-			 * by reference and populate that object.
-			 */
+		if (barcodeNo != null) {
 			
 			ItemInfo info = new ItemInfo();
 			
