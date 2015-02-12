@@ -20,8 +20,8 @@ import uk.ac.cam.cl.kilo.lookup.GoodReadsLookup;
 import uk.ac.cam.cl.kilo.nlp.ItemInfo;
 import uk.ac.cam.cl.kilo.nlp.Summariser;
 
-@Path("/test")
-public class RESTEasyTest {
+@Path("/barcode")
+public class RESTEasyBarcode {
 	
 	@GET
 	@Produces(MediaType.TEXT_HTML)
@@ -81,7 +81,7 @@ public class RESTEasyTest {
 	
 	public static void main(String[] args) {
 		
-		RESTEasyTest test = new RESTEasyTest();
+		RESTEasyBarcode test = new RESTEasyBarcode();
 		test.simpleResponse("1612184081","ISBN");
 		
 	}

@@ -2,9 +2,9 @@ package uk.ac.cam.cl.kilo.backend;
 
 import javax.ws.rs.core.Response;
 
-import org.junit.Test;
-
 import junit.framework.TestCase;
+
+import org.junit.Test;
 
 public class responseStringTest extends TestCase {
 
@@ -19,7 +19,7 @@ public class responseStringTest extends TestCase {
 	
 	@Test
 	public void responseStringTest() {
-		RESTEasyTest test = new RESTEasyTest();
+		RESTEasyBarcode test = new RESTEasyBarcode();
 		//String value = "XXXXX";
 		// assertEquals(Response.ok(value).build(), test.simpleResponse("XXXXX", "XXXXX"));
 		
