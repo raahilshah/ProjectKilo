@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.codec.binary.Base64;
 
 import uk.ac.cam.cl.kilo.lookup.AmznItemLookup;
+import uk.ac.cam.cl.kilo.lookup.GoodReadsLookup;
 import uk.ac.cam.cl.kilo.nlp.ItemInfo;
 import uk.ac.cam.cl.kilo.nlp.Summariser;
 
@@ -36,36 +37,27 @@ public class RESTEasyTest {
 			 * by reference and populate that object.
 			 */
 			
-			ItemInfo itemInfo = new ItemInfo();
+			ItemInfo info = new ItemInfo();
 			
-			AmznItemLookup amzn = new AmznItemLookup(barcodeType, barcodeNo);
-			if (amzn.getDescription() != null) {
-				itemInfo.addDescription(amzn.getDescription());
-				for (String a : amzn.getAuthors()) {
-					itemInfo.addAuthor(a);
-				}
-				itemInfo.setTitle(amzn.getTitle());
-			} else {
-				itemInfo.addDescription("This is a description. It has two sentences!");
-			}
+			Thread tAmzn = new Thread(new AmznItemLookup(barcodeNo, barcodeType, info));
+			Thread tGR = new Thread(new GoodReadsLookup(barcodeNo, barcodeType, info));
 			
-			Summariser.summarise(itemInfo);
-			//String title = amzn.getTitle();
-			//List<String> authors = amzn.getAuthors();
+			tAmzn.start();
+			tGR.start();
 			
-           /* responseString =
-                    "Barcode number: " + barcodeNo   + "<br>" + 
-                    "Barcode type: "   + barcodeType + "<br>" + 
-                    "Product title: "  + title       + "<br>";
-            responseString += "Author(s): ";
-            for (String a : authors) 
-                responseString += a + ", ";
-            responseString += "<br>Product description: " + summarised + "<br>";      */
+			while(tAmzn.isAlive() || tGR.isAlive());
+			
+			System.out.println(info.getTitle());
+			for (String d : info.getDescriptions())
+				System.out.println(d);
+			for (String a : info.getAuthors())
+				System.out.println(a);
+			
+			Summariser.summarise(info);
 			
 			try {
-				responseString = toString(itemInfo);
+				responseString = toString(info);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				responseString = e.getMessage();
 			}
@@ -74,26 +66,23 @@ public class RESTEasyTest {
             responseString = "Missing barcode number.";
         }
 		
-		System.out.println(responseString);
+		//System.out.println(responseString);
         
         return Response.ok(responseString).build();
     }
 	
-	private static String toString( Serializable o ) throws IOException {
+	private static String toString(Serializable o) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream( baos );
-        oos.writeObject( o );
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(o);
         oos.close();
-        for (byte b : baos.toByteArray()) {
-        	System.out.println(b);
-        }
         return Base64.encodeBase64String(baos.toByteArray());
     }
 	
 	public static void main(String[] args) {
 		
 		RESTEasyTest test = new RESTEasyTest();
-		test.simpleResponse("9781907773242","ISBN");
+		test.simpleResponse("1612184081","ISBN");
 		
 	}
 }

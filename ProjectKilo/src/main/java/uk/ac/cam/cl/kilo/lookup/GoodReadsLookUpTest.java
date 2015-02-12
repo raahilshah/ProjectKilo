@@ -1,6 +1,7 @@
 package uk.ac.cam.cl.kilo.lookup;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import uk.ac.cam.cl.kilo.nlp.ItemInfo;
 
 public class GoodReadsLookUpTest {
 
@@ -24,7 +27,8 @@ public class GoodReadsLookUpTest {
 
 	@Test
 	public void testGoodReadsLookUp() {
-		GoodReadsLookUp test = new GoodReadsLookUp("isbn", "978-0764570681");
+		ItemInfo info = new ItemInfo();
+		GoodReadsLookup test = new GoodReadsLookup("isbn", "978-0764570681", info);
 		
 		fail("Not yet implemented");
 	}
@@ -36,14 +40,16 @@ public class GoodReadsLookUpTest {
 
 	@Test
 	public void testGetTitle() {
-		GoodReadsLookUp test = new GoodReadsLookUp("isbn", "978-0764570681");
-		assertEquals("C for Dummies", test.getTitle());
+		ItemInfo info = new ItemInfo();
+		GoodReadsLookup test = new GoodReadsLookup("isbn", "978-0764570681", info);
+		assertEquals("C for Dummies", test.info.getTitle());
 	}
 
 	@Test
 	public void testGetDescription() {
-		GoodReadsLookUp test = new GoodReadsLookUp("isbn", "978-0764570681");
-		assertEquals("description", test.getDescription());
+		ItemInfo info = new ItemInfo();
+		GoodReadsLookup test = new GoodReadsLookup("isbn", "978-0764570681", info);
+		assertEquals("description", test.info.getDescriptions().get(0));
 	}
 
 	/*
@@ -52,10 +58,11 @@ public class GoodReadsLookUpTest {
 	 */
 	@Test
 	public void testGetAuthors() {
-		GoodReadsLookUp test = new GoodReadsLookUp("isbn", "978-0764570681");
+		ItemInfo info = new ItemInfo();
+		GoodReadsLookup test = new GoodReadsLookup("isbn", "978-0764570681", info);
 		List<String> authors = new LinkedList<String>();
 		authors.add("Dan Gookin");
-		assertEquals(authors, test.getAuthors());
+		assertEquals(authors, test.info.getAuthors());
 	}
 
 }

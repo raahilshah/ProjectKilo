@@ -20,7 +20,7 @@ public class Summariser {
 	    
 		}
 		
-		System.out.println(itemInfo.getDescriptions().get(0));
+		//System.out.println(itemInfo.getDescriptions().get(0));
 	    
 	}
 
