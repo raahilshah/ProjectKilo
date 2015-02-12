@@ -12,9 +12,9 @@ import org.junit.Test;
 
 import uk.ac.cam.cl.kilo.nlp.ItemInfo;
 
-public class GoodReadsLookUpTest {
+public class GoodReadsLookupTest {
 
-	public GoodReadsLookUpTest() {
+	public GoodReadsLookupTest() {
 	}
 
 	@Before

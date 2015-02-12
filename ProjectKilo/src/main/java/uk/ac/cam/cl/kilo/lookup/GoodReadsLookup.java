@@ -26,7 +26,6 @@ public class GoodReadsLookup extends Lookup {
             Document doc = db.parse(requestURL);
 
             Node descriptionNode = doc.getElementsByTagName("description").item(0);
-            System.out.println(descriptionNode.getTextContent());
             Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
             Node titleNode = doc.getElementsByTagName("title").item(0);
             Node itemAttrNode = doc.getElementsByTagName("author").item(0);
