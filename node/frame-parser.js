@@ -18,12 +18,14 @@ require("./lib/requirejs/config.js");
 requirejs([
     "underscore",
     "tools/standard-interface/standard-interface",
+    "parse-frame/validate-frame-object",
     "parse-frame/parse-frame",
     "errors/node-error",
     "errors/error-map"
 ], function (
     _,
     standardInterface,
+    validateFrameObject,
     parseFrame,
     NodeError,
     errorMap
@@ -36,7 +38,9 @@ requirejs([
         readRequest = standardInterface.read,
         readCommand = function () {
             readRequest(function (obj) {
-                parseFrame(obj, sendResult);
+                validateFrameObject(obj, function (obj) {
+                    parseFrame(obj, sendResult);
+                });
             });
         };
 

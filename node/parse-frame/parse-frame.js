@@ -24,21 +24,16 @@ define([
     errors
 ) {
     return function (frameObj, complete) {
-        var parseSite;
+        if (frameObj instanceof NodeError) return complete(frameObj);
 
-        // fs.writeFileSync("message.txt", JSON.stringify(frameObj));
-        if (!(frameObj instanceof NodeError)) {
-            parseSite = _.find(parseSiteMap, function (curFunc, curSiteKey) {
-                return curSiteKey === frameObj.site;
-            });
-            
-            if (parseSite == null) {
-                complete(new errors.SiteNotFound());
-            } else {
-                parseSite(frameObj, complete);
-            }
+        var parseSite = _.find(parseSiteMap, function (curFunc, curSiteKey) {
+            return curSiteKey === frameObj.site;
+        });
+        
+        if (parseSite == null) {
+            complete(new errors.SiteNotFound());
         } else {
-            complete(frameObj);
+            parseSite(frameObj, complete);
         }
     };
 });

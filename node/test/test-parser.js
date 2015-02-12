@@ -3,7 +3,9 @@ var _ = require("underscore"),
     tests = [{
         input: JSON.stringify({
             site: "amazon",
-            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D"
+            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D",
+            maxReviews: 300,
+            category: "book"
         }),
         // response must match this exactly
         expectedOutputObj: [
@@ -13,19 +15,30 @@ var _ = require("underscore"),
     }, {
         input: JSON.stringify({
             site: "amazon",
-            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D"
+            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D",
+            maxReviews: 300,
+            category: "book"
         }),
         // response must match this exactly
         expectedOutputObj: [
             "This was really good.",
             "This wasn't very good."
         ]
+    },  {
+        // missing field
+        input: JSON.stringify({
+            site: "amazon",
+            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=052156543X&atag=drupal0a-20&exp=2015-02-04T12%3A34%3A32Z&v=2&sig=ktGPAyJ4NeysiOSgUUX0YwBZhCEr8%2BS2cCjxjbwBDcw%3D",
+            category: "book"
+        }),
+        // response must match this exactly
+        expectedOutputObjContains: {errorCode: 100}
     }, {
         input: "this is not valid json",
         // response must contain this field
         expectedOutputObjContains: {errorCode: 100}
     }, {
-        input: JSON.stringify({site: "not a real site"}),
+        input: JSON.stringify({site: "not a real site", url: "google.com", maxReviews: 100, category: "book"}),
         // response must contain this field
         expectedOutputObjContains: {errorCode: 200}
     }],
