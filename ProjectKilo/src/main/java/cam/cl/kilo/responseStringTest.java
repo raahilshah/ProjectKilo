@@ -1,10 +1,9 @@
-package uk.ac.cam.cl.kilo.backend;
-
-import javax.ws.rs.core.Response;
+package cam.cl.kilo;
 
 import junit.framework.TestCase;
-
 import org.junit.Test;
+
+import javax.ws.rs.core.Response;
 
 public class responseStringTest extends TestCase {
 

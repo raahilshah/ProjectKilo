@@ -20,13 +20,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.github.barcodeeye.R;
 import com.google.android.glass.widget.CardScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.nlp.Summary;
 
 /**
  * Creates a card scroll view that shows an example of using a custom embedded layout in a
@@ -35,7 +34,7 @@ import uk.ac.cam.cl.kilo.nlp.ItemInfo;
 public final class EmbeddedCardLayoutActivity extends Activity {
 
     private CardScrollView mCardScroller;
-    private ItemInfo results;
+    private Summary results;
     private String EXTRA_RESULT_SERIAL = "EXTRA_RESULT_SERIAL";
 
     @Override
@@ -46,12 +45,13 @@ public final class EmbeddedCardLayoutActivity extends Activity {
 
         if (intent != null && intent.getExtras() != null) {
 
-            results = (ItemInfo) intent.getExtras().getSerializable(EXTRA_RESULT_SERIAL);
+            results = (Summary) intent.getExtras().getSerializable(EXTRA_RESULT_SERIAL);
 
         } else results = null;
 
         mCardScroller = new CardScrollView(this);
-        mCardScroller.setAdapter(new EmbeddedCardLayoutAdapter(this, createItems(), results.getTitle(), results.getAuthors().get(0)));
+        mCardScroller.setAdapter(new EmbeddedCardLayoutAdapter(
+                this, createItems(), results.getTitle(), results.getAuthors()));
 
         setContentView(mCardScroller);
     }
@@ -60,11 +60,9 @@ public final class EmbeddedCardLayoutActivity extends Activity {
     private List<SimpleTableItem> createItems() {
         ArrayList<SimpleTableItem> items = new ArrayList<SimpleTableItem>();
 
-        for (String d : results.getDescriptions()) {
+        // Only add one card
+        items.add(new SimpleTableItem(results.getText()));
 
-            items.add(new SimpleTableItem(d));
-
-        }
 
         return items;
     }

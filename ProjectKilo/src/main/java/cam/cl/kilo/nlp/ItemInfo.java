@@ -1,4 +1,4 @@
-package uk.ac.cam.cl.kilo.nlp;
+package cam.cl.kilo.nlp;
 
 import java.io.Serializable;
 import java.util.Vector;
@@ -81,5 +81,13 @@ public class ItemInfo implements Serializable {
 	public void setReviews(Vector<String> reviews) {
 		this.reviews = reviews;
 	}
-	
+
+
+    public String getDescriptionsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s: descriptions) {
+            sb.append(s + '\n');
+        }
+        return sb.toString();
+    }
 }

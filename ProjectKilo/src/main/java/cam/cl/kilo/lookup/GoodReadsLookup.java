@@ -1,12 +1,11 @@
-package uk.ac.cam.cl.kilo.lookup;
+package cam.cl.kilo.lookup;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
+import cam.cl.kilo.nlp.ItemInfo;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class GoodReadsLookup extends Lookup {
 

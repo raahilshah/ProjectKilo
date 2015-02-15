@@ -1,16 +1,13 @@
-package uk.ac.cam.cl.kilo.lookup;
+package cam.cl.kilo.lookup;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
+import cam.cl.kilo.nlp.ItemInfo;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AmznItemLookup extends Lookup {
 
