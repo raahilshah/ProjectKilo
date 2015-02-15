@@ -1,16 +1,15 @@
-package uk.ac.cam.cl.kilo.lookup;
+package cam.cl.kilo.lookup;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.util.LinkedList;
-import java.util.List;
-
+import cam.cl.kilo.nlp.ItemInfo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class GoodReadsLookupTest {
 

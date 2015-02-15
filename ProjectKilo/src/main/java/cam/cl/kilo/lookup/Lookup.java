@@ -1,6 +1,6 @@
-package uk.ac.cam.cl.kilo.lookup;
+package cam.cl.kilo.lookup;
 
-import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.nlp.ItemInfo;
 
 public abstract class Lookup implements Runnable {
 	
@@ -8,19 +8,19 @@ public abstract class Lookup implements Runnable {
 	protected String barcodeType = "";
 	protected ItemInfo info;
 
-	public abstract void run();
-	
-	protected abstract void fillContent(String requestURL);
-	
 	public Lookup(String barcodeNo, String barcodeType, ItemInfo info) {
-		
+
 		super();
-		
+
 		this.barcodeNo = barcodeNo;
 		this.barcodeType = barcodeType;
 		this.info = info;
-		
+
 	}
+	
+	public abstract void run();
+	
+	protected abstract void fillContent(String requestURL);
 
 }
  

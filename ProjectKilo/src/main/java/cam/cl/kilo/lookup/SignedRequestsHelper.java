@@ -19,31 +19,20 @@
  *
  */
 
-package uk.ac.cam.cl.kilo.lookup;
+package cam.cl.kilo.lookup;
 
-import java.io.UnsupportedEncodingException;
-
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TimeZone;
-import java.util.TreeMap;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.codec.binary.Base64;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * This class contains all the logic for signing requests
@@ -80,23 +69,28 @@ public class SignedRequestsHelper {
 	private Mac mac = null;
 
 	/**
+	 * The construct is private since we'd rather use getInstance()
+	 */
+	private SignedRequestsHelper() {}
+
+	/**
 	 * You must provide the three values below to initialize the helper.
-	 *  
+	 *
 	 * @param endpoint          Destination for the requests.
 	 * @param awsAccessKeyId    Your AWS Access Key ID
 	 * @param awsSecretKey      Your AWS Secret Key
 	 */
 	public static SignedRequestsHelper getInstance(
-			String endpoint, 
-			String awsAccessKeyId, 
+			String endpoint,
+			String awsAccessKeyId,
 			String awsSecretKey
 			) throws IllegalArgumentException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException
 			{
 		if (null == endpoint || endpoint.length() == 0)
 		{ throw new IllegalArgumentException("endpoint is null or empty"); }
-		if (null == awsAccessKeyId || awsAccessKeyId.length() == 0) 
+		if (null == awsAccessKeyId || awsAccessKeyId.length() == 0)
 		{ throw new IllegalArgumentException("awsAccessKeyId is null or empty"); }
-		if (null == awsSecretKey || awsSecretKey.length() == 0)   
+		if (null == awsSecretKey || awsSecretKey.length() == 0)
 		{ throw new IllegalArgumentException("awsSecretKey is null or empty"); }
 
 		SignedRequestsHelper instance = new SignedRequestsHelper();
@@ -111,11 +105,6 @@ public class SignedRequestsHelper {
 
 		return instance;
 			}
-
-	/**
-	 * The construct is private since we'd rather use getInstance()
-	 */
-	private SignedRequestsHelper() {}
 
 	/**
 	 * This method signs requests in hashmap form. It returns a URL that should
