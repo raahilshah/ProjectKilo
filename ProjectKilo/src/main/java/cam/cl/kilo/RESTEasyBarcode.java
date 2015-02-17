@@ -25,13 +25,7 @@ public class RESTEasyBarcode {
         oos.close();
         return Base64.encodeBase64String(baos.toByteArray());
     }
-	
-	public static void main(String[] args) {
-		RESTEasyBarcode test = new RESTEasyBarcode();
-		test.simpleResponse("1407130226","ISBN");
 
-	}
-	
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public Response simpleResponse(
@@ -71,11 +65,12 @@ public class RESTEasyBarcode {
                     summarisedText = summarizer.getSummResults();
                     System.out.println("Summarisation complete");
                 } else {
-                    summarisedText = info.getDescriptions().firstElement();
+                    summarisedText = summarizer.getText();
                     System.out.println("Empty summary");
                 }
             } catch (IOException ioe) {
                 ioe.printStackTrace();
+                //TODO: It would be better if it returned text from the Summary object...
                 summarisedText = info.getDescriptions().firstElement();
             } finally {
                 summary = new Summary(info, summarisedText);
@@ -96,5 +91,11 @@ public class RESTEasyBarcode {
 		System.out.println(responseString);
 
         return Response.ok(responseString).build();
+    }
+
+    public static void main(String[] args) {
+        RESTEasyBarcode test = new RESTEasyBarcode();
+        test.simpleResponse("1407130226","ISBN");
+
     }
 }
