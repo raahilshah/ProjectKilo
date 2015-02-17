@@ -27,7 +27,7 @@ public class CardPresenter implements Parcelable {
     }
 
     public CardPresenter(String text, String footer, PendingIntent intent,
-            List<Uri> images) {
+                         List<Uri> images) {
         mText = text;
         mFooter = footer;
         mPendingIntent = intent;

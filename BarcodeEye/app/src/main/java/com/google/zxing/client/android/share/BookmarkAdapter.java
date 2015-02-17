@@ -36,47 +36,47 @@ import com.github.barcodeeye.R;
  * @author dswitkin@google.com (Daniel Switkin)
  */
 final class BookmarkAdapter extends BaseAdapter {
-  private final Context context;
-  private final Cursor cursor;
+    private final Context context;
+    private final Cursor cursor;
 
-  BookmarkAdapter(Context context, Cursor cursor) {
-    this.context = context;
-    this.cursor = cursor;
-  }
-
-  @Override
-  public int getCount() {
-    return cursor.getCount();
-  }
-
-  @Override
-  public Object getItem(int index) {
-    // Not used, so no point in retrieving it.
-    return null;
-  }
-
-  @Override
-  public long getItemId(int index) {
-    return index;
-  }
-
-  @Override
-  public View getView(int index, View view, ViewGroup viewGroup) {
-    View layout;
-    if (view instanceof LinearLayout) {
-      layout = view;
-    } else {
-      LayoutInflater factory = LayoutInflater.from(context);
-      layout = factory.inflate(R.layout.bookmark_picker_list_item, viewGroup, false);
+    BookmarkAdapter(Context context, Cursor cursor) {
+        this.context = context;
+        this.cursor = cursor;
     }
 
-    if (!cursor.isClosed()) {
-      cursor.moveToPosition(index);
-      CharSequence title = cursor.getString(BookmarkPickerActivity.TITLE_COLUMN);
-      ((TextView) layout.findViewById(R.id.bookmark_title)).setText(title);
-      CharSequence url = cursor.getString(BookmarkPickerActivity.URL_COLUMN);
-      ((TextView) layout.findViewById(R.id.bookmark_url)).setText(url);
-    } // Otherwise... just don't update as the object is shutting down
-    return layout;
-  }
+    @Override
+    public int getCount() {
+        return cursor.getCount();
+    }
+
+    @Override
+    public Object getItem(int index) {
+        // Not used, so no point in retrieving it.
+        return null;
+    }
+
+    @Override
+    public long getItemId(int index) {
+        return index;
+    }
+
+    @Override
+    public View getView(int index, View view, ViewGroup viewGroup) {
+        View layout;
+        if (view instanceof LinearLayout) {
+            layout = view;
+        } else {
+            LayoutInflater factory = LayoutInflater.from(context);
+            layout = factory.inflate(R.layout.bookmark_picker_list_item, viewGroup, false);
+        }
+
+        if (!cursor.isClosed()) {
+            cursor.moveToPosition(index);
+            CharSequence title = cursor.getString(BookmarkPickerActivity.TITLE_COLUMN);
+            ((TextView) layout.findViewById(R.id.bookmark_title)).setText(title);
+            CharSequence url = cursor.getString(BookmarkPickerActivity.URL_COLUMN);
+            ((TextView) layout.findViewById(R.id.bookmark_url)).setText(url);
+        } // Otherwise... just don't update as the object is shutting down
+        return layout;
+    }
 }

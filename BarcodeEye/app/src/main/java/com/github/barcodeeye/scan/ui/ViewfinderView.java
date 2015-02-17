@@ -40,8 +40,8 @@ import java.util.List;
  */
 public final class ViewfinderView extends View {
 
-    private static final int[] SCANNER_ALPHA = { 0, 64, 128, 192, 255, 192,
-            128, 64 };
+    private static final int[] SCANNER_ALPHA = {0, 64, 128, 192, 255, 192,
+            128, 64};
     private static final long ANIMATION_DELAY = 80L;
     private static final int CURRENT_POINT_OPACITY = 0xA0;
     private static final int MAX_RESULT_POINTS = 20;
@@ -130,8 +130,8 @@ public final class ViewfinderView extends View {
                 synchronized (currentPossible) {
                     for (ResultPoint point : currentPossible) {
                         canvas.drawCircle(frameLeft
-                                + (int) (point.getX() * scaleX), frameTop
-                                + (int) (point.getY() * scaleY), POINT_SIZE,
+                                        + (int) (point.getX() * scaleX), frameTop
+                                        + (int) (point.getY() * scaleY), POINT_SIZE,
                                 paint);
                     }
                 }
@@ -170,8 +170,7 @@ public final class ViewfinderView extends View {
      * Draw a bitmap with the result points highlighted instead of the live
      * scanning display.
      *
-     * @param barcode
-     *            An image of the decoded barcode.
+     * @param barcode An image of the decoded barcode.
      */
     public void drawResultBitmap(Bitmap barcode) {
         resultBitmap = barcode;

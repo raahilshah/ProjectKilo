@@ -157,7 +157,7 @@ final class CameraConfigurationManager {
                 String flashMode = camera.getParameters().getFlashMode();
                 return flashMode != null
                         && (Camera.Parameters.FLASH_MODE_ON.equals(flashMode) || Camera.Parameters.FLASH_MODE_TORCH
-                                .equals(flashMode));
+                        .equals(flashMode));
             }
         }
         return false;
@@ -171,7 +171,7 @@ final class CameraConfigurationManager {
     }
 
     private void doSetTorch(Camera.Parameters parameters, boolean newSetting,
-            boolean safeMode) {
+                            boolean safeMode) {
         String flashMode;
         if (newSetting) {
             flashMode = findSettableValue(parameters.getSupportedFlashModes(),
@@ -217,7 +217,7 @@ final class CameraConfigurationManager {
     }
 
     private Point findBestPreviewSizeValue(Camera.Parameters parameters,
-            Point screenResolution) {
+                                           Point screenResolution) {
 
         List<Camera.Size> rawSupportedSizes = parameters
                 .getSupportedPreviewSizes();
@@ -312,7 +312,7 @@ final class CameraConfigurationManager {
     }
 
     private static String findSettableValue(Collection<String> supportedValues,
-            String... desiredValues) {
+                                            String... desiredValues) {
         Log.i(TAG, "Supported values: " + supportedValues);
         String result = null;
         if (supportedValues != null) {

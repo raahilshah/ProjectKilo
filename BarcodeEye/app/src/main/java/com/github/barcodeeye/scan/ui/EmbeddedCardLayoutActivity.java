@@ -56,13 +56,15 @@ public final class EmbeddedCardLayoutActivity extends Activity {
         setContentView(mCardScroller);
     }
 
-    /** Creates some sample items that will be displayed on cards in the card scroll view. */
+    /**
+     * Creates some sample items that will be displayed on cards in the card scroll view.
+     */
     private List<SimpleTableItem> createItems() {
         ArrayList<SimpleTableItem> items = new ArrayList<SimpleTableItem>();
 
-        // Only add one card
-        items.add(new SimpleTableItem(results.getText()));
-
+        for (String s: results.getText()) {
+            items.add(new SimpleTableItem((s)));
+        }
 
         return items;
     }

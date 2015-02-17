@@ -39,6 +39,7 @@ public final class LocaleManager {
      * These should be kept in sync with our translations.
      */
     private static final Map<String, String> GOOGLE_COUNTRY_TLD;
+
     static {
         GOOGLE_COUNTRY_TLD = new HashMap<String, String>();
         GOOGLE_COUNTRY_TLD.put("AR", "com.ar"); // ARGENTINA
@@ -81,6 +82,7 @@ public final class LocaleManager {
      * http://support.google.com/merchants/bin/answer.py?hl=en-GB&answer=160619
      */
     private static final Map<String, String> GOOGLE_PRODUCT_SEARCH_COUNTRY_TLD;
+
     static {
         GOOGLE_PRODUCT_SEARCH_COUNTRY_TLD = new HashMap<String, String>();
         GOOGLE_PRODUCT_SEARCH_COUNTRY_TLD.put("AU", "com.au"); // AUSTRALIA
@@ -112,8 +114,8 @@ public final class LocaleManager {
 
     /**
      * @return country-specific TLD suffix appropriate for the current default
-     *         locale
-     *         (e.g. "co.uk" for the United Kingdom)
+     * locale
+     * (e.g. "co.uk" for the United Kingdom)
      */
     public static String getCountryTLD(Context context) {
         return doGetTLD(GOOGLE_COUNTRY_TLD, context);
@@ -140,8 +142,7 @@ public final class LocaleManager {
     /**
      * Does a given URL point to Google Book Search, regardless of domain.
      *
-     * @param url
-     *            The address to check.
+     * @param url The address to check.
      * @return True if this is a Book Search URL.
      */
     public static boolean isBookSearchUrl(String url) {

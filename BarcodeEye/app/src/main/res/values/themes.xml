@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  Copyright (C) 2012 ZXing authors
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +14,8 @@
  limitations under the License.
 -->
 <resources>
-    
-    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault">
-    </style>
+
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault"></style>
 
     <style name="CaptureTheme" parent="@style/AppTheme">
         <item name="android:windowFullscreen">true</item>

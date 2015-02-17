@@ -22,7 +22,9 @@ package com.github.barcodeeye.scan.ui;
  */
 public class SimpleTableItem {
 
-    /** The primary text associated with the table item. */
+    /**
+     * The primary text associated with the table item.
+     */
     public final CharSequence primaryText;
 
     /**

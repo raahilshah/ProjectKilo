@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,15 +17,17 @@
     android:id="@+id/simple_table"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <!-- Override the default padding on the first row. -->
-    <include layout="@layout/simple_table_row"
-        android:paddingTop="0px"
-        />
+    <include
+        layout="@layout/simple_table_row"
+        android:paddingTop="0px" />
+
     <include layout="@layout/simple_table_row" />
+
     <include layout="@layout/simple_table_row" />
+
     <include layout="@layout/simple_table_row" />
 
 </LinearLayout>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  Copyright (C) 2012 ZXing authors
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +39,7 @@
         <item name="android:gravity">right</item>
     </style>
 
-    
+
     <style name="Capture.Text.Value" parent="@style/Text"></style>
 
     <style name="Capture.Text.Content" parent="@style/Text.Large"></style>

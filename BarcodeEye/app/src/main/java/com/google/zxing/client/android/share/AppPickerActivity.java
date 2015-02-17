@@ -26,38 +26,38 @@ import android.widget.ListView;
 
 public final class AppPickerActivity extends ListActivity {
 
-  private AsyncTask<?,?,?> backgroundTask;
+    private AsyncTask<?, ?, ?> backgroundTask;
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    backgroundTask = new LoadPackagesAsyncTask(this);
-    backgroundTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-  }
-
-  @Override
-  protected void onPause() {
-    AsyncTask<?,?,?> task = backgroundTask;
-    if (task != null) {
-      task.cancel(true);
-      backgroundTask = null;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        backgroundTask = new LoadPackagesAsyncTask(this);
+        backgroundTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
-    super.onPause();
-  }
 
-  @Override
-  protected void onListItemClick(ListView l, View view, int position, long id) {
-    Adapter adapter = getListAdapter();
-    if (position >= 0 && position < adapter.getCount()) {
-      String packageName = ((AppInfo) adapter.getItem(position)).getPackageName();
-      Intent intent = new Intent();
-      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-      intent.putExtra(Browser.BookmarkColumns.URL, "market://details?id=" + packageName);
-      setResult(RESULT_OK, intent);
-    } else {
-      setResult(RESULT_CANCELED);      
+    @Override
+    protected void onPause() {
+        AsyncTask<?, ?, ?> task = backgroundTask;
+        if (task != null) {
+            task.cancel(true);
+            backgroundTask = null;
+        }
+        super.onPause();
     }
-    finish();
-  }
+
+    @Override
+    protected void onListItemClick(ListView l, View view, int position, long id) {
+        Adapter adapter = getListAdapter();
+        if (position >= 0 && position < adapter.getCount()) {
+            String packageName = ((AppInfo) adapter.getItem(position)).getPackageName();
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            intent.putExtra(Browser.BookmarkColumns.URL, "market://details?id=" + packageName);
+            setResult(RESULT_OK, intent);
+        } else {
+            setResult(RESULT_CANCELED);
+        }
+        finish();
+    }
 
 }

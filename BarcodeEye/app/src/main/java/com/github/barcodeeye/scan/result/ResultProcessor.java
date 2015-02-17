@@ -30,7 +30,7 @@ public class ResultProcessor<T extends ParsedResult> {
     }
 
     public ResultProcessor(Context context, T parsedResult,
-            Result result, Uri photoUri) {
+                           Result result, Uri photoUri) {
         mContext = context;
         mParsedResult = parsedResult;
         mRawResult = result;
@@ -82,7 +82,7 @@ public class ResultProcessor<T extends ParsedResult> {
     }
 
     public static PendingIntent createPendingIntent(Context context,
-            Intent intent) {
+                                                    Intent intent) {
         return PendingIntent.getActivity(context, 0, intent, 0);
     }
 }

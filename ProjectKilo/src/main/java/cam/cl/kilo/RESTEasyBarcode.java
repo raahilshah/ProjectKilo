@@ -85,7 +85,7 @@ public class RESTEasyBarcode {
 			}
 
         } else {
-            responseString = "Missing barcode number.";
+            responseString = "Missing barcode number";
         }
 
 		System.out.println(responseString);

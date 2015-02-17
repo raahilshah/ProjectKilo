@@ -70,11 +70,9 @@ public final class CameraManager {
     /**
      * Opens the camera driver and initializes the hardware parameters.
      *
-     * @param holder
-     *            The surface object which the camera will draw preview frames
-     *            into.
-     * @throws IOException
-     *             Indicates the camera driver failed to open.
+     * @param holder The surface object which the camera will draw preview frames
+     *               into.
+     * @throws IOException          Indicates the camera driver failed to open.
      * @throws InterruptedException
      */
     public synchronized void openDriver(SurfaceHolder holder)
@@ -199,10 +197,8 @@ public final class CameraManager {
      * and message.arg2,
      * respectively.
      *
-     * @param handler
-     *            The handler to send the message to.
-     * @param message
-     *            The what field of the message to be sent.
+     * @param handler The handler to send the message to.
+     * @param message The what field of the message to be sent.
      */
     public synchronized void requestPreviewFrame(Handler handler, int message) {
         Camera theCamera = camera;
@@ -247,7 +243,7 @@ public final class CameraManager {
     }
 
     private static int findDesiredDimensionInRange(int resolution, int hardMin,
-            int hardMax) {
+                                                   int hardMax) {
         int dim = 5 * resolution / 8; // Target 5/8 of each dimension
         if (dim < hardMin) {
             return hardMin;
@@ -290,10 +286,8 @@ public final class CameraManager {
      * rather than determine
      * them automatically based on screen resolution.
      *
-     * @param width
-     *            The width in pixels to scan.
-     * @param height
-     *            The height in pixels to scan.
+     * @param width  The width in pixels to scan.
+     * @param height The height in pixels to scan.
      */
     public synchronized void setManualFramingRect(int width, int height) {
         if (initialized) {
@@ -321,16 +315,13 @@ public final class CameraManager {
      * the format
      * of the preview buffers, as described by Camera.Parameters.
      *
-     * @param data
-     *            A preview frame.
-     * @param width
-     *            The width of the image.
-     * @param height
-     *            The height of the image.
+     * @param data   A preview frame.
+     * @param width  The width of the image.
+     * @param height The height of the image.
      * @return A PlanarYUVLuminanceSource instance.
      */
     public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data,
-            int width, int height) {
+                                                         int width, int height) {
         Rect rect = getFramingRectInPreview();
         if (rect == null) {
             return null;

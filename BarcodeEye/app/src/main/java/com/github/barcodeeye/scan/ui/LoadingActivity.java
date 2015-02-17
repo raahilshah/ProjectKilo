@@ -84,8 +84,8 @@ public class LoadingActivity extends Activity {
 
         }
 
-        private Object fromString( String s ) throws IOException, ClassNotFoundException {
-            byte [] data = Base64.decode(s, Base64.DEFAULT);
+        private Object fromString(String s) throws IOException, ClassNotFoundException {
+            byte[] data = Base64.decode(s, Base64.DEFAULT);
             ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
             Object o = ois.readObject();
             ois.close();
@@ -104,6 +104,7 @@ public class LoadingActivity extends Activity {
             }
 
         }
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {

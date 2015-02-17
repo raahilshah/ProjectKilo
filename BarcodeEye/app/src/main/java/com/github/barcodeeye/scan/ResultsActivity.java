@@ -30,7 +30,7 @@ public class ResultsActivity extends Activity {
     private CardScrollView mCardScrollView;
 
     public static Intent newIntent(Context context,
-            List<CardPresenter> cardResults) {
+                                   List<CardPresenter> cardResults) {
 
         Intent intent = new Intent(context, ResultsActivity.class);
         if (cardResults != null) {
@@ -84,7 +84,7 @@ public class ResultsActivity extends Activity {
         private final List<CardPresenter> mCardPresenters;
 
         public CardScrollViewAdapter(Context context,
-                List<CardPresenter> cardPresenter) {
+                                     List<CardPresenter> cardPresenter) {
             mContext = context;
             mCardPresenters = cardPresenter;
         }
@@ -115,7 +115,7 @@ public class ResultsActivity extends Activity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
-                long id) {
+                                long id) {
             CardPresenter cardPresenter = mCardPresenters.get(position);
             PendingIntent pendingIntent = cardPresenter.getPendingIntent();
             if (pendingIntent != null) {

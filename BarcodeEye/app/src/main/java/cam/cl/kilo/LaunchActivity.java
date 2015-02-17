@@ -20,7 +20,7 @@ public class LaunchActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                    processVoiceAction(null);
+                processVoiceAction(null);
             }
         }, 100);
 

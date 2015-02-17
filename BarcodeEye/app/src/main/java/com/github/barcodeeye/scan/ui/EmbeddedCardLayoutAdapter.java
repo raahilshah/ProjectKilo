@@ -20,7 +20,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.barcodeeye.R;
@@ -35,10 +34,14 @@ import java.util.List;
  */
 public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
 
-    /** The maximum number of items that fit on a card. */
+    /**
+     * The maximum number of items that fit on a card.
+     */
     private static final int ITEMS_PER_CARD = 4;
 
-    /** Index of the {@link android.widget.TextView} containing the primary text in a table row. */
+    /**
+     * Index of the {@link android.widget.TextView} containing the primary text in a table row.
+     */
     private static final int PRIMARY_TEXT_VIEW_INDEX = 0;
 
     private final Context mContext;
@@ -46,7 +49,9 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     private final String mTitle;
     private final String mAuthor;
 
-    /** Initializes a new adapter with the specified context and list of items. */
+    /**
+     * Initializes a new adapter with the specified context and list of items.
+     */
     public EmbeddedCardLayoutAdapter(Context context, List<SimpleTableItem> items, String title, String author) {
         mContext = context;
         mItems = items;
@@ -60,7 +65,7 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     }
 
     @Override
-    public int getItemViewType(int position){
+    public int getItemViewType(int position) {
         return 0;
     }
 
@@ -84,9 +89,9 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CardBuilder card = new CardBuilder(mContext, CardBuilder.Layout.EMBED_INSIDE)
-            .setEmbeddedLayout(R.layout.simple_table)
-            .setFootnote(mTitle)
-            .setTimestamp(mAuthor);
+                .setEmbeddedLayout(R.layout.simple_table)
+                .setFootnote(mTitle)
+                .setTimestamp(mAuthor);
         View view = card.getView(convertView, parent);
 
         // Get a reference to an embedded view from the custom layout and then manipulate it.
@@ -96,7 +101,9 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
         return view;
     }
 
-    /** Populates all of the rows in the card at the specified position. */
+    /**
+     * Populates all of the rows in the card at the specified position.
+     */
     private void populateTableRows(int position, ViewGroup tableView) {
         int startItemIndex = position * ITEMS_PER_CARD;
         int endItemIndex = Math.min(startItemIndex + ITEMS_PER_CARD, mItems.size());
@@ -118,7 +125,9 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
         }
     }
 
-    /** Populates a row in the table with the specified item data. */
+    /**
+     * Populates a row in the table with the specified item data.
+     */
     private void populateTableRow(SimpleTableItem item, ViewGroup rowView) {
         TextView primaryTextView = (TextView) rowView.getChildAt(PRIMARY_TEXT_VIEW_INDEX);
         primaryTextView.setText(item.primaryText);

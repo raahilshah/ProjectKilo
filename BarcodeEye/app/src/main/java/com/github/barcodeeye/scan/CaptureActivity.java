@@ -218,7 +218,7 @@ public final class CaptureActivity extends BaseGlassActivity implements
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
-            int height) {
+                               int height) {
 
     }
 
@@ -226,12 +226,9 @@ public final class CaptureActivity extends BaseGlassActivity implements
      * A valid barcode has been found, so give an indication of success and show
      * the results.
      *
-     * @param rawResult
-     *            The contents of the barcode.
-     * @param scaleFactor
-     *            amount by which thumbnail was scaled
-     * @param barcode
-     *            A greyscale bitmap of the camera data which was decoded.
+     * @param rawResult   The contents of the barcode.
+     * @param scaleFactor amount by which thumbnail was scaled
+     * @param barcode     A greyscale bitmap of the camera data which was decoded.
      */
     public void handleDecode(Result rawResult, Bitmap barcode, float scaleFactor) {
         mInactivityTimer.onActivity();
@@ -250,15 +247,12 @@ public final class CaptureActivity extends BaseGlassActivity implements
      * Superimpose a line for 1D or dots for 2D to highlight the key features of
      * the barcode.
      *
-     * @param barcode
-     *            A bitmap of the captured image.
-     * @param scaleFactor
-     *            amount by which thumbnail was scaled
-     * @param rawResult
-     *            The decoded results which contains the points to draw.
+     * @param barcode     A bitmap of the captured image.
+     * @param scaleFactor amount by which thumbnail was scaled
+     * @param rawResult   The decoded results which contains the points to draw.
      */
     private static void drawResultPoints(Bitmap barcode, float scaleFactor,
-            Result rawResult, int color) {
+                                         Result rawResult, int color) {
         ResultPoint[] points = rawResult.getResultPoints();
         if (points != null && points.length > 0) {
             Canvas canvas = new Canvas(barcode);
@@ -269,7 +263,7 @@ public final class CaptureActivity extends BaseGlassActivity implements
                 drawLine(canvas, paint, points[0], points[1], scaleFactor);
             } else if (points.length == 4
                     && (rawResult.getBarcodeFormat() == BarcodeFormat.UPC_A || rawResult
-                            .getBarcodeFormat() == BarcodeFormat.EAN_13)) {
+                    .getBarcodeFormat() == BarcodeFormat.EAN_13)) {
                 // Hacky special case -- draw two lines, for the barcode and metadata
                 drawLine(canvas, paint, points[0], points[1], scaleFactor);
                 drawLine(canvas, paint, points[2], points[3], scaleFactor);
@@ -286,7 +280,7 @@ public final class CaptureActivity extends BaseGlassActivity implements
     }
 
     private static void drawLine(Canvas canvas, Paint paint, ResultPoint a,
-            ResultPoint b, float scaleFactor) {
+                                 ResultPoint b, float scaleFactor) {
         if (a != null && b != null) {
             canvas.drawLine(scaleFactor * a.getX(), scaleFactor * a.getY(),
                     scaleFactor * b.getX(), scaleFactor * b.getY(), paint);

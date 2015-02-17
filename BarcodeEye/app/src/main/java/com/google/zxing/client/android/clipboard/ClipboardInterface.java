@@ -22,40 +22,40 @@ import android.content.Context;
 import android.util.Log;
 
 public final class ClipboardInterface {
-  
-  private static final String TAG = ClipboardInterface.class.getSimpleName();
 
-  private ClipboardInterface() {
-  }
+    private static final String TAG = ClipboardInterface.class.getSimpleName();
 
-  public static CharSequence getText(Context context) {
-    ClipboardManager clipboard = getManager(context);
-    ClipData clip = clipboard.getPrimaryClip();
-    return hasText(context) ? clip.getItemAt(0).coerceToText(context) : null;
-  }
-
-  public static void setText(CharSequence text, Context context) {
-    if (text != null) {
-      try {
-        getManager(context).setPrimaryClip(ClipData.newPlainText(null, text));
-      } catch (NullPointerException npe) {
-        // Have seen this in the wild, bizarrely
-        Log.w(TAG, "Clipboard bug", npe);
-      } catch (IllegalStateException ise) {
-        // java.lang.IllegalStateException: beginBroadcast() called while already in a broadcast
-        Log.w(TAG, "Clipboard bug", ise);
-      }
+    private ClipboardInterface() {
     }
-  }
 
-  public static boolean hasText(Context context) {
-    ClipboardManager clipboard = getManager(context);
-    ClipData clip = clipboard.getPrimaryClip();
-    return clip != null && clip.getItemCount() > 0;
-  }
-  
-  private static ClipboardManager getManager(Context context) {
-    return (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-  }
+    public static CharSequence getText(Context context) {
+        ClipboardManager clipboard = getManager(context);
+        ClipData clip = clipboard.getPrimaryClip();
+        return hasText(context) ? clip.getItemAt(0).coerceToText(context) : null;
+    }
+
+    public static void setText(CharSequence text, Context context) {
+        if (text != null) {
+            try {
+                getManager(context).setPrimaryClip(ClipData.newPlainText(null, text));
+            } catch (NullPointerException npe) {
+                // Have seen this in the wild, bizarrely
+                Log.w(TAG, "Clipboard bug", npe);
+            } catch (IllegalStateException ise) {
+                // java.lang.IllegalStateException: beginBroadcast() called while already in a broadcast
+                Log.w(TAG, "Clipboard bug", ise);
+            }
+        }
+    }
+
+    public static boolean hasText(Context context) {
+        ClipboardManager clipboard = getManager(context);
+        ClipData clip = clipboard.getPrimaryClip();
+        return clip != null && clip.getItemCount() > 0;
+    }
+
+    private static ClipboardManager getManager(Context context) {
+        return (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    }
 
 }

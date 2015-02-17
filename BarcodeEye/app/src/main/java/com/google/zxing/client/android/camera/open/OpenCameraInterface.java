@@ -27,6 +27,7 @@ public final class OpenCameraInterface {
     /**
      * Opens a rear-facing camera with {@link Camera#open(int)}, if one exists,
      * or opens camera 0.
+     *
      * @throws InterruptedException
      */
     public static Camera open() throws InterruptedException {
@@ -50,7 +51,7 @@ public final class OpenCameraInterface {
         Camera camera = null;
         long timeout = System.currentTimeMillis() + MAX_WAIT_TIME;
         int attempt = 0;
-        while(camera == null && System.currentTimeMillis() < timeout) {
+        while (camera == null && System.currentTimeMillis() < timeout) {
             attempt++;
             Log.v(TAG, "Sleeping 100ms - attempt " + attempt);
             Thread.sleep(100);
