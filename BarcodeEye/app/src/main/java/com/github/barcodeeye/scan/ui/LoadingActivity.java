@@ -16,7 +16,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import uk.ac.cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.nlp.Summary;
 
 /**
  * Created by ruhatch on 10/02/15.
@@ -30,7 +30,7 @@ public class LoadingActivity extends Activity {
     private String EXTRA_RESULT_SERIAL = "EXTRA_RESULT_SERIAL";
     private String EXTRA_CODE = "EXTRA_CODE";
     private String EXTRA_TYPE = "EXTRA_TYPE";
-    private ItemInfo itemInfo;
+    private Summary summary;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -62,7 +62,7 @@ public class LoadingActivity extends Activity {
     private void displayResults(String result) {
 
         if (result.equals("success")) {
-            startActivity(new Intent(this, EmbeddedCardLayoutActivity.class).putExtra(EXTRA_RESULT_SERIAL, itemInfo));
+            startActivity(new Intent(this, EmbeddedCardLayoutActivity.class).putExtra(EXTRA_RESULT_SERIAL, summary));
         } else {
             startActivity(new Intent(this, ScanFailureActivity.class)); //failure activity!
         }
@@ -75,14 +75,11 @@ public class LoadingActivity extends Activity {
 
             try {
                 CharSequence result = HttpHelper.downloadViaHttp(uri, HttpHelper.ContentType.HTML);
-                itemInfo = (ItemInfo) fromString(result.toString());
+                summary = (Summary) fromString(result.toString());
             } catch (IOException ioe) {
-                itemInfo = new ItemInfo();
-                itemInfo.setTitle("No Results Found");
+                ioe.printStackTrace();
             } catch (ClassNotFoundException cnfe) {
                 cnfe.printStackTrace();
-                itemInfo = new ItemInfo();
-                itemInfo.setTitle("No Class Found");
             }
 
         }
@@ -100,7 +97,7 @@ public class LoadingActivity extends Activity {
 
             // params comes from the execute() call: params[0] is the url.
             getInfo(urls[0]);
-            if (itemInfo.getDescriptions().size() > 0 && !itemInfo.getDescriptions().get(0).equals("")) {
+            if (summary != null && summary.getText() != null && !summary.getText().isEmpty()) {
                 return "success";
             } else {
                 return "failure";
