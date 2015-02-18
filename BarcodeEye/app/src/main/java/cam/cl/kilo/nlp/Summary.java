@@ -31,7 +31,7 @@ public class Summary implements Serializable {
     }
 
     public Vector<String> stringToVector(String text) {
-        /* TODO:
+        /*
         * Given a summarised String, do the following cleanup:
         * - remove line numbers ([1], [2], ...)
         * - add newlines at the end of sentences
@@ -41,7 +41,34 @@ public class Summary implements Serializable {
         * Vector text = {"Blah.". "Another sentence.", "What is this even doing here?", "Foobar."}
         * */
 
-        return null;
+        if(text.contains("\n")){
+            //first case
+            text = text.replaceAll("\\[.", "");
+            text = text.replaceAll("\\]", "");
+            String[] array = text.split("\n");
+            Vector<String> vector = new Vector<String>();
+            for(String element: array){
+                vector.add(element);
+            }
+            Vector<String> empty = new Vector<String>();
+            empty.add("");
+            vector.removeAll(empty);
+
+            return vector;
+        }else{
+            //second case
+
+            text = text.replaceAll("[!;]","\\." );
+            text = text.replaceAll("\\.","\\.{" );
+            text = text.replaceAll("\\?","\\?{" );
+            String[] split = text.split("\\{");
+            Vector<String> vector = new Vector<String>();
+            for(String element: split){
+                vector.add(element);
+            }
+            return vector;
+        }
+
     }
 
 }

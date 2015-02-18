@@ -4,11 +4,6 @@ package cam.cl.kilo.nlp;
 import java.io.Serializable;
 import java.util.Vector;
 
-import cam.cl.kilo.nlp.ItemInfo;
-
-/**
- * Created by dcultrera on 14/02/2015.
- */
 
 public class Summary implements Serializable {
 
