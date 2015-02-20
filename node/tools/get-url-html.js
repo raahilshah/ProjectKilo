@@ -23,16 +23,16 @@ define([
 ) {
     return function (url, complete) {
         http.get(url, function (res) {
-            var body = "";
+            var chunks = [];
             
             res.setEncoding("utf8");
-
+            console.log(res.getHeader("Content-length"))
             res.on("data", function (chunk) {
-                body += chunk;
+                chunks.push(chunk);
             });
 
             res.on("end", function (chunk) {
-                complete(body);
+                complete(chunks.join(""));
             });
         }).on("error", function () {
             complete(new errors.HttpGetFailed());
