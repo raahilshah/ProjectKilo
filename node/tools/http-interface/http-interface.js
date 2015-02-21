@@ -26,47 +26,63 @@ define([
     bodyParser,
     errorMap
 ) {
-    var app, requests = [], port = 3000, unprocessedRequestIndices = [], pendingRequestIndices = [];
+    var port = 3000, app, requests = [], unprocessedRequestIndices = [], pendingRequestIndices = [];
 
     return {
         start: function () {
             if (app == null) {
+                // create instance of the server
                 app = express();
 
-                // support JSON requests
-                app.use(bodyParser.json({
-                    limit: "50mb"
-                }));
-
                 // listen for POST requests
-                app.post("/frame-parser", function (req, res) {
+                app.get("/frame-parser", function (req, res) {
+                    // index of request to process
                     unprocessedRequestIndices.push(requests.length);
 
+                    // request and response objects to be dealt
+                    // with by the read and write methods
                     requests.push({
                         req: req,
                         res: res
                     });
                 }); 
 
-                app.listen(port, function () {
-                    console.log("Frame parser listening on port " + port);
-                });
-
-                app.use(function(req, res, next){
+                // send 404 error if another route used
+                app.use(function(req, res, next) {
                     res.status(404);
                     res.send((new errorMap.PoorRequestPath()).getErrorObj());
+                });
+
+                // turn the server on
+                app.listen(port, function () {
+                    console.log("Frame parser listening on port " + port);
                 });
             }
         },
         read: function (callback) {
             var read = false,
-                checkTimer;
+                checkTimerId;
 
-            checkTimer = setInterval(function () {
+            // keep checking until the next request has come in
+            // there will usually already be one
+            checkTimerId = setInterval(function () {
+                var query;
+
                 if (unprocessedRequestIndices.length > 0) {
-                    clearInterval(checkTimer);
+                    // stop checking
+                    clearInterval(checkTimerId);
+
+
                     pendingRequestIndices.push(unprocessedRequestIndices.pop());
-                    callback(requests[_.last(pendingRequestIndices)].req.body);
+
+                    // determine the query (and convert numbers to actual numbers)
+                    query = requests[_.last(pendingRequestIndices)].req.query;
+
+                    _.each(query, function (curVal, curProp) {
+                        query[curProp] = isNaN(curVal) ? curVal : +curVal;
+                    });
+
+                    callback(query);
                 }
             }, 500);
         },
