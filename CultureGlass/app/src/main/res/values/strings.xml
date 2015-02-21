@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  Copyright (C) 2010 ZXing authors
+ Copyright (C) 2015 Group Kilo (Cambridge Computer Lab)
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -15,7 +17,7 @@
 -->
 <resources>
 
-    <string name="app_name">Barcode Eye</string>
+    <string name="app_name">Culture Glass</string>
     <string name="app_picker_name">Applications</string>
     <string name="bookmark_picker_name">Bookmarks</string>
     <string name="button_add_calendar">Add to calendar</string>
