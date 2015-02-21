@@ -20,11 +20,16 @@ define([
 ], function (
     NodeError
 ) {
-    var PoorRequestFormat = function () {}, SiteNotFound = function () {}, HttpGetFailed = function () {};
+    var PoorRequestFormat = function () {}, PoorRequestPath = function () {}, SiteNotFound = function () {}, HttpGetFailed = function () {};
 
     PoorRequestFormat.prototype = new NodeError({
         errorMessage: "data poorly formatted",
         errorCode: 100
+    });
+
+    PoorRequestPath.prototype = new NodeError({
+        errorMessage: "request to invalid location",
+        errorCode: 101
     });
 
     SiteNotFound.prototype = new NodeError({
@@ -39,6 +44,7 @@ define([
 
     return {
         PoorRequestFormat: PoorRequestFormat,
+        PoorRequestPath: PoorRequestPath,
         SiteNotFound: SiteNotFound,
         HttpGetFailed: HttpGetFailed
     };
