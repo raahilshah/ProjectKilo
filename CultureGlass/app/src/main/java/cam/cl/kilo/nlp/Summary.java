@@ -19,6 +19,7 @@ package cam.cl.kilo.nlp;
 import java.io.Serializable;
 import java.util.Vector;
 
+
 public class Summary implements Serializable {
 
     private static final long serialVersionUID = 2900729725728472406L;

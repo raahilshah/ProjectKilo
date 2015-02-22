@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 'Google Inc.:Glass Development Kit Preview:19'
-    buildToolsVersion "21.1.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.github.barcodeeye"
+        applicationId "cam.cl.kilo"
         minSdkVersion 15
         targetSdkVersion 15
     }
@@ -20,6 +20,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:support-v4:21.0.3'
     compile files('libs/zxing-core-2.3.jar')
 }
