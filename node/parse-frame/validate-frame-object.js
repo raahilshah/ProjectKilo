@@ -32,7 +32,8 @@ define([
         type: "string"
     }, {
         prop: "maxReviews",
-        type: "number"
+        type: "number",
+        nonNegative: true
     }];
 
     return function (frameObj, complete) {
@@ -49,6 +50,7 @@ define([
                     break;
                 case "number":
                     newIsValid = newIsValid && _.isNumber(frameObj[curFieldObj.prop]);
+                    newIsValid = newIsValid && (!curFieldObj.nonNegative || frameObj[curFieldObj.prop] >= 0);
                     break;
             }
 

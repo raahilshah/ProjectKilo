@@ -38,34 +38,33 @@ define([
 
     return function (frameObj, complete) {
         var asin = url.parse(frameObj.url, true).query.asin,
+            // the total number of reviews pages to make requests to
+            pagesToTest = Math.ceil(frameObj.maxReviews / reviewsPerPage),
             // the total number of reviews to fetch from the last page
             lastPageReviewsToFetch = frameObj.maxReviews % reviewsPerPage,
-            pagesToTest = Math.ceil(frameObj.maxReviews / reviewsPerPage),
-            getNewCompleteCallback,
             // maps page index to the an array of the reviews for that page
-            pageIndexReviews = [];
+            pageIndexReviews = [],
+            // a function to create a callback to be run once a request is complete
+            // once all these callbacks have been called, the function passed to
+            // _.all will then be called (this can only happen once)
+            getNewCompleteCallback = _.all(function () {
+                // find if any of the page requests created an error
+                var err = _.find(pageIndexReviews, function (curPageReviews) {
+                    return curPageReviews instanceof NodeError;pagesToTest
+                });
+
+                // there was at least one error, so return that
+                if (err) return complete(err);
+
+                // return all the reviews
+                complete(_.flatten(pageIndexReviews));
+            }, true);
 
         // if this is 0, take it to mean `reviewsPerPage`
         lastPageReviewsToFetch = lastPageReviewsToFetch === 0 ? reviewsPerPage : lastPageReviewsToFetch;
 
         // asin must be a number that converts to a string
         if (!_.isString(asin) || isNaN(asin)) return complete(new errorMap.HttpGetFailed());
-
-        // a function to create a callback to be run once a request is complete
-        // once all these callbacks have been called, the function passed to
-        // _.all will then be called (this can only happen once)
-        getNewCompleteCallback = _.all(function () {
-            // find if any of the page requests created an error
-            var err = _.find(pageIndexReviews, function (curPageReviews) {
-                return curPageReviews instanceof NodeError;pagesToTest
-            });
-
-            // there was at least one error, so return that
-            if (err) return complete(err);
-
-            // return all the reviews
-            complete(_.flatten(pageIndexReviews));
-        }, true);
 
         // create requests to the pages
         _.times(pagesToTest, function (curPageIndex) {
@@ -79,7 +78,8 @@ define([
             }));
         });
 
-        // if no reveiws to fetch, return the result (no reviews)
+        // make sure that the `complete` callback actually runs
+        // even if no reveiws to fetch, return the result (no reviews)
         getNewCompleteCallback(true);
     };
 });
