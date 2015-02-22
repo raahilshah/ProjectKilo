@@ -25,10 +25,6 @@ define([
     NodeError
 ) {
     var getPageReviews = function (
-        // 0-indexed current page number
-        curPageIndex,
-        // string of the reviews
-        reviews,
         // total max number of reviews to get
         maxReviews,
         // callback for completion
@@ -40,8 +36,7 @@ define([
     ) {
         if ($ instanceof NodeError) return complete($);
 
-        // the url of the next page of reviews to process (if necessary)
-        var nextPageUrl;
+        var reviews = [];
 
         // get the text for each of these reviews
         $body.find(".reviewText").each(function () {
@@ -50,23 +45,7 @@ define([
             reviews.push($(this).text());
         });
 
-        // you have found all the requested reviews
-        if (reviews.length === maxReviews) {
-            complete(reviews);
-        } else {
-            nextPageUrl = $(".paging").first().find("a").filter(function () {
-                // zero-based index of link text is that of the next page
-                return (+$(this).text()) - 1 === curPageIndex + 1;
-            }).attr("href");
-                
-            // you have already fetched all the reviews
-            if (!nextPageUrl) {
-                complete(reviews);
-            } else {
-                // recurse to process next page
-                getUrl$body(nextPageUrl, _.partial(getPageReviews, curPageIndex + 1, reviews, maxReviews, complete));
-            }
-        }
+        complete(reviews);
     };
 
     return getPageReviews;

@@ -20,31 +20,66 @@ if (typeof define !== 'function') { var define = require('amdefine')(module) }
 
 define([
     "underscore",
+    "url",
     "tools/get-url-$body",
     "errors/node-error",
     "errors/error-map",
     "parse-frame/site-parsers/amazon/amazon-get-page-reviews"
 ], function (
     _,
+    url,
     getUrl$body,
     NodeError,
     errorMap,
     getPageReviews
 ) {
+    var reviewsPerPage = 10,
+        reviewsUrlTemplate = _.template("http://www.amazon.com/product-reviews/<%= asin %>/sortBy=byRankDescending&pageNumber=<%= pageNumber %>");
+
     return function (frameObj, complete) {
-        getUrl$body(frameObj.url, function ($, $body) {
-            if ($ instanceof NodeError) return complete($);
+        var asin = url.parse(frameObj.url, true).query.asin,
+            // the total number of reviews to fetch from the last page
+            lastPageReviewsToFetch = frameObj.maxReviews % reviewsPerPage,
+            pagesToTest = Math.ceil(frameObj.maxReviews / reviewsPerPage),
+            getNewCompleteCallback,
+            // maps page index to the an array of the reviews for that page
+            pageIndexReviews = [];
 
-            // get the link to the first page of top rated reviews
-            var firstReviewsPageUrl = $body.find("a").filter(function () {
-                return /^[0-9,]+ customer reviews$/i.test($(this).text().trim());
-            }).attr("href");
+        // if this is 0, take it to mean `reviewsPerPage`
+        lastPageReviewsToFetch = lastPageReviewsToFetch === 0 ? reviewsPerPage : lastPageReviewsToFetch;
 
-            // if this link is bad return an error
-            if (!firstReviewsPageUrl) return complete(new errorMap.HttpGetFailed());
+        // asin must be a number that converts to a string
+        if (!_.isString(asin) || isNaN(asin)) return complete(new errorMap.HttpGetFailed());
 
-            // fetch the first page of top rated reviews
-            getUrl$body(firstReviewsPageUrl, _.partial(getPageReviews, 0, [], frameObj.maxReviews, complete));
+        // a function to create a callback to be run once a request is complete
+        // once all these callbacks have been called, the function passed to
+        // _.all will then be called (this can only happen once)
+        getNewCompleteCallback = _.all(function () {
+            // find if any of the page requests created an error
+            var err = _.find(pageIndexReviews, function (curPageReviews) {
+                return curPageReviews instanceof NodeError;pagesToTest
+            });
+
+            // there was at least one error, so return that
+            if (err) return complete(err);
+
+            // return all the reviews
+            complete(_.flatten(pageIndexReviews));
+        }, true);
+
+        // create requests to the pages
+        _.times(pagesToTest, function (curPageIndex) {
+            var curReviewsPageUrl = reviewsUrlTemplate({asin: asin, pageNumber: curPageIndex + 1}),
+                curReviewsPageMaxReviews = curPageIndex + 1 === pagesToTest ? lastPageReviewsToFetch : reviewsPerPage,
+                curPageCompleteCallback = getNewCompleteCallback();
+
+            getUrl$body(curReviewsPageUrl, _.partial(getPageReviews, curReviewsPageMaxReviews, function (reviews) {
+                pageIndexReviews[curPageIndex] = reviews;
+                curPageCompleteCallback();
+            }));
         });
+
+        // if no reveiws to fetch, return the result (no reviews)
+        getNewCompleteCallback(true);
     };
 });
