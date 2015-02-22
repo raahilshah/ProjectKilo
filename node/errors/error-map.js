@@ -28,7 +28,7 @@ define([
     });
 
     PoorRequestPath.prototype = new NodeError({
-        errorMessage: "request to invalid location",
+        errorMessage: "request to invalid frame-parser API route",
         errorCode: 101
     });
 

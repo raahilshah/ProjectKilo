@@ -1,6 +1,6 @@
 /*
 |-------------------------------------------
-| amazon frame parser
+| amazon parse frame
 |-------------------------------------------
 |
 | generates reviews on an item from amazon and sends
@@ -19,40 +19,32 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module) }
 
 define([
+    "underscore",
     "tools/get-url-$body",
     "errors/node-error",
-    "errors/error-map"
+    "errors/error-map",
+    "parse-frame/site-parsers/amazon/amazon-get-page-reviews"
 ], function (
+    _,
     getUrl$body,
     NodeError,
-    errorMap
+    errorMap,
+    getPageReviews
 ) {
     return function (frameObj, complete) {
         getUrl$body(frameObj.url, function ($, $body) {
-            if ($body instanceof NodeError) return complete($body);
+            if ($ instanceof NodeError) return complete($);
 
             // get the link to the first page of top rated reviews
-            $allLink = $body.find("a").filter(function () {
+            var firstReviewsPageUrl = $body.find("a").filter(function () {
                 return /^[0-9,]+ customer reviews$/i.test($(this).text().trim());
-            });
+            }).attr("href");
 
             // if this link is bad return an error
-            if ($allLink.length === 0 || !$allLink.attr("href")) return complete(new errorMap.HttpGetFailed());
+            if (!firstReviewsPageUrl) return complete(new errorMap.HttpGetFailed());
 
             // fetch the first page of top rated reviews
-            getUrl$body($allLink.attr("href"), function ($, $body) {
-                // string of the reviews
-                var reviews = [];
-
-                // get the text for each of these reviews
-                $body.find(".reviewText").each(function () {
-                    if (reviews.length >= frameObj.maxReviews) return false;
-
-                    reviews.push($(this).text());
-                });
-
-                complete(reviews);
-            });
+            getUrl$body(firstReviewsPageUrl, _.partial(getPageReviews, 0, [], frameObj.maxReviews, complete));
         });
     };
 });

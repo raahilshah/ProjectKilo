@@ -18,18 +18,18 @@ if (typeof define !== "function") { var define = require("amdefine")(module) }
 define([
     "underscore",
     "express",
-    "body-parser",
     "errors/error-map"
 ], function (
     _,
     express,
-    bodyParser,
     errorMap
 ) {
     var port = 3000, app, requests = [], unprocessedRequestIndices = [], pendingRequestIndices = [];
 
     return {
-        start: function () {
+        start: function (paramPort) {
+            paramPort = paramPort == null ? port : paramPort;
+
             if (app == null) {
                 // create instance of the server
                 app = express();
@@ -54,8 +54,8 @@ define([
                 });
 
                 // turn the server on
-                app.listen(port, function () {
-                    console.log("Frame parser listening on port " + port);
+                app.listen(paramPort, function () {
+                    console.log("Frame parser listening on port " + paramPort);
                 });
             }
         },

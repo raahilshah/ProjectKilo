@@ -19,13 +19,11 @@ define([
     "jsdom",
     "lib/jquery/jquery-string",
     "request",
-    "errors/node-error",
     "errors/error-map"
 ], function (
     jsdom,
     jqString,
     request,
-    NodeError,
     errors
 ) {
     return function (url, complete) {
@@ -42,7 +40,7 @@ define([
                     if (err) return complete(new errorMap.HttpGetFailed());
 
                     var $ = window.jQuery,
-                        $body = $("body"), $allLink;
+                        $body = $("body");
 
                     if ($body.length === 0) return complete(new errorMap.HttpGetFailed());
 

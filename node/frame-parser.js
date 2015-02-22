@@ -8,8 +8,8 @@
 |
 | type:         void
 | author:       Josh Bambrick
-| version:      0.0.1
-| modified:     03/02/15
+| version:      1.3.1
+| modified:     20/02/15
 |
 */
 
@@ -17,8 +17,8 @@ require("./lib/requirejs/config.js");
 
 requirejs([
     "underscore",
-    "tools/http-interface/http-interface",
-    "tools/standard-interface/standard-interface",
+    "tools/http-interface",
+    "tools/standard-interface",
     "parse-frame/validate-frame-object",
     "parse-frame/parse-frame",
     "errors/node-error",
@@ -63,7 +63,7 @@ requirejs([
         case "web":
             // interface via a web api using route /frame-parser
 
-            httpInterface.start();
+            httpInterface.start(process.argv[3]);
 
             readRequest = httpInterface.read;
 
@@ -83,11 +83,7 @@ requirejs([
             break;
     }
 
-    // repeatedly read in commands from stdin
-    // don't read the next if you are currently
-    // reading one in/processing one
-    // use infinite loop to avoid stack overflow of `readCommand`
-    // don't use while (true) as this is FUBAR
+    // repeatedly read commands
     setInterval(function () {
         if (readNextCommand) {
             readNextCommand = false;
