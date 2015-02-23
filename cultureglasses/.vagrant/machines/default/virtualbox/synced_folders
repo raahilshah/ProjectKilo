@@ -1,0 +1,1 @@
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/yuhaoyan/ProjectKilo/cultureglasses","disabled":false},"v-csc-1":{"id":"v-csc-1","guestpath":"/tmp/vagrant-chef/0c9560d96a9e5fc0a308fad94246ab22/cookbooks","hostpath":"/Users/yuhaoyan/.berkshelf/vagrant-berkshelf/shelves/berkshelf20150130-1332-1ext759-default","disabled":false}}}
