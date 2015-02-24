@@ -1,13 +1,22 @@
 package cam.cl.kilo.lookup;
 
-import cam.cl.kilo.nlp.ItemInfo;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import cam.cl.kilo.nlp.ItemInfo;
 
 public class AmznItemLookup extends Lookup {
 
@@ -23,22 +32,23 @@ public class AmznItemLookup extends Lookup {
         
     }
 
-    // Parsing XML response. 
     public void fillContent(String requestURL) {
         try {
+        	// Parse XML response DOM. 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(requestURL);
 
+            // Required DOM nodes.
             Node descriptionNode = doc.getElementsByTagName("Content").item(0);
             Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
             Node titleNode = doc.getElementsByTagName("Title").item(0);
             Node itemAttrNode = doc.getElementsByTagName("ItemAttributes").item(0);
             
+            // Populate ItemInfo object.
             for (Node child = itemAttrNode.getFirstChild(); child != null; child = child.getNextSibling())
                 if (child.getNodeName().equalsIgnoreCase("Author"))
                     info.addAuthor(child.getTextContent());
-            
             info.setTitle(titleNode.getTextContent());
             info.addDescription(descriptionNode.getTextContent());
             
@@ -77,8 +87,20 @@ public class AmznItemLookup extends Lookup {
         requestURL = helper.sign(params);
         
         System.out.println("Signed Request:\n" + requestURL);
-
         fillContent(requestURL);
+        
+        try {
+			Process p = new ProcessBuilder("/usr/local/bin/node", "/Users/Raahil/Documents/ProjectKilo/node/frame-parser.js", "test").start();
+			InputStream stdout = p.getInputStream();
+			Scanner scn = new Scanner(stdout);
+			while (scn.hasNextLine())
+				System.out.println(scn.nextLine());
+			scn.close();
+			
+		} catch (IOException e) {
+			System.out.println("Process IOException.");
+			e.printStackTrace();
+		}
 		
 	}
 
