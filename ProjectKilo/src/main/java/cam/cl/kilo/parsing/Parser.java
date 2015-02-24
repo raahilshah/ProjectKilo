@@ -160,13 +160,20 @@ public class Parser {
 		
 		parse(URL,pattern1,pattern2,info);
 		
+		String key = "5xKQ69Ihz8msh84QD6YjRTBePwHRp1HIUJPjsnB22cVB9CdCZ9";
+		int sentnum = 5;
+		String text = info.getReviews().get(1);
+		String newText = "";
+		newText = TextSummarizer.summarize(text, sentnum, key);
+		System.out.println(newText);
+		
+		//System.out.println(info.getReviews().get(0));
 
-		System.out.println(info.getReviews().get(0));
-
+		
 		
 		long endTime = System.currentTimeMillis();
 		long timeTaken = endTime - startTime;
-		System.out.println(timeTaken);
+		//System.out.println(timeTaken);
 
 	}
 }
