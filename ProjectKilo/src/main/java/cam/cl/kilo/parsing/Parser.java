@@ -18,11 +18,8 @@ package cam.cl.kilo.parsing;
 
 import java.io.IOException;
 import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
-import org.jsoup.examples.HtmlToPlainText;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -92,26 +89,62 @@ public class Parser {
 	}
 	
 	//general method for getting reviews into vector from an array of urls
-	public static Vector<String> reviewFromLinks(String[] links,String pattern){
+	public static Vector<String> reviewFromLinks(String[] links, String pattern){
 		
 		int length = links.length;
 		Vector<String> vector = new Vector<String>(length);
+		LinkThread[] threads = new LinkThread[length];
 		
-		try {
-
-			//put the links into Document for extractions
-			for(int i = 0; i < length; i ++){
-
-				Document page = Jsoup.connect(links[i]).get();
-				Elements elements = getLinks(page,pattern);
-				String review = removeTags(elements.get(0));
-				vector.add(i,review);
-			}		
-						
-		} catch (IOException e) {
-			e.printStackTrace();
+		//put the links into Document for extractions
+		for(int i = 0; i < length; i ++){
+			
+			threads[i] = new LinkThread(links[i], pattern);
+			threads[i].start();
+			
+		}
+		
+		for(int i = 0; i < length; i ++){
+			
+			try {
+				threads[i].join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		for(int i = 0; i < length; i ++){
+			
+			vector.add(i, threads[i].review);
+			
 		}
 		return vector;
+		
+	}
+	
+	static class LinkThread extends Thread {
+		
+		public String review;
+		public String link;
+		public String pattern;
+		
+		public LinkThread(String link, String pattern) {
+			this.link = link;
+			this.pattern = pattern;
+		}
+		
+		public void run() {
+			
+			Document page;
+			try {
+				page = Jsoup.connect(link).get();
+				Elements elements = getLinks(page,pattern);
+				review = removeTags(elements.get(0));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
 		
 	}
 	
@@ -127,16 +160,13 @@ public class Parser {
 		
 		parse(URL,pattern1,pattern2,info);
 		
-		String key = "5xKQ69Ihz8msh84QD6YjRTBePwHRp1HIUJPjsnB22cVB9CdCZ9";
-		int sentnum = 5;
-		String text = info.getReviews().get(1);
-		String newText = "";
-		newText = TextSummarizer.summarize(text, sentnum, key);
-		System.out.println(newText);
+
+		System.out.println(info.getReviews().get(0));
+
 		
 		long endTime = System.currentTimeMillis();
 		long timeTaken = endTime - startTime;
-		//System.out.println(timeTaken);
+		System.out.println(timeTaken);
 
 	}
 }

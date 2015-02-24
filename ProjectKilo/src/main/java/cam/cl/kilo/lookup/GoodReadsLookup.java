@@ -17,6 +17,8 @@
 package cam.cl.kilo.lookup;
 
 import cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.parsing.Parser;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -56,6 +58,10 @@ public class GoodReadsLookup extends Lookup {
 			info.addDescription(descriptionNode.getTextContent());
 			// Gets review link
 			info.addDescription(extract(reviewsBlock.getTextContent()));
+			
+			Parser.parse(extract(reviewsBlock.getTextContent()), "link[itemprop=\"url\"][href]", "div[class=\"reviewText mediumText description\"]", info);
+			
+			System.out.println(info.getReviews().get(0));
 
 		} catch (Exception e) {
 			e.printStackTrace();
