@@ -28,6 +28,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.nlp.TextSummarizer;
 
 
 //the whole process of the parser: 1.find the review links in the gadget 2.Goto those links and extract
@@ -126,9 +127,16 @@ public class Parser {
 		
 		parse(URL,pattern1,pattern2,info);
 		
+		String key = "5xKQ69Ihz8msh84QD6YjRTBePwHRp1HIUJPjsnB22cVB9CdCZ9";
+		int sentnum = 5;
+		String text = info.getReviews().get(1);
+		String newText = "";
+		newText = TextSummarizer.summarize(text, sentnum, key);
+		System.out.println(newText);
+		
 		long endTime = System.currentTimeMillis();
 		long timeTaken = endTime - startTime;
-		System.out.println(timeTaken);
+		//System.out.println(timeTaken);
 
 	}
 }
