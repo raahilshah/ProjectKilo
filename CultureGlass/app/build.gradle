@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 'Google Inc.:Glass Development Kit Preview:19'
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "cam.cl.kilo"
+        minSdkVersion 15
+        targetSdkVersion 15
+    }
+
+    buildTypes {
+        release {
+            apply plugin: 'idea'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:21.0.3'
+    compile files('libs/zxing-core-2.3.jar')
+}

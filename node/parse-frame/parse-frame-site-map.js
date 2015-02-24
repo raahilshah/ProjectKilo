@@ -8,19 +8,19 @@
 |
 | type:         object
 | author:       Josh Bambrick
-| version:      0.0.1
-| modified:     09/02/15
+| version:      0.2.1
+| modified:     22/02/15
 |
 */
 
 if (typeof define !== 'function') { var define = require('amdefine')(module) }
 
 define([
-    "parse-frame/site-parsers/amazon"
+    "parse-frame/site-parsers/amazon/amazon-parse-frame"
 ], function (
-    amazon
+    amazonParseFrame
 ) {
     return {
-        amazon: amazon
+        amazon: amazonParseFrame
     };
 });

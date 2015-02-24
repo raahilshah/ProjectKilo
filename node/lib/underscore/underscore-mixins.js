@@ -8,6 +8,33 @@
     }
 }(function (_) {
     _.mixin({
+        // take a function as a parameter and returns a `getNewCallback` function
+        // `getNewCallback` returns a callback function and starts tracking it
+        // once all functions created using the `getNewCallback` function have run, the original input function will be called
+        // can pass 'true' into one of the callbacks to call it immediately (so that if this is the only callback created, `func` will run)
+        all: function (func, onceOnly) {
+            var getNewCallback, requiredCallbackIds = [], hasBeenCalled = false, idCounter = 0;
+
+            getNewCallback = function (callImmediately) {
+                var newCallbackId = idCounter++, newCallback;
+
+                requiredCallbackIds.push(newCallbackId);
+
+                newCallback = function () {
+                    // NOTE: this will do nothing if `newCallbackId` isn't in the array
+                    requiredCallbackIds.splice(_.indexOf(requiredCallbackIds, newCallbackId), 1);
+
+                    if (requiredCallbackIds.length === 0 && (!onceOnly || hasBeenCalled === false)) {
+                        hasBeenCalled = true;
+                        func();
+                    }
+                };
+
+                return callImmediately ? newCallback() : newCallback;
+            };
+
+            return getNewCallback;
+        },
         capitalise: function(string) {
             return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
         },

@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2015 Group Kilo (Cambridge Computer Lab)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package cam.cl.kilo;
 
 import cam.cl.kilo.lookup.AmznItemLookup;
@@ -25,13 +41,7 @@ public class RESTEasyBarcode {
         oos.close();
         return Base64.encodeBase64String(baos.toByteArray());
     }
-	
-	public static void main(String[] args) {
-		RESTEasyBarcode test = new RESTEasyBarcode();
-		test.simpleResponse("1407130226","ISBN");
 
-	}
-	
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public Response simpleResponse(
@@ -71,11 +81,12 @@ public class RESTEasyBarcode {
                     summarisedText = summarizer.getSummResults();
                     System.out.println("Summarisation complete");
                 } else {
-                    summarisedText = info.getDescriptions().firstElement();
+                    summarisedText = summarizer.getText();
                     System.out.println("Empty summary");
                 }
             } catch (IOException ioe) {
                 ioe.printStackTrace();
+                //TODO: It would be better if it returned text from the Summary object...
                 summarisedText = info.getDescriptions().firstElement();
             } finally {
                 summary = new Summary(info, summarisedText);
@@ -90,11 +101,17 @@ public class RESTEasyBarcode {
 			}
 
         } else {
-            responseString = "Missing barcode number.";
+            responseString = "Missing barcode number";
         }
 
 		System.out.println(responseString);
 
         return Response.ok(responseString).build();
+    }
+
+    public static void main(String[] args) {
+        RESTEasyBarcode test = new RESTEasyBarcode();
+        test.simpleResponse("1407130226","ISBN");
+
     }
 }

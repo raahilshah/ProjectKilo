@@ -1,0 +1,5 @@
+node frame-parser.js test "{\"site\":\"amazon\",\"url\":\"http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA^&alinkCode=xm2^&asin=1853260002^&atag=drupal0a-20^&exp=2015-02-21T21%3A56%3A05Z^&v=2^&sig=mgKHH%2BL51tvsbjN3Xg9YB3YOcXMiiZNJrkVkEp5SFHM%3D\",\"maxReviews\":3,\"category\":\"book\"}"
+
+{"site":"amazon","url":"http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=1853260002&atag=drupal0a-20&exp=2015-02-13T13%3A05%3A12Z&v=2&sig=f0ix3qz%2FvM2g6eoZcDE38BFOBCbPbaWMDFzAd33niC4%3D","maxReviews":300,"category":"book"}
+
+http://127.0.0.1:3000/frame-parser?site=amazon&url=http%3A%2F%2Fwww.amazon.com%2Freviews%2Fiframe%3Fakid%3DAKIAI4LLUAWZMGNUW5NA%26alinkCode%3Dxm2%26asin%3D1853260002%26atag%3Ddrupal0a-20%26exp%3D2015-02-21T21%253A56%253A05Z%26v%3D2%26sig%3DmgKHH%252BL51tvsbjN3Xg9YB3YOcXMiiZNJrkVkEp5SFHM%253D&maxReviews=3&category=book
