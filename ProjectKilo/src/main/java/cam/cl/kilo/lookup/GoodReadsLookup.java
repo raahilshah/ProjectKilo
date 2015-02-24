@@ -25,44 +25,62 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class GoodReadsLookup extends Lookup {
 
-    private static final String GR_KEY = "JFp6OfWw4CyC62C9EAXJdw";
-    
-    public GoodReadsLookup(String barcodeNo, String barcodeType, ItemInfo info){
-    	
-    	super(barcodeNo, barcodeType, info);
-        
-    }
-    
-    // Parsing XML response. 
-    public void fillContent(String requestURL) {
-        try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(requestURL);
+	private static final String GR_KEY = "JFp6OfWw4CyC62C9EAXJdw";
 
-            Node descriptionNode = doc.getElementsByTagName("description").item(0);
-            Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
-            Node titleNode = doc.getElementsByTagName("title").item(0);
-            Node itemAttrNode = doc.getElementsByTagName("author").item(0);
+	public GoodReadsLookup(String barcodeNo, String barcodeType, ItemInfo info) {
 
-            for (Node child = itemAttrNode.getFirstChild(); child != null; child = child.getNextSibling())
-                if (child.getNodeName().equalsIgnoreCase("name"))
-                    info.addAuthor(child.getTextContent());
+		super(barcodeNo, barcodeType, info);
 
-            info.setTitle(titleNode.getTextContent());
-            info.addDescription(descriptionNode.getTextContent());
+	}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+	// Parsing XML response.
+	public void fillContent(String requestURL) {
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(requestURL);
+
+			Node descriptionNode = doc.getElementsByTagName("description")
+					.item(0);
+			Node reviewURLNode = doc.getElementsByTagName("IFrameURL").item(0);
+			Node titleNode = doc.getElementsByTagName("title").item(0);
+			Node itemAttrNode = doc.getElementsByTagName("author").item(0);
+			Node reviewsBlock = doc.getElementsByTagName("reviews_widget").item(0);
+
+			for (Node child = itemAttrNode.getFirstChild(); child != null; child = child
+					.getNextSibling())
+				if (child.getNodeName().equalsIgnoreCase("name"))
+					info.addAuthor(child.getTextContent());
+
+			info.setTitle(titleNode.getTextContent());
+			info.addDescription(descriptionNode.getTextContent());
+			// Gets review link
+			info.addDescription(extract(reviewsBlock.getTextContent()));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String extract(String string) {
+
+		String output = "no match";
+		String[] stringArray = string.split("\"");
+		for (String element : stringArray) {
+			if (element.startsWith("https://www.goodreads.com/api/reviews"))
+				output = element;
+		}
+		return output;
+	}
+
 	@Override
 	public void run() {
-		
-		 String uri = String.format("https://www.goodreads.com/book/isbn?format=%s&key=%s&isbn=%s", "xml", GR_KEY, barcodeNo);
-	     fillContent(uri);
-	     
+
+		String uri = String.format(
+				"https://www.goodreads.com/book/isbn?format=%s&key=%s&isbn=%s",
+				"xml", GR_KEY, barcodeNo);
+		fillContent(uri);
+
 	}
-    
+
 }
