@@ -26,7 +26,7 @@ define([
             var chunks = [];
             
             res.setEncoding("utf8");
-            console.log(res.getHeader("Content-length"))
+            
             res.on("data", function (chunk) {
                 chunks.push(chunk);
             });
