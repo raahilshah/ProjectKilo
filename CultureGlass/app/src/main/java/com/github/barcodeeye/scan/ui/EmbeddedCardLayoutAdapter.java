@@ -37,7 +37,7 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     /**
      * The maximum number of items that fit on a card.
      */
-    private static final int ITEMS_PER_CARD = 4;
+    private static final int ITEMS_PER_CARD = 1;
 
     /**
      * Index of the {@link android.widget.TextView} containing the primary text in a table row.

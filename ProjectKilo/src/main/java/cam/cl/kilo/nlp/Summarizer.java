@@ -22,7 +22,7 @@ public class Summarizer {
     private int comp = 20;
 
     public Summarizer(ItemInfo info) throws IOException {
-        this(info.getDescriptionsAsString(), "P10", "localhost");
+        this(info.getDescriptionsAsString() + info.getReviewsAsString(), "P10", "localhost");
     }
 
     public Summarizer(String text, String summtype) throws IOException {
@@ -30,7 +30,9 @@ public class Summarizer {
     }
 
     public Summarizer(String text, String summtype, String host) throws IOException {
-
+    	
+    	System.out.println(text);
+    	
         this.text = text;
         this.summlength = 0;
 

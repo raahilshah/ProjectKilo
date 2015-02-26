@@ -1,13 +1,12 @@
 package cam.cl.kilo.lookup;
 
-import cam.cl.kilo.RESTEasyBarcode;
-import cam.cl.kilo.nlp.ItemInfo;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import cam.cl.kilo.nlp.ItemInfo;
 
 public class OMDBLookup extends Lookup {
 
@@ -51,8 +50,7 @@ public class OMDBLookup extends Lookup {
 
 	@Override
 	public void run() {
-		title = "Titanic";
-		String uri = String.format("http://www.omdbapi.com/?t=%s&y=&plot=full&r=xml", title);
+		String uri = String.format("http://www.omdbapi.com/?t=%s&y=&plot=full&r=xml", info.getTitle());
 		fillContent(uri);
 	}
 	

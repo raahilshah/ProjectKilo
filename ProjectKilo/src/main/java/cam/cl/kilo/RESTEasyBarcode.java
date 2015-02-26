@@ -16,20 +16,27 @@
 
 package cam.cl.kilo;
 
-import cam.cl.kilo.lookup.AmznItemLookup;
-import cam.cl.kilo.lookup.GoodReadsLookup;
-import cam.cl.kilo.nlp.ItemInfo;
-import cam.cl.kilo.nlp.Summarizer;
-import cam.cl.kilo.nlp.Summary;
-import org.apache.commons.codec.binary.Base64;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.apache.commons.codec.binary.Base64;
+
+import cam.cl.kilo.lookup.AmznItemLookup;
+import cam.cl.kilo.lookup.GoodReadsLookup;
+import cam.cl.kilo.lookup.OMDBLookup;
+import cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.nlp.Summarizer;
+import cam.cl.kilo.nlp.Summary;
 
 @Path("/barcode")
 public class RESTEasyBarcode {
@@ -58,9 +65,15 @@ public class RESTEasyBarcode {
 			Thread tGR = new Thread(new GoodReadsLookup(barcodeNo, barcodeType, info));
 
 			tAmzn.start();
-			tGR.start();
+			
+			if (barcodeType == "ISBN") tGR.start();
 
 			while(tAmzn.isAlive() || tGR.isAlive());
+			
+			if (barcodeType != "ISBN") {
+				Thread tOMDB = new Thread(new OMDBLookup(barcodeNo, barcodeType, info));
+				while(tOMDB.isAlive());
+			}
 
 //			System.out.println(info.getTitle());
 //			for (String d : info.getDescriptions())
@@ -111,7 +124,7 @@ public class RESTEasyBarcode {
 
     public static void main(String[] args) {
         RESTEasyBarcode test = new RESTEasyBarcode();
-        test.simpleResponse("1407130226","ISBN");
+        test.simpleResponse("052156543X","ISBN");
 
     }
 }

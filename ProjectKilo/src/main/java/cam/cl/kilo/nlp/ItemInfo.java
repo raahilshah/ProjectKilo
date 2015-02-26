@@ -106,4 +106,12 @@ public class ItemInfo implements Serializable {
         }
         return sb.toString();
     }
+    
+    public String getReviewsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s: reviews) {
+            sb.append(s + '\n');
+        }
+        return sb.toString();
+    }
 }
