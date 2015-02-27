@@ -31,14 +31,14 @@ var _ = require("underscore"),
         testComplete();
     },
     outputTestFail = function (index, moduleName, label, expected, actual) {
-        console.log("failed test " + index + ": " + moduleName + "->" + label);
+        console.log("FAILED test " + index + ": " + moduleName + "->" + label);
         console.log("   expected:");
         console.log("   " + (fullErrorOutput ? expected : _.stringClip(JSON.stringify(expected), clippedErrorOutputLength, true)));
         console.log("   got:");
         console.log("   " + (fullErrorOutput ? actual : _.stringClip(JSON.stringify(actual), clippedErrorOutputLength, true)));
     },
     outputTestPass = function (index, moduleName, label) {
-        console.log("passed test " + index + ": " + moduleName + "->" + label);
+        console.log("PASSED test " + index + ": " + moduleName + "->" + label);
     },
     determineTestResult = function (test, moduleName, testIndex, res) {
         // decide if match (output may or may not be allowed to contain extra fields)
