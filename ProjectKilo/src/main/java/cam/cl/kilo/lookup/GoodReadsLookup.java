@@ -58,7 +58,7 @@ public class GoodReadsLookup extends Lookup {
 			info.addDescription(descriptionNode.getTextContent());
 			Parser.parse(extract(reviewsBlock.getTextContent()), "link[itemprop=\"url\"][href]", "div[class=\"reviewText mediumText description\"]", info);
 			
-			System.out.println(info.getReviews().get(0));
+			//System.out.println(info.getReviews().get(0));
 
 		} catch (Exception e) {
 			e.printStackTrace();

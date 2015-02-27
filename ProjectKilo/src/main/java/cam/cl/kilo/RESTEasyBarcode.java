@@ -16,27 +16,21 @@
 
 package cam.cl.kilo;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.apache.commons.codec.binary.Base64;
-
 import cam.cl.kilo.lookup.AmznItemLookup;
 import cam.cl.kilo.lookup.GoodReadsLookup;
 import cam.cl.kilo.lookup.OMDBLookup;
 import cam.cl.kilo.nlp.ItemInfo;
 import cam.cl.kilo.nlp.Summarizer;
 import cam.cl.kilo.nlp.Summary;
+import org.apache.commons.codec.binary.Base64;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 @Path("/barcode")
 public class RESTEasyBarcode {
@@ -75,37 +69,11 @@ public class RESTEasyBarcode {
 				while(tOMDB.isAlive());
 			}
 
-//			System.out.println(info.getTitle());
-//			for (String d : info.getDescriptions())
-//				//System.out.println(d);
-//			for (String a : info.getAuthors())
-//				System.out.println(a);
-
 
             // Summarize text in ItemInfo and create a Summary object
-            // If it fails, just return the full text of the first description
-            Summarizer summarizer;
-            String summarisedText = null;
-            Summary summary;
-            try {
-                summarizer = new Summarizer(info);
+            Summary summary = prepareSummary(info);
 
-                if (summarizer.getSummLength() != 0) {
-                    summarisedText = summarizer.getSummResults();
-                    System.out.println("Summarisation complete");
-                } else {
-                    summarisedText = summarizer.getText();
-                    System.out.println("Empty summary");
-                }
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-                //TODO: It would be better if it returned text from the Summary object...
-                summarisedText = info.getDescriptions().firstElement();
-            } finally {
-                summary = new Summary(info, summarisedText);
-                System.out.println(summary.getText());
-            }
-
+            // Serialize Summary object
 			try {
 				responseString = toString(summary);
 			} catch (IOException e) {
@@ -121,6 +89,46 @@ public class RESTEasyBarcode {
 
         return Response.ok(responseString).build();
     }
+
+    /**
+     *
+     * @param info The itemInfo object being populated
+     * @return Summary
+     */
+    public Summary prepareSummary(ItemInfo info) {
+        Summarizer descriptionSummarizer, reviewSummarizer;
+        String summarizedDescriptions, summarizedReviews;
+
+        // Handle both summarizers in same try/catch, if there is an IO error from Mead, it is likely to affect both
+        try {
+            descriptionSummarizer = new Summarizer(info.getDescriptionsAsString(), "P10");
+            reviewSummarizer = new Summarizer(info.getReviewsAsString(), "P10");
+
+            if (descriptionSummarizer.getSummLength() > 0) {
+                summarizedDescriptions = descriptionSummarizer.getSummResults();
+                System.out.println("Description summarization successful");
+            } else {
+                summarizedDescriptions = info.getDescriptions().firstElement();
+                System.out.println("Empty description summary");
+            }
+
+            if (reviewSummarizer.getSummLength() == 0) {
+                summarizedReviews = info.getReviews().firstElement();
+                System.out.println("Review summarization successful");
+            } else {
+                summarizedReviews = info.getReviews().firstElement();
+                System.out.println("Empty reviews summary");
+            }
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            summarizedDescriptions = info.getDescriptions().firstElement();
+            summarizedReviews = info.getReviews().firstElement();
+        }
+
+        return new Summary(info, summarizedDescriptions, summarizedReviews);
+    }
+
 
     public static void main(String[] args) {
         RESTEasyBarcode test = new RESTEasyBarcode();
