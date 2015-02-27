@@ -17,13 +17,26 @@ public class OMDBLookup extends Lookup {
 	private String actors = "";
 	private String plot = "";
 
+	/**
+	 * OMDB Constructor
+	 *
+	 * @param  barcodeNo    The barcode number of the book to look up
+	 * @param  barcodeType  The type of the barcode (UPC in this case)
+	 * @param  info         The ItemInfo object to store the relevant information
+	 */
 	public OMDBLookup(String barcodeNo, String barcodeType, ItemInfo info) {
 
 		super(barcodeNo, barcodeType, info);
 
 	}
 
-	// Parsing XML response.
+	/**
+	 * Fills in the ItemInfo object with the title, director,
+	 * actors, and plot description from a XML File containing
+	 * movie information by parsing the relevant information from it
+	 *
+	 * @param  requestURL  the URL of the XML File that needs to be parsed
+	 */
 	public void fillContent(String requestURL) {
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

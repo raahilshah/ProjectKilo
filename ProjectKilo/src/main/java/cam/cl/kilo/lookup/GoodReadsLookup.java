@@ -29,13 +29,26 @@ public class GoodReadsLookup extends Lookup {
 
 	private static final String GR_KEY = "JFp6OfWw4CyC62C9EAXJdw";
 
+	/**
+	 * GoodReads Constructor
+	 *
+	 * @param  barcodeNo    The barcode number of the book to look up
+	 * @param  barcodeType  The type of the barcode (ISBN in this case)
+	 * @param  info         The ItemInfo object to store the relevant information
+	 */
 	public GoodReadsLookup(String barcodeNo, String barcodeType, ItemInfo info) {
 
 		super(barcodeNo, barcodeType, info);
 
 	}
 
-	// Parsing XML response.
+	/**
+	 * Fills in the ItemInfo object with the title, author(s)
+	 * description and reviews, from a XML File containing
+	 * book information by parsing the relevant information from it
+	 *
+	 * @param  requestURL  the URL of the XML File that needs to be parsed
+	 */
 	public void fillContent(String requestURL) {
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -65,6 +78,14 @@ public class GoodReadsLookup extends Lookup {
 		}
 	}
 
+	/**
+	 * Returns the link of the reviews widget from a large
+	 * block of text containing the link. This is done because
+	 * the XML parser cannot distinguish the "reviews_widget" element
+	 *
+	 * @param  string a string containing the link to the Reviews_widget
+	 * @return  the link of the reviews widget
+	 */
 	public String extract(String string) {
 
 		String output = "no match";
@@ -76,6 +97,7 @@ public class GoodReadsLookup extends Lookup {
 		return output;
 	}
 
+	
 	@Override
 	public void run() {
 
