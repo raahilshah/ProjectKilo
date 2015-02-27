@@ -8,8 +8,8 @@
 |
 | type:         void
 | author:       Josh Bambrick
-| version:      1.3.1
-| modified:     20/02/15
+| version:      1.3.5
+| modified:     24/02/15
 |
 */
 
@@ -42,7 +42,7 @@ requirejs([
             });
         };
 
-    // alternative means of communicating if this is a test run
+    // determine inteface for communication
     switch (process.argv[2]) {
         case "test":
             // interface using second argument and console
@@ -63,6 +63,7 @@ requirejs([
         case "web":
             // interface via a web api using route /frame-parser
 
+            // initiate the RESTful API
             httpInterface.start(process.argv[3]);
 
             readRequest = httpInterface.read;
@@ -74,6 +75,8 @@ requirejs([
 
             break;
         default:
+            // use standard in/out
+
             readRequest = standardInterface.read;
             sendResult = function (res) {
                 standardInterface.write(res instanceof NodeError ? res.getErrorObj() : res);

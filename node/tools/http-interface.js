@@ -8,8 +8,8 @@
 |
 | type:         object
 | author:       Josh Bambrick
-| version:      0.0.1
-| modified:     20/02/15
+| version:      0.5.0
+| modified:     24/02/15
 |
 */
 
@@ -24,27 +24,34 @@ define([
     express,
     errorMap
 ) {
-    var port = 3000, app, requests = [], unprocessedRequestIndices = [], pendingRequestIndices = [];
+    var defaultPort = 3000, app, requests = [], unprocessedRequestIndices = [], pendingRequestIndices = [];
 
     return {
-        start: function (paramPort) {
-            paramPort = paramPort == null ? port : paramPort;
+        start: function (paramPort, suppressMessage, onStart) {
+            paramPort = paramPort || defaultPort;
+            onStart = onStart || _.noop;
 
             if (app == null) {
                 // create instance of the server
                 app = express();
 
                 // listen for POST requests
-                app.get("/frame-parser", function (req, res) {
-                    // index of request to process
-                    unprocessedRequestIndices.push(requests.length);
+                app.all("/frame-parser", function (req, res) {
+                    if (req.method.toLowerCase() === "get") {
+                        // index of request to process
+                        unprocessedRequestIndices.push(requests.length);
 
-                    // request and response objects to be dealt
-                    // with by the read and write methods
-                    requests.push({
-                        req: req,
-                        res: res
-                    });
+                        // request and response objects to be dealt
+                        // with by the read and write methods
+                        requests.push({
+                            req: req,
+                            res: res
+                        });
+                    } else {
+                        // invalid method
+                        res.status(405);
+                        res.send((new errorMap.PoorRequestPath()).getErrorObj());
+                    }
                 }); 
 
                 // send 404 error if another route used
@@ -52,10 +59,13 @@ define([
                     res.status(404);
                     res.send((new errorMap.PoorRequestPath()).getErrorObj());
                 });
-
+                
                 // turn the server on
                 app.listen(paramPort, function () {
-                    console.log("Frame parser listening on port " + paramPort);
+                    if (!suppressMessage) {
+                        console.log("Frame parser listening on port " + paramPort);
+                    }
+                    onStart();
                 });
             }
         },

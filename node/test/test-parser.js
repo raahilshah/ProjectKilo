@@ -1,101 +1,88 @@
+// support requirejs
+require("../lib/requirejs/config.js");
+
 var _ = require("underscore"),
-    spawn = require("child_process").spawn,
-    tests = [{
-        input: JSON.stringify({
-            site: "amazon",
-            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=1853260002&atag=drupal0a-20&exp=2015-02-13T13%3A05%3A12Z&v=2&sig=f0ix3qz%2FvM2g6eoZcDE38BFOBCbPbaWMDFzAd33niC4%3D",
-            maxReviews: 300,
-            category: "book"
-        }),
-        // response must match this exactly
-        expectedOutputObj: [
-            "This was really good.",
-            "This wasn't very good."
-        ]
-    }, {
-        input: JSON.stringify({
-            site: "amazon",
-            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=1853260002&atag=drupal0a-20&exp=2015-02-13T13%3A05%3A12Z&v=2&sig=f0ix3qz%2FvM2g6eoZcDE38BFOBCbPbaWMDFzAd33niC4%3D",
-            maxReviews: 300,
-            category: "book"
-        }),
-        // response must match this exactly
-        expectedOutputObj: [
-            "This was really good.",
-            "This wasn't very good."
-        ]
-    },  {
-        // missing field
-        input: JSON.stringify({
-            site: "amazon",
-            url: "http://www.amazon.com/reviews/iframe?akid=AKIAI4LLUAWZMGNUW5NA&alinkCode=xm2&asin=1853260002&atag=drupal0a-20&exp=2015-02-13T13%3A05%3A12Z&v=2&sig=f0ix3qz%2FvM2g6eoZcDE38BFOBCbPbaWMDFzAd33niC4%3D",
-            category: "book"
-        }),
-        // response must match this exactly
-        expectedOutputObjContains: {errorCode: 100}
-    }, {
-        input: "this is not valid json",
-        // response must contain this field
-        expectedOutputObjContains: {errorCode: 100}
-    }, {
-        input: JSON.stringify({site: "not a real site", url: "google.com", maxReviews: 100, category: "book"}),
-        // response must contain this field
-        expectedOutputObjContains: {errorCode: 200}
-    }],
-    // pass a parameter to determine whether to display
-    // output from the harness or the source
-    onlySourceOutput = !!process.argv[2];
+    mixins = require("../lib/underscore/underscore-mixins.js"),
+    fullErrorOutput = !!process.argv[2],
+    clippedErrorOutputLength = 100,
+    testsRan = 0, testsPassed = 0, testsFailed = 0,
+    testComplete = function () {
+        testsRan += 1;
 
-_.each(tests, function (curTest, curTestIndex) {
-    // set callbacks to read any responses
-    var n = spawn("node", [__dirname + "/../frame-parser.js"]),
-        inputChunks = [];
-
-    n.stdout.setEncoding("utf8");
-
-    if (onlySourceOutput) {
-        // log all of the data passed (inc console.logs if debugging)
-        n.stdout.pipe(process.stdout);
-    }
-
-    n.stdout.on("data", function(chunk) {
-        inputChunks.push(chunk);
-    });
-
-    n.stdout.on("end", function() {
-        var res = JSON.parse(inputChunks.join("")), passed = true;
-
-        if (!onlySourceOutput) {
-            passed = _.reduce(curTest, function (curPassed, curTestItem, curTestItemKey) {
-                switch (curTestItemKey) {
-                    case 'expectedOutputObj':
-                        curPassed = curPassed && _.isEqual(res, curTestItem);
-                        break;
-                    case 'expectedOutputObjContains':
-                        curPassed = curPassed && _.matches(curTestItem)(res);
-                        break;
-                }
-                return curPassed
-            }, passed);
-
-            if (passed) {
-                console.log("passed test " + curTestIndex);
+        if (testsRan === testCount) {
+            console.log();
+            console.log("================================");
+            console.log();
+            if (testsPassed === testCount) {
+                console.log("PASSED ALL " + testCount + " TESTS");
             } else {
-                console.log("failed test " + curTestIndex);
-                console.log("   expected:");
-                _.each(curTest, function (curTestItem, curTestItemKey) {
-                    if (curTestItemKey !== "input"){
-                        console.log(curTestItem);
-                    }
-                });
-                console.log("   got:");
-                console.log(res);
+                console.log("FAILED " + testFailed + " OF " + testCount + " TESTS");
             }
         }
+    },
+    testPassed = function (index, moduleName, label) {
+        testsPassed += 1;
+        outputTestPass(index, moduleName, label)
+        testComplete();
+    },
+    testFailed = function (index, moduleName, label, res) {
+        testsFailed += 1;
+        outputTestFail(index, moduleName, label, res)
+        testComplete();
+    },
+    outputTestFail = function (index, moduleName, label, expected, actual) {
+        console.log("failed test " + index + ": " + moduleName + "->" + label);
+        console.log("   expected:");
+        console.log("   " + (fullErrorOutput ? expected : _.stringClip(JSON.stringify(expected), clippedErrorOutputLength, true)));
+        console.log("   got:");
+        console.log("   " + (fullErrorOutput ? actual : _.stringClip(JSON.stringify(actual), clippedErrorOutputLength, true)));
+    },
+    outputTestPass = function (index, moduleName, label) {
+        console.log("passed test " + index + ": " + moduleName + "->" + label);
+    },
+    determineTestResult = function (test, moduleName, testIndex, res) {
+        // decide if match (output may or may not be allowed to contain extra fields)
+        var passed = test.outputExtensible ? _.matches(test.expectedOutput)(res) : _.isEqual(res, test.expectedOutput);
+
+        if (passed) {
+            testPassed(testIndex, moduleName, test.label)
+        } else {
+            testFailed(testIndex, moduleName, test.label, test.expectedOutput, res)
+        }
+    },
+    testModules = [{
+        // tests for the full system
+        module: "full system",
+        tests: require("./full-tests.js")
+    }, {
+        // tests for getUrl$body
+        module: "getUrl$body",
+        tests: require("./get-url-$body.js")
+    }, {
+        // tests for standardInterface
+        module: "standardInterface",
+        tests: require("./standard-interface.js")
+    }, {
+        // tests for httpInterface
+        module: "httpInterface",
+        tests: require("./http-interface.js")
+    }, {
+        // tests for validateFrameObject
+        module: "validateFrameObject",
+        tests: require("./validate-frame-object.js")
+    }],
+    // the total number of tests
+    testCount = _.reduce(testModules, function (curCount, curModule) {
+        return curModule.tests.length + curCount;
+    }, 0),
+    // the index of the test currently being run
+    curTestIndex = 0;
+
+// run tests
+_.each(testModules, function (curModule) {
+    _.each(curModule.tests, function (curTest) {
+        curTest.getTestResult(_.partial(determineTestResult, curTest, curModule.module, curTestIndex));
+
+        curTestIndex += 1;
     });
-
-
-    // send something
-    n.stdin.write(curTest.input);
-    n.stdin.end();
 });

@@ -24,7 +24,7 @@ define([
     jsdom,
     jqString,
     request,
-    errors
+    errorMap
 ) {
     return function (url, complete) {
         request(url, function(err, res, body) {

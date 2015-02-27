@@ -2,6 +2,8 @@
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['underscore'], factory);
+    } else if (typeof require === 'function') {
+        factory(require("underscore"));
     } else {
         // Browser globals
         factory(this._);
@@ -37,6 +39,10 @@
         },
         capitalise: function(string) {
             return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+        },
+        stringClip: function (str, length, addEllipsis) {
+            var clipped = str.substr(0, length - (addEllipsis ? 3 : 0));
+            return clipped + ((addEllipsis && clipped !== str) ? "..." : "");
         },
         round: function (number, decimalPlaces, toString) {
             var power = Math.pow(10, decimalPlaces || 0),
