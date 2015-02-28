@@ -36,6 +36,16 @@ import java.util.NoSuchElementException;
 
 import java.util.List;
 
+/**
+ * Main class of the backend:
+ * - populates an ItemInfo object by starting threads that look up product information and reviews
+ * - summarizes text retrieved
+ * - serializes summary for transmission to the frontend
+ *
+ * @author groupKilo
+ * @author rh572
+ * @author dc561
+ */
 @Path("/barcode")
 public class RESTEasyBarcode {
 	
@@ -95,15 +105,17 @@ public class RESTEasyBarcode {
     }
 
     /**
+     * Given an ItemInfo, initialise two Summarizer objects, one for descriptions and one for reviews.
+     * In case of MEAD failure or other errors, the full text is returned.
      *
-     * @param info The itemInfo object being populated
-     * @return Summary
+     * @param info A populated ItemInfo
+     * @return A Summary object holding summarized text
      */
     public Summary prepareSummary(ItemInfo info) {
         Summarizer descriptionSummarizer, reviewSummarizer;
         String summarizedDescriptions, summarizedReviews;
 
-        // Handle both summarizers in same try/catch, if there is an IO error from Mead, it is likely to affect both
+        // Handle both summarizers in same try/catch, if there is an IO error from MEAD, it is likely to affect both
         try {
             descriptionSummarizer = new Summarizer(
                     (info.getDescriptions().toArray(new String [0])), "P10", Summarizer.LOCALHOST);
@@ -148,6 +160,11 @@ public class RESTEasyBarcode {
         return new Summary(info, summarizedDescriptions, summarizedReviews);
     }
 
+    /**
+     * Simple pretty printer for lists
+     *
+     * @param l A List
+     */
     public static void ppList(List<String> l) {
         Iterator itr = l.iterator();
         while (itr.hasNext()) {

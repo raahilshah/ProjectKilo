@@ -1,28 +1,48 @@
+/*
+ * Copyright (C) 2015 Group Kilo (Cambridge Computer Lab)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package cam.cl.kilo.nlp;
 
 import java.io.IOException;
 
 /**
- * Sample MEAD summarizer client: 
+ * Interface with the MEAD client (code adapted from MEAD addons)
+ * It is initialised with documents as an array of String, and a type of summary.
+ * It uses an instance of MEAD to exchange data with a local or remote Perl MEAD server.
  *
- * In the main method you can change the document to summarize
- * and the type of summary that will be retrieved.  A local meadd
- * must be running if you want to use the default host.  You can
- * also set the host to use if you have meadd running elsewhere.
- *
+ * @author groupKilo
+ * @author dc561
  */
 public class Summarizer {
     public static final String LOCALHOST = "localhost";
 
     private String[] texts;
-    private String query;
     private String summary;
     private double summlength;
     private MEADClient MC=null;
     private String sys=null;
     private int comp = 20;
 
-
+    /**
+     *
+     * @param texts Original text to summarize
+     * @param summtype Type of summary requested
+     * @param host Location of MEAD server; LOCALHOST looks for local server
+     * @throws IOException
+     */
     public Summarizer(String[] texts, String summtype, String host) throws IOException {
 
         this.texts = texts;
@@ -33,35 +53,22 @@ public class Summarizer {
         texts = preprocessText(texts);
 
         if(sys.equals("fulldocs")) {
+            // Return the full original text
             StringBuilder sb = new StringBuilder();
             for (String s: texts) sb.append(s);
             summary= sb.toString();
         }
-        else if(sys.equals("CENTROID")) {
-            MC = new MEADClient(host);
-            MEADClient.Policy.output_mode = "centroid";
-            MEADClient.Policy.compressionAmt = comp;
-
-            summary = MC.Exchange(texts);
-
-            if(summary.equals("\n") || summary.equals("")){
-                summlength=0;
-                summary=null;
-            } else if(summary.startsWith("io problem")) {
-                throw new IOException("The Mead server on " + host + " is returning nothing");
-            } else {
-                this.summlength = summary.length();
-            }
-
-        }
         else {
-            // get a regular summary
-            MEADClient.Policy.output_mode = "summary";
+            if (sys.equals("CENTROID")) {
+                // Produce centroid scorings
+                MEADClient.Policy.output_mode = "centroid";
+            } else {
+                // Produce a regular summary
+                MEADClient.Policy.output_mode = "summary";
+            }
             MC = new MEADClient(host);
-            MEADClient.Policy.system = sys;
             MEADClient.Policy.compressionAmt = comp;
 
-            // get MEAD summary right here
             summary = MC.Exchange(texts);
 
             if(summary.matches("^\\s*$")){
@@ -75,7 +82,11 @@ public class Summarizer {
         }
     }
 
-
+    /**
+     * Sets the summary type for the object
+     *
+     * @param summtype String indicating the type of summary requested
+     */
     private void parseSummtype(String summtype) {
         if(summtype.toUpperCase().startsWith("RAND")) {
             sys = "RANDOM";
@@ -108,18 +119,29 @@ public class Summarizer {
         return summary;
     }
 
+    /**
+     *
+     * @return The length of the summary
+     */
     public double getSummLength() {
         return summlength;
     }
 
+    /**
+     *
+     * @return An array of String with the original text
+     */
     public String[] getTexts() {
         return texts;
     }
 
-
+    /**
+     * Removes stray HTML tags and excessive whitespace
+     *
+     * @param texts Original text
+     * @return Sanitised text
+     */
     public static String[] preprocessText(String[] texts) {
-        /* replace punctuation with '.' and clean up some HTML tags */
-
         for (int i = 0; i < texts.length; i++)
             texts[i] = texts[i].
                     replaceAll("</?[a-zA-Z]+>", "").
@@ -149,7 +171,7 @@ public class Summarizer {
 
         //defaults to localhost
         Summarizer summer = new Summarizer(arr, type, LOCALHOST);
-        //Summarizer summer = new Summarizer(anHTMLDoc, type, "meadd.elsewhere.edu");
+        //Summarizer summer = new Summarizer(anHTMLDoc, type, "MEADd.elsewhere.edu");
 
         System.out.println(summer.getSummResults());
 

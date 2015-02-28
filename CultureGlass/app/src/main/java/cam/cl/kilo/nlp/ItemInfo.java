@@ -19,6 +19,12 @@ package cam.cl.kilo.nlp;
 import java.io.Serializable;
 import java.util.Vector;
 
+/**
+ * Class holding information about one product within Vectors, to allow for concurrent API calls
+ *
+ * @author groupKilo
+ * @author dc561
+ */
 public class ItemInfo implements Serializable {
 
     private static final long serialVersionUID = 2900729725728472406L;
@@ -28,35 +34,35 @@ public class ItemInfo implements Serializable {
     private Vector<String> reviews = new Vector<String>();
 
     /**
-     * @return the title
+     * @return The title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * @param title the title to set
+     * @param title The title to set
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * @return the authors
+     * @return The authors
      */
     public Vector<String> getAuthors() {
         return authors;
     }
 
     /**
-     * @param authors the authors to set
+     * @param authors The authors to set
      */
     public void setAuthors(Vector<String> authors) {
         this.authors = authors;
     }
 
     /**
-     * @param author the author to add
+     * @param author The author to add
      */
     public void addAuthor(String author) {
 
@@ -64,28 +70,28 @@ public class ItemInfo implements Serializable {
     }
 
     /**
-     * @return the description
+     * @return The description
      */
     public Vector<String> getDescriptions() {
         return descriptions;
     }
 
     /**
-     * @param descriptions the description to set
+     * @param descriptions The description to set
      */
     public void setDescriptions(Vector<String> descriptions) {
         this.descriptions = descriptions;
     }
 
     /**
-     * @param description the description to add
+     * @param description The description to add
      */
     public void addDescription(String description) {
         this.descriptions.add(description);
     }
 
     /**
-     * @return the reviews
+     * @return The reviews
      */
     public Vector<String> getReviews() {
         return reviews;
@@ -98,4 +104,28 @@ public class ItemInfo implements Serializable {
         this.reviews = reviews;
     }
 
+
+    /**
+     *
+     * @return The descriptions' text as one String
+     */
+    public String getDescriptionsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s: descriptions) {
+            sb.append(s + '\n');
+        }
+        return sb.toString();
+    }
+
+    /**
+     *
+     * @return The reviews' text as one String
+     */
+    public String getReviewsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s: reviews) {
+            sb.append(s + '\n');
+        }
+        return sb.toString();
+    }
 }

@@ -10,9 +10,9 @@ import java.net.UnknownHostException;
 /**
  * Java client to access a MEAD server.  All you really need to do is
  * instantiate a MEADClient object, set any particular policy options that
- * can be treated as writing your meadrc file, then simply call the Exchange
+ * can be treated as writing your MEADrc file, then simply call the Exchange
  * method to go grab your summary.
- * <p>Also see my <a href="http://tangra.si.umich.edu/clair/intranet/nutchmead">
+ * <p>Also see my <a href="http://tangra.si.umich.edu/clair/intranet/nutchMEAD">
  * internal documentation</a>.
  *
  * @author	Jin Yi
@@ -221,7 +221,7 @@ public class MEADClient {
 	}
 
 	/**
-	 * This MEADopts class is like your meadrc file.  The only particular thing
+	 * This MEADopts class is like your MEADrc file.  The only particular thing
 	 * is that you have to instantiate a String under feature for every feature
 	 * you expect you include.
 	 */

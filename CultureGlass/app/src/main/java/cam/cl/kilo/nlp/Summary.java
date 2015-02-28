@@ -19,6 +19,11 @@ package cam.cl.kilo.nlp;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Contains the text of summarised product descriptions and reviews.
+ * @author groupKilo
+ * @author dc561
+ */
 public class Summary implements Serializable {
 
     private static final long serialVersionUID = 2900729725728472406L;
@@ -28,6 +33,12 @@ public class Summary implements Serializable {
 
     public static final String BEGIN_REVIEWS = "### BEGIN REVIEWS ###";
 
+    /**
+     *
+     * @param info An ItemInfo object
+     * @param descriptions Summarised text of product descriptions
+     * @param reviews Summarised text of product reviews
+     */
     public Summary(ItemInfo info, String descriptions, String reviews) {
         this.title = info.getTitle();
         this.authors = info.getAuthors().toString();
@@ -37,14 +48,26 @@ public class Summary implements Serializable {
         this.text.addAll(stringToArrayList(reviews));
     }
 
+    /**
+     *
+     * @return The item's title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @return Item's authors/artists/producers
+     */
     public String getAuthors() {
         return authors;
     }
 
+    /**
+     *
+     * @return The summarised text
+     */
     public ArrayList<String> getText() {
         return text;
     }
@@ -73,5 +96,4 @@ public class Summary implements Serializable {
 
         return v;
     }
-
 }
