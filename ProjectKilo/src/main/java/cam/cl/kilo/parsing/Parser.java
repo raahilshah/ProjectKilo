@@ -32,10 +32,28 @@ import cam.cl.kilo.nlp.TextSummarizer;
 //the reviews from HTML 3. put them into a vector
 //But since the whole process is API dependent,Amazon may have different pattern for word extraction in
 //HTML. So far I only tested GoodRead.  
+
+/**
+ * Extracts reviews from HTML given the api review gadget url
+ *
+ *@author groupKilo
+ *@author yg300
+ */
 public class Parser {
 
 	//parse needs more than URL, it also needs pattern1 for extract links from URL, pattern2 to extract
 	//reviews from the HTML of a given link
+	
+	/**
+	 * General parse method, put the reviews extracted into the reviews field of a ItemInfo's object
+	 *
+	 *@param URL The review gadget url.
+	 *@param pattern1 The pattern used for finding the links of reviews from HTML of the review gadget by
+	 *Jsoup's Element's select method.
+	 *@param pattern2 The pattern used for finding the review text from the review HTML.
+	 *@param info The ItemInfo's object.
+	 */
+	
 	public static void parse(String URL,String pattern1, String pattern2, ItemInfo info){
 		
 		Vector<String> vectorOfReviews = null;
@@ -60,6 +78,14 @@ public class Parser {
 	}
 	
 	//the arg pattern is API dependent so we might want to pass the type of api to parse()
+	/**
+	 * Gets links of individual reviews from the review gadget HTML.
+	 *
+	 *@param inputHTML Document object of the review gadget HTML.
+	 *@param pattern The pattern used for finding the links of reviews from HTML of the review gadget by
+	 *Jsoup's Element's select method.
+	 *@return The links of reviews.
+	 */
 	public static Elements getLinks(Document inputHTML, String pattern){
 	
 		Elements links = inputHTML.select(pattern);
@@ -69,6 +95,12 @@ public class Parser {
 	}
 	
 	//extract url from tag
+	/**
+	 * Extracts url from a string.
+	 *
+	 *@param input The given string.
+	 *@return A string of url.
+	 */
 	public static String stringExtractor(String input){
 		
 		String output = "";
@@ -80,6 +112,12 @@ public class Parser {
 		return output;
 	}
 	
+	/**
+	 * Extracts text from HTML.
+	 *
+	 *@param tags The given HTML.
+	 *@return A string without tags.
+	 */
 	//remove tags to get the review text
 	public static String removeTags(Element tags){
 		String newString = "";
@@ -88,6 +126,14 @@ public class Parser {
 		return newString;
 	}
 	
+	/**
+	 * General method for getting reviews from links.
+	 *
+	 *@param links url of individual reviews
+	 *@param pattern The pattern used for finding the review text from the review HTML by Jsoup's Element's
+	 * select method.
+	 *@return A Vector of reviews.
+	 */
 	//general method for getting reviews into vector from an array of urls
 	public static Vector<String> reviewFromLinks(String[] links, String pattern){
 		
@@ -121,7 +167,9 @@ public class Parser {
 		return vector;
 		
 	}
-	
+	/**
+	 * Thread Class for allowing to get reviews in parellel.
+	 */
 	static class LinkThread extends Thread {
 		
 		public String review;
