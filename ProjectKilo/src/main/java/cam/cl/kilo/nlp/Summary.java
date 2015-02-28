@@ -17,14 +17,14 @@
 package cam.cl.kilo.nlp;
 
 import java.io.Serializable;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Summary implements Serializable {
 
     private static final long serialVersionUID = 2900729725728472406L;
     private String title;
     private String authors;
-    private Vector<String> text;
+    private ArrayList<String> text;
 
     public static final String BEGIN_REVIEWS = "### BEGIN REVIEWS ###";
 
@@ -32,9 +32,9 @@ public class Summary implements Serializable {
         this.title = info.getTitle();
         this.authors = info.getAuthors().toString();
 
-        this.text = stringToVector(descriptions);
+        this.text = stringToArrayList(descriptions);
         this.text.add(BEGIN_REVIEWS);
-        this.text.addAll(stringToVector(reviews));
+        this.text.addAll(stringToArrayList(reviews));
     }
 
     public String getTitle() {
@@ -45,18 +45,18 @@ public class Summary implements Serializable {
         return authors;
     }
 
-    public Vector<String> getText() {
+    public ArrayList<String> getText() {
         return text;
     }
 
-    public Vector<String> stringToVector(String text) {
-        /*
-        * Given a summarised string (or a full raw text), clean of
-        * line numbers and split into sentences.
-        * Returns a Vector of String.
-        * */
+    /**
+     *
+     * @param text Multi-sentence output from the summarizer
+     * @return A sanitised ArrayList of sentences
+     */
+    public ArrayList<String> stringToArrayList(String text) {
 
-        Vector<String> v = new Vector<String>();
+        ArrayList<String> v = new ArrayList<String>();
 
         // Remove line numbers, e.g. [1], [2], ...
         text = text.replaceAll("\\[\\d+\\]", "\n");
