@@ -69,9 +69,18 @@ public class GoodReadsLookup extends Lookup {
 
 			info.setTitle(titleNode.getTextContent());
 			info.addDescription(descriptionNode.getTextContent());
+            System.out.println("GOODREADS DESCRIPTION FETCHED:");
+            System.out.println(info.getDescriptions().lastElement());
+
+            System.out.println("About to obtain reviews");
+
+            int reviewsBefore = info.getReviews().size();
 			Parser.parse(extract(reviewsBlock.getTextContent()), "link[itemprop=\"url\"][href]", "div[class=\"reviewText mediumText description\"]", info);
-			
-			//System.out.println(info.getReviews().get(0));
+
+            System.out.println("Reviews fetched: " + (info.getReviews().size() - reviewsBefore));
+
+
+            //System.out.println(info.getReviews().get(0));
 
 		} catch (Exception e) {
 			e.printStackTrace();

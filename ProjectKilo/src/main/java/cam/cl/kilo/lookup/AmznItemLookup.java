@@ -16,23 +16,17 @@
 
 package cam.cl.kilo.lookup;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
+import cam.cl.kilo.nlp.ItemInfo;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import cam.cl.kilo.nlp.ItemInfo;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class AmznItemLookup extends Lookup {
 
@@ -67,6 +61,9 @@ public class AmznItemLookup extends Lookup {
                     info.addAuthor(child.getTextContent());
             info.setTitle(titleNode.getTextContent());
             info.addDescription(descriptionNode.getTextContent());
+
+            System.out.println("AMAZON DESCRIPTION FETCHED:");
+            System.out.println(info.getDescriptions().lastElement());
             
         } catch (Exception e) {
             e.printStackTrace();

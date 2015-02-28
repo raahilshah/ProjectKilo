@@ -16,16 +16,15 @@
 
 package cam.cl.kilo.parsing;
 
-import java.io.IOException;
-import java.util.Vector;
-
+import cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.nlp.TextSummarizer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import cam.cl.kilo.nlp.ItemInfo;
-import cam.cl.kilo.nlp.TextSummarizer;
+import java.io.IOException;
+import java.util.Vector;
 
 
 //the whole process of the parser: 1.find the review links in the gadget 2.Goto those links and extract
@@ -53,7 +52,7 @@ public class Parser {
 	 *@param pattern2 The pattern used for finding the review text from the review HTML.
 	 *@param info The ItemInfo's object.
 	 */
-	
+
 	public static void parse(String URL,String pattern1, String pattern2, ItemInfo info){
 		
 		Vector<String> vectorOfReviews = null;
@@ -68,6 +67,9 @@ public class Parser {
 			vectorOfReviews = reviewFromLinks(linksArray,pattern2);
 			
 		} catch (IOException e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+
 			String message = "invalid URL, can't get reviews";
 			Vector<String> vector = new Vector<String>();
 			vector.add(message);

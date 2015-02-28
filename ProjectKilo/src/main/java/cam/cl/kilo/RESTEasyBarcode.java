@@ -32,9 +32,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Main class of the backend:
@@ -74,11 +73,11 @@ public class RESTEasyBarcode {
 
 			tAmzn.start();
 			
-			if (barcodeType == "ISBN") tGR.start();
+			if (barcodeType.equals("ISBN")) tGR.start();
 
 			while(tAmzn.isAlive() || tGR.isAlive());
 			
-			if (barcodeType != "ISBN") {
+			if (!barcodeType.equals("ISBN")) {
 				Thread tOMDB = new Thread(new OMDBLookup(barcodeNo, barcodeType, info));
 				while(tOMDB.isAlive());
 			}
@@ -115,10 +114,10 @@ public class RESTEasyBarcode {
         Summarizer descriptionSummarizer, reviewSummarizer;
         String summarizedDescriptions, summarizedReviews;
 
-        // Handle both summarizers in same try/catch, if there is an IO error from MEAD, it is likely to affect both
+        // Handle both summarizers in same try/catch: if there is an IO error from MEAD, it is likely to affect both
         try {
             descriptionSummarizer = new Summarizer(
-                    (info.getDescriptions().toArray(new String [0])), "P10", Summarizer.LOCALHOST);
+                    (info.getDescriptions().toArray(new String [0])), "P5", Summarizer.LOCALHOST);
             reviewSummarizer = new Summarizer(
                     (info.getReviews().toArray(new String[0])), "P5", Summarizer.LOCALHOST);
 
@@ -174,6 +173,6 @@ public class RESTEasyBarcode {
 
     public static void main(String[] args) {
         RESTEasyBarcode test = new RESTEasyBarcode();
-        test.simpleResponse("0330511742","ISBN");
+        test.simpleResponse("1906040184","ISBN");
     }
 }
