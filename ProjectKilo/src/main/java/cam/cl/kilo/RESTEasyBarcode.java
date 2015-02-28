@@ -31,6 +31,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import java.util.List;
 
 @Path("/barcode")
 public class RESTEasyBarcode {
@@ -101,22 +105,32 @@ public class RESTEasyBarcode {
 
         // Handle both summarizers in same try/catch, if there is an IO error from Mead, it is likely to affect both
         try {
-            descriptionSummarizer = new Summarizer(info.getDescriptionsAsString(), "P10");
-            reviewSummarizer = new Summarizer(info.getReviewsAsString(), "P10");
+            descriptionSummarizer = new Summarizer(
+                    (info.getDescriptions().toArray(new String [0])), "P10", Summarizer.LOCALHOST);
+            reviewSummarizer = new Summarizer(
+                    (info.getReviews().toArray(new String[0])), "P5", Summarizer.LOCALHOST);
 
-            if (descriptionSummarizer.getSummLength() > 0) {
+            if (descriptionSummarizer.getSummLength() != 0) {
                 summarizedDescriptions = descriptionSummarizer.getSummResults();
                 System.out.println("Description summarization successful");
             } else {
-                summarizedDescriptions = info.getDescriptions().firstElement();
+                try {
+                    summarizedDescriptions = info.getDescriptions().firstElement();
+                } catch (NoSuchElementException nsee) {
+                    summarizedDescriptions = "No description available for this item.";
+                }
                 System.out.println("Empty description summary");
             }
 
-            if (reviewSummarizer.getSummLength() == 0) {
-                summarizedReviews = info.getReviews().firstElement();
+            if (reviewSummarizer.getSummLength() != 0) {
+                summarizedReviews = reviewSummarizer.getSummResults();
                 System.out.println("Review summarization successful");
             } else {
-                summarizedReviews = info.getReviews().firstElement();
+                try {
+                    summarizedReviews = info.getReviews().firstElement();
+                } catch (NoSuchElementException nsee) {
+                    summarizedReviews = "No reviews available for this item.";
+                }
                 System.out.println("Empty reviews summary");
             }
 
@@ -126,13 +140,23 @@ public class RESTEasyBarcode {
             summarizedReviews = info.getReviews().firstElement();
         }
 
+        System.out.println(summarizedDescriptions);
+        System.out.println(summarizedReviews);
+//        ppList(info.getDescriptions());
+//        ppList(info.getReviews());
+
         return new Summary(info, summarizedDescriptions, summarizedReviews);
     }
 
+    public static void ppList(List<String> l) {
+        Iterator itr = l.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+    }
 
     public static void main(String[] args) {
         RESTEasyBarcode test = new RESTEasyBarcode();
-        test.simpleResponse("052156543X","ISBN");
-
+        test.simpleResponse("0330511742","ISBN");
     }
 }

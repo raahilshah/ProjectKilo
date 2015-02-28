@@ -227,7 +227,8 @@ public class MEADClient {
 	 */
 	public static class MEADopts {
 		public String basis = "sentences";
-		public String compression = "percent";
+//		public String compression = "percent";
+		public String compression = "absolute";
 		public int compressionAmt = 20;
 		public String system = "";
 		public String classifier = "";
