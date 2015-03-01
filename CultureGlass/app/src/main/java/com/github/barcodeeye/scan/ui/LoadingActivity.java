@@ -32,7 +32,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import cam.cl.kilo.nlp.Summary;
+import cam.cl.kilo.NLP.Summary;
 
 
 public class LoadingActivity extends Activity {

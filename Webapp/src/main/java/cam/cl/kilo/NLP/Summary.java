@@ -43,11 +43,13 @@ public class Summary implements Serializable {
         this.title = info.getTitle();
         this.authors = info.getAuthors().toString();
 
-        BEGIN_REVIEWS = "<h1>What people say about " + info.getTitle() + ":</h1>";
+        BEGIN_REVIEWS = "What people say about " + info.getTitle();
 
         this.text = stringToArrayList(descriptions);
-        this.text.add(BEGIN_REVIEWS);
-        this.text.addAll(stringToArrayList(reviews));
+        if (reviews.length() > 0) {
+            this.text.add(BEGIN_REVIEWS);
+            this.text.addAll(stringToArrayList(reviews));
+        }
     }
 
     /**
