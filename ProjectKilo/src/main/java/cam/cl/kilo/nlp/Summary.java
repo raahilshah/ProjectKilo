@@ -31,7 +31,7 @@ public class Summary implements Serializable {
     private String authors;
     private ArrayList<String> text;
 
-    public static final String BEGIN_REVIEWS = "### BEGIN REVIEWS ###";
+    public final String BEGIN_REVIEWS;
 
     /**
      *
@@ -42,6 +42,8 @@ public class Summary implements Serializable {
     public Summary(ItemInfo info, String descriptions, String reviews) {
         this.title = info.getTitle();
         this.authors = info.getAuthors().toString();
+
+        BEGIN_REVIEWS = "<h1>What people say about " + info.getTitle() + ":</h1>";
 
         this.text = stringToArrayList(descriptions);
         this.text.add(BEGIN_REVIEWS);
