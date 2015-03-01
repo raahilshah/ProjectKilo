@@ -16,7 +16,9 @@
 
 package cam.cl.kilo.NLP;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -24,6 +26,17 @@ import static org.junit.Assert.assertTrue;
  * @author dc561
  */
 public class SummarizerTest {
+    Summarizer summarizer;
+    ItemInfo info = new ItemInfo();
+    String barcodeNo = "0385354304"; // "The Strange Library" by H. Murakami
+
+
+    @BeforeClass
+    public void setUp() {
+
+
+        //summarizer = new Summarizer();
+    }
 
     @Test
     public void testGetSummResults() throws Exception {
@@ -44,5 +57,11 @@ public class SummarizerTest {
     @Test
     public void testPreprocessText() throws Exception {
         assertTrue(true);
+    }
+
+    @Test
+    public void testParseSummtype() throws Exception {
+
+
     }
 }

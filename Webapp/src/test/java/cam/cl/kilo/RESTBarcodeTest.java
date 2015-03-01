@@ -27,7 +27,7 @@ import static org.junit.Assert.assertTrue;
  * @author groupKilo
  * @author dc561
  */
-public class RESTEasyBarcodeTest {
+public class RESTBarcodeTest {
 
     @Test
     public void testSimpleResponse() throws Exception {
@@ -39,8 +39,4 @@ public class RESTEasyBarcodeTest {
         assertTrue(true);
     }
 
-    @Test
-    public void testPpList() throws Exception {
-        assertTrue(true);
-    }
 }

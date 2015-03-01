@@ -37,71 +37,77 @@ import java.util.NoSuchElementException;
 
 /**
  * Main class of the backend:
- * - populates an ItemInfo object by starting threads that look up product information and reviews
- * - summarizes text retrieved
- * - serializes summary for transmission to the frontend
+ * it populates an ItemInfo object by starting threads that look up product information and reviews;
+ * it isummarizes text retrieved;
+ * it serializes summary for transmission to the frontend
  *
  * @author groupKilo
  * @author rh572
  * @author dc561
  */
 @Path("/barcode")
-public class RESTEasyBarcode {
-	
-	private static String toString(Serializable o) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(baos);
-        oos.writeObject(o);
-        oos.close();
-        return Base64.encodeBase64String(baos.toByteArray());
-    }
+public class RESTBarcode {
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public Response simpleResponse(
-			@QueryParam("barcodeNo") String barcodeNo,
-			@DefaultValue("ISBN") @QueryParam("barcodeType") String barcodeType) {
+	public Response produceResponse(
+            @QueryParam("barcodeNo") String barcodeNo,
+            @DefaultValue("ISBN") @QueryParam("barcodeType") String barcodeType) {
 
-		String responseString;
+		String encodedSummary;
+        Summary summary;
 
 		if (barcodeNo != null) {
 
-			ItemInfo info = new ItemInfo();
-
-			Thread tAmzn = new Thread(new AmznItemLookup(barcodeNo, barcodeType, info));
-			Thread tGR = new Thread(new GoodReadsLookup(barcodeNo, barcodeType, info));
-
-			tAmzn.start();
-			
-			if (barcodeType.equals("ISBN")) tGR.start();
-
-			while(tAmzn.isAlive() || tGR.isAlive());
-			
-			if (!barcodeType.equals("ISBN")) {
-				Thread tOMDB = new Thread(new OMDBLookup(barcodeNo, barcodeType, info));
-				while(tOMDB.isAlive());
-			}
-
+			//Make API calls and gather item information
+            ItemInfo info = populateItemInfo(barcodeNo, barcodeType);
 
             // Summarize text in ItemInfo and create a Summary object
-            Summary summary = prepareSummary(info);
-
-            // Serialize Summary object
-			try {
-				responseString = toString(summary);
-			} catch (IOException e) {
-				e.printStackTrace();
-				responseString = e.getMessage();
-			}
+            summary = generateSummary(info);
 
         } else {
-            responseString = "Missing barcode number";
+            summary = new Summary("Missing barcode number. Try scanning again.");
         }
 
-		System.out.println(responseString);
+        // Serialize Summary object
+        try {
+            encodedSummary = toString(summary);
+        } catch (IOException e) {
+            e.printStackTrace();
+            encodedSummary = e.getMessage();
+        }
 
-        return Response.ok(responseString).build();
+        return Response.ok(encodedSummary).build();
     }
+
+
+    /**
+     * Make different API calls according to the item's type
+     *
+     * @param barcodeNo The item's barcode number
+     * @param barcodeType The type of the barcode (ISBN, UPC or other)
+     * @return ItemInfo object with item information
+     */
+    public ItemInfo populateItemInfo(String barcodeNo, String barcodeType) {
+        ItemInfo info = new ItemInfo();
+
+        Thread tAmzn = new Thread(new AmznItemLookup(barcodeNo, barcodeType, info));
+        Thread tGR = new Thread(new GoodReadsLookup(barcodeNo, barcodeType, info));
+
+        tAmzn.start();
+
+        if (barcodeType.equals("ISBN")) tGR.start();
+
+        while(tAmzn.isAlive() || tGR.isAlive());
+
+        if (!barcodeType.equals("ISBN")) {
+            Thread tOMDB = new Thread(new OMDBLookup(barcodeNo, barcodeType, info));
+            while(tOMDB.isAlive());
+        }
+
+        return info;
+    }
+
 
     /**
      * Given an ItemInfo, initialise two Summarizer objects, one for descriptions and one for reviews.
@@ -110,7 +116,7 @@ public class RESTEasyBarcode {
      * @param info A populated ItemInfo
      * @return A Summary object holding summarized text
      */
-    public Summary prepareSummary(ItemInfo info) {
+    public Summary generateSummary(ItemInfo info) {
         Summarizer descriptionSummarizer, reviewSummarizer;
         String summarizedDescriptions, summarizedReviews;
 
@@ -164,6 +170,23 @@ public class RESTEasyBarcode {
         return new Summary(info, summarizedDescriptions, summarizedReviews);
     }
 
+
+    /**
+     * Serialises an object as a Base 64 string.
+     *
+     * @param o The object to serialise
+     * @return Base64-encoded string.
+     * @throws IOException
+     */
+    private static String toString(Serializable o) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(o);
+        oos.close();
+        return Base64.encodeBase64String(baos.toByteArray());
+    }
+
+
     /**
      * Simple pretty print for lists
      *
@@ -177,8 +200,9 @@ public class RESTEasyBarcode {
         }
     }
 
+
     public static void main(String[] args) {
-        RESTEasyBarcode test = new RESTEasyBarcode();
-        test.simpleResponse("144932391X","ISBN");
+        RESTBarcode test = new RESTBarcode();
+        test.produceResponse("144932391X", "ISBN");
     }
 }

@@ -18,6 +18,7 @@ package cam.cl.kilo.NLP;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Contains the text of summarised product descriptions and reviews.
@@ -28,10 +29,11 @@ public class Summary implements Serializable {
 
     private static final long serialVersionUID = 2900729725728472406L;
     private String title;
-    private String authors;
+    private ArrayList<String> authors;
     private ArrayList<String> text;
 
-    public final String BEGIN_REVIEWS;
+    public String BEGIN_REVIEWS;
+
 
     /**
      *
@@ -41,7 +43,7 @@ public class Summary implements Serializable {
      */
     public Summary(ItemInfo info, String descriptions, String reviews) {
         this.title = info.getTitle();
-        this.authors = info.getAuthors().toString();
+        this.authors = new ArrayList<String>(info.getAuthors());
 
         BEGIN_REVIEWS = "What people say about " + info.getTitle();
 
@@ -51,6 +53,20 @@ public class Summary implements Serializable {
             this.text.addAll(stringToArrayList(reviews));
         }
     }
+
+    /**
+     * In case an error occurs, an empty Summary with some explanatory message can be returned
+     * without passing an ItemInfo object
+     * @param s The error message to pass
+     */
+    public Summary(String s) {
+        this.title = "Title unknown";
+        String[] authors = { "Authors unknown" };
+        String[] text = { s };
+        this.authors = new ArrayList<String>(Arrays.asList(authors));
+        this.text = new ArrayList<String>(Arrays.asList(text));
+    }
+
 
     /**
      *
@@ -64,7 +80,7 @@ public class Summary implements Serializable {
      *
      * @return Item's authors/artists/producers
      */
-    public String getAuthors() {
+    public ArrayList<String> getAuthors() {
         return authors;
     }
 

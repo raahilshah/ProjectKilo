@@ -87,7 +87,7 @@ public class Summarizer {
      *
      * @param summtype String indicating the type of summary requested
      */
-    private void parseSummtype(String summtype) {
+    public void parseSummtype(String summtype) {
         if(summtype.toUpperCase().startsWith("RAND")) {
             sys = "RANDOM";
         }
