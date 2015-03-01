@@ -45,14 +45,14 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     private static final int PRIMARY_TEXT_VIEW_INDEX = 0;
 
     private final Context mContext;
-    private final List<SimpleTableItem> mItems;
+    private final List<String> mItems;
     private final String mTitle;
     private final String mAuthor;
 
     /**
      * Initializes a new adapter with the specified context and list of items.
      */
-    public EmbeddedCardLayoutAdapter(Context context, List<SimpleTableItem> items, String title, String author) {
+    public EmbeddedCardLayoutAdapter(Context context, List<String> items, String title, String author) {
         mContext = context;
         mItems = items;
         mTitle = title;
@@ -88,15 +88,15 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CardBuilder card = new CardBuilder(mContext, CardBuilder.Layout.EMBED_INSIDE)
-                .setEmbeddedLayout(R.layout.simple_table)
+        CardBuilder card = new CardBuilder(mContext, CardBuilder.Layout.TEXT)
+                .setText(mItems.get(position))
                 .setFootnote(mTitle)
                 .setTimestamp(mAuthor);
         View view = card.getView(convertView, parent);
 
         // Get a reference to an embedded view from the custom layout and then manipulate it.
-        ViewGroup tableView = (ViewGroup) view.findViewById(R.id.simple_table);
-        populateTableRows(position, tableView);
+        //ViewGroup tableView = (ViewGroup) view.findViewById(R.id.simple_table);
+       // populateTableRows(position, tableView);
 
         return view;
     }
@@ -104,7 +104,7 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
     /**
      * Populates all of the rows in the card at the specified position.
      */
-    private void populateTableRows(int position, ViewGroup tableView) {
+    /*private void populateTableRows(int position, ViewGroup tableView) {
         int startItemIndex = position * ITEMS_PER_CARD;
         int endItemIndex = Math.min(startItemIndex + ITEMS_PER_CARD, mItems.size());
 
@@ -123,7 +123,7 @@ public class EmbeddedCardLayoutAdapter extends CardScrollAdapter {
                 rowView.setVisibility(View.INVISIBLE);
             }
         }
-    }
+    }*/
 
     /**
      * Populates a row in the table with the specified item data.
