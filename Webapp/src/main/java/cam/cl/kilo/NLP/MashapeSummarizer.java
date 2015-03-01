@@ -5,7 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-public class TextSummarizer {
+public class MashapeSummarizer {
 
 	public static String summarize(String text, int sentnum, String key){
 		

@@ -31,6 +31,5 @@ import org.junit.runners.Suite;
         Summary.class
 })
 public class NLPSuite {
-    //Do nothing.
 }
 

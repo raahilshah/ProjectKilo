@@ -20,7 +20,7 @@ import cam.cl.kilo.lookup.AmznItemLookup;
 import cam.cl.kilo.lookup.GoodReadsLookup;
 import cam.cl.kilo.lookup.OMDBLookup;
 import cam.cl.kilo.NLP.ItemInfo;
-import cam.cl.kilo.NLP.Summarizer;
+import cam.cl.kilo.NLP.MEADSummarizer;
 import cam.cl.kilo.NLP.Summary;
 import org.apache.commons.codec.binary.Base64;
 
@@ -88,7 +88,7 @@ public class RESTBarcode {
      * @param barcodeType The type of the barcode (ISBN, UPC or other)
      * @return ItemInfo object with item information
      */
-    public ItemInfo populateItemInfo(String barcodeNo, String barcodeType) {
+    public static ItemInfo populateItemInfo(String barcodeNo, String barcodeType) {
         ItemInfo info = new ItemInfo();
 
         Thread tAmzn = new Thread(new AmznItemLookup(barcodeNo, barcodeType, info));
@@ -96,11 +96,11 @@ public class RESTBarcode {
 
         tAmzn.start();
 
-        if (barcodeType.equals("ISBN")) tGR.start();
+        if ("ISBN".equals(barcodeType)) tGR.start();
 
         while(tAmzn.isAlive() || tGR.isAlive());
 
-        if (!barcodeType.equals("ISBN")) {
+        if (!"ISBN".equals(barcodeType)) {
             Thread tOMDB = new Thread(new OMDBLookup(barcodeNo, barcodeType, info));
             while(tOMDB.isAlive());
         }
@@ -116,19 +116,17 @@ public class RESTBarcode {
      * @param info A populated ItemInfo
      * @return A Summary object holding summarized text
      */
-    public Summary generateSummary(ItemInfo info) {
-        Summarizer descriptionSummarizer, reviewSummarizer;
+    public static Summary generateSummary(ItemInfo info) {
+        MEADSummarizer descriptionSummarizer, reviewSummarizer;
         String summarizedDescriptions, summarizedReviews;
 
         // Handle both summarizers in same try/catch: if there is an IO error from MEAD, it is likely to affect both
         try {
-            descriptionSummarizer = new Summarizer(
-                    (info.getDescriptions().toArray(new String [0])), "P5", Summarizer.LOCALHOST);
-            reviewSummarizer = new Summarizer(
-                    (info.getReviews().toArray(new String[0])), "P5", Summarizer.LOCALHOST);
+            descriptionSummarizer = new MEADSummarizer(info.getDescriptions(), 5);
+            reviewSummarizer = new MEADSummarizer(info.getReviews(), 5);
 
-            if (descriptionSummarizer.getSummLength() != 0) {
-                summarizedDescriptions = descriptionSummarizer.getSummResults();
+            if (! descriptionSummarizer.isEmpty()) {
+                summarizedDescriptions = descriptionSummarizer.getSummary();
                 System.out.println("Description summarization successful");
             } else {
                 try {
@@ -139,8 +137,8 @@ public class RESTBarcode {
                 System.out.println("Empty description summary");
             }
 
-            if (reviewSummarizer.getSummLength() != 0) {
-                summarizedReviews = reviewSummarizer.getSummResults();
+            if (! reviewSummarizer.isEmpty()) {
+                summarizedReviews = reviewSummarizer.getSummary();
                 System.out.println("Review summarization successful");
             } else {
                 try {
@@ -172,7 +170,7 @@ public class RESTBarcode {
 
 
     /**
-     * Serialises an object as a Base 64 string.
+     * Serialise an object as a Base 64 string.
      *
      * @param o The object to serialise
      * @return Base64-encoded string.

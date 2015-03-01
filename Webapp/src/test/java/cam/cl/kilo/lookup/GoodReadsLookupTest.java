@@ -26,6 +26,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 
+/**
+ * @author groupKilo
+ * @author yy363
+ */
 public class GoodReadsLookupTest {
 
 	public GoodReadsLookupTest() {
