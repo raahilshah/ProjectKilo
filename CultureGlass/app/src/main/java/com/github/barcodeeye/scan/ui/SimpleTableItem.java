@@ -18,7 +18,7 @@ package com.github.barcodeeye.scan.ui;
 
 /**
  * Simple data object used to represent items in a table, which are converted into views by
- * {@link ResultsCardScrollAdapter}.
+ * {@link EmbeddedCardLayoutAdapter}.
  */
 public class SimpleTableItem {
 
