@@ -151,11 +151,15 @@ public class RESTEasyBarcode {
             summarizedReviews = info.getReviews().firstElement();
         }
 
+        System.out.println("SUMMARISED DESCRIPTIONS");
         System.out.println(summarizedDescriptions);
+        System.out.println("ORIGINAL DESCRIPTIONS");
+        ppList(info.getDescriptions());
+
+        System.out.println("SUMMARISED REVIEWS");
         System.out.println(summarizedReviews);
-        System.out.println(info.getTitle());
-//        ppList(info.getDescriptions());
-//        ppList(info.getReviews());
+        System.out.println("ORIGINAL REVIEWS");
+        ppList(info.getReviews());
 
         return new Summary(info, summarizedDescriptions, summarizedReviews);
     }
@@ -167,13 +171,14 @@ public class RESTEasyBarcode {
      */
     public static void ppList(List<String> l) {
         Iterator itr = l.iterator();
+        int i = 0;
         while (itr.hasNext()) {
-            System.out.println(itr.next());
+            System.out.printf("[%d]\n%s\n", ++i, itr.next());
         }
     }
 
     public static void main(String[] args) {
         RESTEasyBarcode test = new RESTEasyBarcode();
-        test.simpleResponse("978-0764570681","ISBN");
+        test.simpleResponse("144932391X","ISBN");
     }
 }
