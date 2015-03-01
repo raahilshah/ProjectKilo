@@ -1,0 +1,4 @@
+020161622X      The pragmatic programmer
+978-0764570681  C for Dummies
+0385354304      The Strange Library (Murakami)
+144932391X      Real World OCaml
