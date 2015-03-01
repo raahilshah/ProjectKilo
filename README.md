@@ -18,8 +18,7 @@ words that make the wearer seem as smart as possible.
 Directories
 -----------
 
-- BarcodeEye - fork of the BarcodeEye google glass app
-- Docs - documents for the project (basically just our original spec)
-- ProjectKilo - the eclipse project (all important code is here)
-- StubClasses/src/uk/ac/cam/kilo/backend - the abstract classes, as created for the original spec
-- cultureglasses - the vagrant VM on which the server runs
+- CultureGlass - frontend Google Glass app
+- Docs - documents for the project
+- Webapp - backend Tomcat webapp
+- node - node.js review parser
