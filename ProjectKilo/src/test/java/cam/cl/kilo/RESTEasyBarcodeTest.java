@@ -15,23 +15,32 @@
  */
 
 
-package cam.cl.kilo.NLP;
+package cam.cl.kilo;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+
 /**
+ * Tests correct execution of processing pipeline
+ *
  * @author groupKilo
  * @author dc561
  */
-public class MEADClientTest {
+public class RESTEasyBarcodeTest {
 
     @Test
-    public void testExchange() throws Exception {
-
+    public void testSimpleResponse() throws Exception {
+        assertTrue(true);
     }
 
     @Test
-    public void testExchange1() throws Exception {
+    public void testPrepareSummary() throws Exception {
+        assertTrue(true);
+    }
 
+    @Test
+    public void testPpList() throws Exception {
+        assertTrue(true);
     }
 }

@@ -26,7 +26,7 @@ import org.junit.runners.Suite;
  * @author dc561
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ SummarizerTest.class, MEADClientTest.class })
+@Suite.SuiteClasses({ SummarizerTest.class, Summary.class })
 public class AllTests {
 
 }

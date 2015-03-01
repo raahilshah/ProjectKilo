@@ -153,6 +153,7 @@ public class RESTEasyBarcode {
 
         System.out.println(summarizedDescriptions);
         System.out.println(summarizedReviews);
+        System.out.println(info.getTitle());
 //        ppList(info.getDescriptions());
 //        ppList(info.getReviews());
 
@@ -160,7 +161,7 @@ public class RESTEasyBarcode {
     }
 
     /**
-     * Simple pretty printer for lists
+     * Simple pretty print for lists
      *
      * @param l A List
      */
@@ -173,6 +174,6 @@ public class RESTEasyBarcode {
 
     public static void main(String[] args) {
         RESTEasyBarcode test = new RESTEasyBarcode();
-        test.simpleResponse("1906040184","ISBN");
+        test.simpleResponse("978-0764570681","ISBN");
     }
 }

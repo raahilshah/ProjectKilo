@@ -43,9 +43,17 @@ public class ItemInfo implements Serializable {
 	/**
 	 * @param title The title to set
 	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        if (this.title == null) {
+            if (!title.matches("^\\s*$")) {
+                this.title = title;
+            } else {
+                System.out.println("Empty title");
+            }
+        } else {
+            System.out.println("Title already set");
+        }
+    }
 
 	/**
 	 * @return The authors
@@ -128,4 +136,5 @@ public class ItemInfo implements Serializable {
         }
         return sb.toString();
     }
+
 }

@@ -17,6 +17,7 @@
 package cam.cl.kilo.NLP;
 
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author groupKilo
@@ -26,21 +27,22 @@ public class SummarizerTest {
 
     @Test
     public void testGetSummResults() throws Exception {
-
+        assertTrue(true);
     }
 
     @Test
     public void testGetSummLength() throws Exception {
-
+        //Return 0 when text is null, empty or blank
+        assertTrue(true);
     }
 
     @Test
     public void testGetTexts() throws Exception {
-
+        assertTrue(true);
     }
 
     @Test
     public void testPreprocessText() throws Exception {
-
+        assertTrue(true);
     }
 }
