@@ -6,7 +6,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.NLP.ItemInfo;
 
 public class OMDBLookup extends Lookup {
 

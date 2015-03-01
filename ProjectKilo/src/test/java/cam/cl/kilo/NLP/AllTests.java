@@ -14,29 +14,20 @@
  * limitations under the License.
  */
 
-package cam.cl.kilo.lookup;
+package cam.cl.kilo.NLP;
 
-import cam.cl.kilo.NLP.ItemInfo;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public abstract class Lookup implements Runnable {
-	
-	protected String barcodeNo = "";
-	protected String barcodeType = "";
-	protected ItemInfo info;
-
-	public Lookup(String barcodeNo, String barcodeType, ItemInfo info) {
-
-		super();
-
-		this.barcodeNo = barcodeNo;
-		this.barcodeType = barcodeType;
-		this.info = info;
-
-	}
-	
-	public abstract void run();
-	
-	protected abstract void fillContent(String requestURL);
+/**
+ * Test suite for all NLP classes
+ *
+ * @author groupKilo
+ * @author dc561
+ */
+@RunWith(Suite.class)
+@Suite.SuiteClasses({ SummarizerTest.class, MEADClientTest.class })
+public class AllTests {
 
 }
- 
+

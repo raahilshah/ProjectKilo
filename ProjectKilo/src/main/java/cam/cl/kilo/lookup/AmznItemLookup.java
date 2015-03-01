@@ -16,7 +16,7 @@
 
 package cam.cl.kilo.lookup;
 
-import cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.NLP.ItemInfo;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 

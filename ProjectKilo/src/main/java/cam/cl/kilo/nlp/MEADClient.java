@@ -1,4 +1,4 @@
-package cam.cl.kilo.nlp;
+package cam.cl.kilo.NLP;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -19,9 +19,9 @@ package cam.cl.kilo;
 import cam.cl.kilo.lookup.AmznItemLookup;
 import cam.cl.kilo.lookup.GoodReadsLookup;
 import cam.cl.kilo.lookup.OMDBLookup;
-import cam.cl.kilo.nlp.ItemInfo;
-import cam.cl.kilo.nlp.Summarizer;
-import cam.cl.kilo.nlp.Summary;
+import cam.cl.kilo.NLP.ItemInfo;
+import cam.cl.kilo.NLP.Summarizer;
+import cam.cl.kilo.NLP.Summary;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.ws.rs.*;

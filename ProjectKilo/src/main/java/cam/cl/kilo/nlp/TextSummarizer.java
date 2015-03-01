@@ -1,4 +1,4 @@
-package cam.cl.kilo.nlp;
+package cam.cl.kilo.NLP;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;

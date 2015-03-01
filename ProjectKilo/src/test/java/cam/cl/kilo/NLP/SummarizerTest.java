@@ -14,29 +14,33 @@
  * limitations under the License.
  */
 
-package cam.cl.kilo.lookup;
+package cam.cl.kilo.NLP;
 
-import cam.cl.kilo.NLP.ItemInfo;
+import org.junit.Test;
 
-public abstract class Lookup implements Runnable {
-	
-	protected String barcodeNo = "";
-	protected String barcodeType = "";
-	protected ItemInfo info;
+/**
+ * @author groupKilo
+ * @author dc561
+ */
+public class SummarizerTest {
 
-	public Lookup(String barcodeNo, String barcodeType, ItemInfo info) {
+    @Test
+    public void testGetSummResults() throws Exception {
 
-		super();
+    }
 
-		this.barcodeNo = barcodeNo;
-		this.barcodeType = barcodeType;
-		this.info = info;
+    @Test
+    public void testGetSummLength() throws Exception {
 
-	}
-	
-	public abstract void run();
-	
-	protected abstract void fillContent(String requestURL);
+    }
 
+    @Test
+    public void testGetTexts() throws Exception {
+
+    }
+
+    @Test
+    public void testPreprocessText() throws Exception {
+
+    }
 }
- 

@@ -16,8 +16,8 @@
 
 package cam.cl.kilo.parsing;
 
-import cam.cl.kilo.nlp.ItemInfo;
-import cam.cl.kilo.nlp.TextSummarizer;
+import cam.cl.kilo.NLP.ItemInfo;
+import cam.cl.kilo.NLP.TextSummarizer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

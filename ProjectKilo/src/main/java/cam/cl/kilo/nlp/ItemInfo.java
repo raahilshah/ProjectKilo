@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cam.cl.kilo.nlp;
+package cam.cl.kilo.NLP;
 
 import java.io.Serializable;
 import java.util.Vector;

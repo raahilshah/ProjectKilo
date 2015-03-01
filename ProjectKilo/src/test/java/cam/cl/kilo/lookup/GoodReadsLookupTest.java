@@ -16,7 +16,7 @@
 
 package cam.cl.kilo.lookup;
 
-import cam.cl.kilo.nlp.ItemInfo;
+import cam.cl.kilo.NLP.ItemInfo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
