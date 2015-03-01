@@ -1,0 +1,17 @@
+cam/cl/kilo/parsing/Parser$LinkThread.class
+cam/cl/kilo/nlp/TextSummarizer.class
+cam/cl/kilo/lookup/GoodReadsLookup.class
+cam/cl/kilo/lookup/SignedRequestsHelper.class
+cam/cl/kilo/RESTEasyBarcode.class
+cam/cl/kilo/nlp/Summary.class
+cam/cl/kilo/lookup/AmznItemLookup.class
+cam/cl/kilo/nlp/MEADClient$MEADopts.class
+cam/cl/kilo/lookup/Lookup.class
+cam/cl/kilo/nlp/ItemInfo.class
+cam/cl/kilo/nlp/Summarizer.class
+cam/cl/kilo/nlp/MEADClient.class
+cam/cl/kilo/lookup/OldAmznItemLookup.class
+cam/cl/kilo/lookup/GoodReadsLookupTest.class
+cam/cl/kilo/responseStringTest.class
+cam/cl/kilo/parsing/Parser.class
+cam/cl/kilo/lookup/OMDBLookup.class
