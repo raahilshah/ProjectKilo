@@ -27,20 +27,16 @@ import static org.junit.Assert.assertTrue;
  * @author groupKilo
  * @author dc561
  */
-public class RESTEasyBarcodeTest {
+public class RESTBarcodeTest {
 
     @Test
-    public void testSimpleResponse() throws Exception {
+    public void testProduceResponse() throws Exception {
         assertTrue(true);
     }
 
     @Test
-    public void testPrepareSummary() throws Exception {
+    public void testGenerateSummary() throws Exception {
         assertTrue(true);
     }
 
-    @Test
-    public void testPpList() throws Exception {
-        assertTrue(true);
-    }
 }

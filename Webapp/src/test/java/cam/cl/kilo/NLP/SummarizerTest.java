@@ -17,6 +17,8 @@
 package cam.cl.kilo.NLP;
 
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -24,25 +26,59 @@ import static org.junit.Assert.assertTrue;
  * @author dc561
  */
 public class SummarizerTest {
+    Summarizer summarizer;
+    String barcodeNo;
+    ItemInfo info;
+
 
     @Test
-    public void testGetSummResults() throws Exception {
-        assertTrue(true);
+    public void emptyWhenWhitespace() throws Exception {
+        String[] testArray = { "   ", "\n\n\n\n", "\t\t\t\t", "    \n    \t   "};
+        summarizer = new MEADSummarizer(testArray, "P10", MEADSummarizer.LOCALHOST);
+
+        assertTrue(summarizer.isEmpty());
     }
 
     @Test
-    public void testGetSummLength() throws Exception {
-        //Return 0 when text is null, empty or blank
-        assertTrue(true);
+    public void emptyWhenBlank() throws Exception {
+        String[] testArray = { "", "", ""};
+        summarizer = new MEADSummarizer(testArray, "P10", MEADSummarizer.LOCALHOST);
+
+        assertTrue(summarizer.isEmpty());
     }
 
     @Test
-    public void testGetTexts() throws Exception {
-        assertTrue(true);
+    public void emptyWhenNull() throws Exception {
+        String[] testArray = null;
+        summarizer = new MEADSummarizer(testArray, "P10", MEADSummarizer.LOCALHOST);
+
+        assertTrue(summarizer.isEmpty());
     }
+
 
     @Test
     public void testPreprocessText() throws Exception {
+        String[] testArray = {
+                "<h1 id='bold'>This is a bold paragraph</h1>",
+                "    -. Foo.",
+                "   .    .",
+                "\t \t     \t"
+        };
+
+        String[] expected = {
+                "This is a bold paragraph",
+                "Foo.",
+                "",
+                ""
+        };
+
+        assertArrayEquals(expected, MEADSummarizer.preprocessText(testArray));
+
+
+    }
+
+    @Test
+    public void testParseSummtype() throws Exception {
         assertTrue(true);
     }
 }

@@ -17,7 +17,7 @@
 package cam.cl.kilo.parsing;
 
 import cam.cl.kilo.NLP.ItemInfo;
-import cam.cl.kilo.NLP.TextSummarizer;
+import cam.cl.kilo.NLP.MashapeSummarizer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -214,7 +214,7 @@ public class Parser {
 		int sentnum = 5;
 		String text = info.getReviews().get(1);
 		String newText = "";
-		newText = TextSummarizer.summarize(text, sentnum, key);
+		newText = MashapeSummarizer.summarize(text, sentnum, key);
 		System.out.println(newText);
 		
 		//System.out.println(info.getReviews().get(0));

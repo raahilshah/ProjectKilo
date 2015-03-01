@@ -45,7 +45,7 @@ public class ItemInfo implements Serializable {
 	 */
     public void setTitle(String title) {
         if (this.title == null) {
-            if (!title.matches("^\\s*$")) {
+            if ( !title.matches("^\\s*$") ) {
                 this.title = title;
             } else {
                 System.out.println("Empty title");
@@ -66,7 +66,7 @@ public class ItemInfo implements Serializable {
 	 * @param authors The authors to set
 	 */
 	public void setAuthors(Vector<String> authors) {
-		this.authors = authors;
+		this.authors = (authors == null) ? this.authors : authors;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class ItemInfo implements Serializable {
 	 * @param descriptions The description to set
 	 */
 	public void setDescriptions(Vector<String> descriptions) {
-		this.descriptions = descriptions;
+		this.descriptions = (descriptions == null) ? this.descriptions : descriptions;
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class ItemInfo implements Serializable {
 	 * @param reviews the reviews to set
 	 */
 	public void setReviews(Vector<String> reviews) {
-		this.reviews = reviews;
+        this.reviews = (reviews == null) ? this.reviews : reviews;
 	}
 
 

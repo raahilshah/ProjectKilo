@@ -26,8 +26,10 @@ import org.junit.runners.Suite;
  * @author dc561
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ SummarizerTest.class, Summary.class })
-public class AllTests {
-
+@Suite.SuiteClasses({
+        SummarizerTest.class,
+        Summary.class
+})
+public class NLPSuite {
 }
 
