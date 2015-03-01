@@ -76,7 +76,7 @@ public class LoadingActivity extends Activity {
     private void displayResults(String result) {
 
         if (result.equals("success")) {
-            startActivity(new Intent(this, EmbeddedCardLayoutActivity.class).putExtra(EXTRA_RESULT_SERIAL, summary));
+            startActivity(new Intent(this, ResultsCardScrollActivity.class).putExtra(EXTRA_RESULT_SERIAL, summary));
         } else {
             startActivity(new Intent(this, ScanFailureActivity.class)); //failure activity!
         }

@@ -37,7 +37,7 @@
             android:theme="@style/CaptureTheme"
             android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
-            android:name="com.github.barcodeeye.scan.ui.EmbeddedCardLayoutActivity"
+            android:name=".scan.ui.ResultsCardScrollActivity"
             android:exported="true" />
         <activity
             android:name="com.github.barcodeeye.scan.ui.LoadingActivity"
