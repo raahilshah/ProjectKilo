@@ -73,8 +73,6 @@ public class SummarizerTest {
         };
 
         assertArrayEquals(expected, MEADSummarizer.preprocessText(testArray));
-
-
     }
 
     @Test
