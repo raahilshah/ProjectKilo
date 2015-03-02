@@ -6,10 +6,7 @@ Introduction
 
 This module contains any node.js server code that we may use. This typically interfaces with the Java server via stdin/stdout or via its RESTful HTTP API.
 
-This includes code for:
-
-- parsing iframes
-- rendering HTML
+This includes code for parsing iframes.
 
 Set up
 --------
@@ -25,3 +22,8 @@ Test
 -------
 
 In order to run the unit tests developed for the node.js system run `npm test`.
+
+Author
+-------
+
+All files in this directory were developed by Joshua Bambrick (jpb80).

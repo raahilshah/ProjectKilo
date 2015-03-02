@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+|
+| type:         function
+| author:       Josh Bambrick
+|
+*/
 module.exports = [{
     label: "valid url",
     getTestResult: function (complete) {

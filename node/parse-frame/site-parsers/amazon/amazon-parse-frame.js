@@ -23,11 +23,6 @@
 |
 | type:         function
 | author:       Josh Bambrick
-| version:      1.2.0
-| modified:     20/02/15
-|
-| the most likely reason for any issues you may have with this
-| is that the amazon link has expired for whatever reason
 |
 */
 

@@ -23,8 +23,6 @@
 |
 | type:         void
 | author:       Josh Bambrick
-| version:      1.3.5
-| modified:     24/02/15
 |
 */
 

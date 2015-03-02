@@ -23,8 +23,6 @@
 |
 | type:         object
 | author:       Josh Bambrick
-| version:      0.5.0
-| modified:     24/02/15
 |
 */
 
