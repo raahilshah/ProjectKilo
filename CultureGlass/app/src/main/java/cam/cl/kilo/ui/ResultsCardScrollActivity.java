@@ -68,7 +68,7 @@ public final class ResultsCardScrollActivity extends Activity {
 
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(new ResultsCardScrollAdapter(
-                this, results.getText(), results.getTitle(), results.getAuthors()));
+                this, results.getText(), results.getTitle(), results.getAuthors().get(0)));
 
         mCardScroller.setHorizontalScrollBarEnabled(false);
 
@@ -147,6 +147,20 @@ public final class ResultsCardScrollActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String ppList(ArrayList<String> list) {
+        String result = "";
+        boolean first = true;
+        for (String s : list) {
+            if (first) {
+                result = s;
+                first = false;
+            } else {
+                result += ", " + s;
+            }
+        }
+        return result;
     }
 
     @Override
