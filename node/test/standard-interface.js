@@ -15,7 +15,7 @@
  */
 /*
 |
-| type:         function
+| type:         array
 | author:       Josh Bambrick
 |
 */
