@@ -8,6 +8,13 @@ import org.w3c.dom.NodeList;
 
 import cam.cl.kilo.NLP.ItemInfo;
 
+/**
+ * Main class of the OMDB Lookup
+ * Performs an API call to the OMDB API
+ *
+ * @author groupKilo
+ * @author yy363
+ */
 public class OMDBLookup extends Lookup {
 
 	private String title = "";

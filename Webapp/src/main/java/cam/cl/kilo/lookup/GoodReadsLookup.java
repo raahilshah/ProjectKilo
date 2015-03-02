@@ -25,6 +25,13 @@ import org.w3c.dom.Node;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+/**
+ * Main class of GoodReads Lookup
+ * Performs an API call to the GoodReads API
+ * 
+ * @author groupKilo
+ * @author yy363
+ */
 public class GoodReadsLookup extends Lookup {
 
 	private static final String GR_KEY = "JFp6OfWw4CyC62C9EAXJdw";
