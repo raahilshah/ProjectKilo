@@ -37,22 +37,14 @@
             android:theme="@style/CaptureTheme"
             android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
-            android:name=".scan.ui.ResultsCardScrollActivity"
+            android:name="cam.cl.kilo.ui.ResultsCardScrollActivity"
             android:exported="true" />
         <activity
-            android:name="com.github.barcodeeye.scan.ui.LoadingActivity"
+            android:name="cam.cl.kilo.ui.LoadingActivity"
             android:exported="true" />
         <activity
-            android:name="com.github.barcodeeye.scan.ScanFailureActivity"
+            android:name="cam.cl.kilo.ui.ScanFailureActivity"
             android:exported="true" />
-        <activity
-            android:name="com.github.barcodeeye.scan.ResultsActivity"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="landscape"
-            android:stateNotNeeded="true"
-            android:theme="@style/CaptureTheme"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,7 @@
 /*
  * Copyright (C) 2008 ZXing authors
+ * Copyright (C) 2015 Group Kilo (Cambridge Computer Lab)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -35,7 +37,7 @@ import com.github.barcodeeye.migrated.BeepManager;
 import com.github.barcodeeye.migrated.FinishListener;
 import com.github.barcodeeye.migrated.InactivityTimer;
 import com.github.barcodeeye.scan.result.ResultProcessor;
-import com.github.barcodeeye.scan.ui.LoadingActivity;
+import cam.cl.kilo.ui.LoadingActivity;
 import com.github.barcodeeye.scan.ui.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
@@ -302,6 +304,9 @@ public final class CaptureActivity extends BaseGlassActivity implements
         ResultProcessor<?> processor = new ResultProcessor<ParsedResult>(
                 this, ResultParser.parseResult(rawResult), rawResult, imageUri);
 
+        // ***** CultureGlass entry point *****
+
+        //Original BarcodeEye path
         //startActivity(ResultsActivity.newIntent(this,processor.getCardResults()));
 
         ParsedResult result = processor.getParsedResult();
